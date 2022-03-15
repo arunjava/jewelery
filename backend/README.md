@@ -1,2 +1,1 @@
-# jewelery
-Project for Jewelry Shop
+# textiles
