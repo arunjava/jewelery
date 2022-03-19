@@ -26,10 +26,8 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     console.log('Login button pressed');
-    console.log(this.loginform.value.username);
-    this.loginService.login(this.loginform.value.username, this.loginform.value.password).pipe(
-
-    );
+    console.log(this.loginform.value.username +''  +this.loginform.value.password) ;
+    this.loginService.login(this.loginform.value.username, this.loginform.value.password).pipe();
   }
 
 }

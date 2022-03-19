@@ -10,10 +10,10 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.nura.textiles</groupId>
-	<artifactId>TextileServices</artifactId>
+	<artifactId>JeweleryServices</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>TextileServices</name>
-	<description>Textile services</description>
+	<name>JeweleryServices</name>
+	<description>Jewelery services</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
