@@ -4,10 +4,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/views/login/login.component';
 import { ForgetPasswordComponent } from './components/views/forget-password/forget-password.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './components/views/home/home.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'forget-password', component: ForgetPasswordComponent }
 ];

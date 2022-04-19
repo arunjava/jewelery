@@ -9,13 +9,15 @@ import { LoginComponent } from './components/views/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SignupComponent } from './components/views/signup/signup.component';
 import { ForgetPasswordComponent } from './components/views/forget-password/forget-password.component';
+import { HomeComponent } from './components/views/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SignupComponent,
-    ForgetPasswordComponent
+    ForgetPasswordComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

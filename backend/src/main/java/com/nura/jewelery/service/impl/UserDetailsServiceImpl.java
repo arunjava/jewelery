@@ -6,9 +6,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.nura.jewelery.entity.user.User;
+import com.nura.jewelery.entity.User;
 import com.nura.jewelery.repository.UserRepository;
-import com.nura.jewelery.utils.UserDetailsImpl;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService{
@@ -24,7 +23,8 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 			throw new UsernameNotFoundException("Could not find user");
 		}
 		
-		return new UserDetailsImpl(user);
+//		return new UserDetailsImpl(user);
+		return null;
 	}
 
 }

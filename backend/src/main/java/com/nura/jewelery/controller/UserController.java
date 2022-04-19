@@ -7,11 +7,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nura.jewelery.dto.request.user.LoginDTO;
 import com.nura.jewelery.dto.request.user.UserDTO;
-import com.nura.jewelery.entity.user.User;
+import com.nura.jewelery.entity.User;
 import com.nura.jewelery.service.UserService;
 import com.nura.jewelery.utils.ServiceResponse;
 import com.nura.jewelery.utils.ServiceResponseWrapper;
@@ -26,9 +26,16 @@ public class UserController {
 	@Autowired
 	private ModelMapper modelMapper;
 
+//	@Autowired
+//	private PasswordEncoder passwordEncoder;
+
 	@PostMapping(path = "/login")
-	public ResponseEntity<ServiceResponse<String>> login(@RequestParam String username, @RequestParam String password) {
-		if (username.equalsIgnoreCase("arun") && password.equalsIgnoreCase("arun")) {
+	public ResponseEntity<ServiceResponse<String>> login(@RequestBody LoginDTO loginDTO) {
+
+		User user = userService.findUserByUserName(loginDTO.getUsername());
+
+		if (user != null && loginDTO.getPassword().equals(user.getPassword())) {
+
 			return ResponseEntity.ok(
 					new ServiceResponseWrapper<String>().wrapServiceResponse("", "ValidUser", HttpStatus.OK.value()));
 		}

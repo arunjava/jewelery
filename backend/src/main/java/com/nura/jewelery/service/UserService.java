@@ -1,6 +1,6 @@
 package com.nura.jewelery.service;
 
-import com.nura.jewelery.entity.user.User;
+import com.nura.jewelery.entity.User;
 
 public interface UserService {
 
