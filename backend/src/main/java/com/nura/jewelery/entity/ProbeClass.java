@@ -36,6 +36,8 @@ public class ProbeClass implements Serializable {
 	public void onPrepersist() {
 		this.createdOn = new Date();
 		this.modifiedOn = new Date();
+		this.createdBy = "System";
+		this.modifiedBy = "System";
 	}
 
 	@PreUpdate

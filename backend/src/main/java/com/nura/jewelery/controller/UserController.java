@@ -1,5 +1,7 @@
 package com.nura.jewelery.controller;
 
+import javax.validation.Valid;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -45,7 +47,7 @@ public class UserController {
 	}
 
 	@PostMapping(path = "/signup")
-	public ResponseEntity<ServiceResponse<?>> signup(@RequestBody UserDTO userDTO) {
+	public ResponseEntity<ServiceResponse<?>> signup(@Valid @RequestBody UserDTO userDTO) {
 
 		User userExist = userService.findUserByUserName(userDTO.getUsername());
 

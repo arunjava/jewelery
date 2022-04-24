@@ -9,11 +9,11 @@ import { UserService } from '../../../service/user-service/user-service.service'
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-
+  public loading = false;
   userSignupModel = new UserSignup();
 
   constructor(private formBuilder: FormBuilder,
-              private userService: UserService) { }
+    private userService: UserService) { }
 
   ngOnInit(): void {
   }
@@ -28,6 +28,8 @@ export class SignupComponent implements OnInit {
 
 
   onFormSubmit(): void {
+    this.loading = true;
+
     this.userSignupModel.firstName = this.signupForm.value.firstName;
     this.userSignupModel.lastName = this.signupForm.value.lastName;
     this.userSignupModel.username = this.signupForm.value.username;
@@ -36,9 +38,11 @@ export class SignupComponent implements OnInit {
     console.log(JSON.stringify(this.userSignupModel));
 
     this.userService.signup(this.userSignupModel).subscribe(response => {
+      this.loading = false;
       console.log(response);
+    }, err => {
+      this.loading = false;
     });
-
   }
 
 }

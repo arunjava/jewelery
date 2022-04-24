@@ -11,6 +11,6 @@ import com.nura.jewelery.entity.Customer;
 @Repository
 public interface CustomerRepository extends CrudRepository<Customer, Long> {
 
-//	List<CustomerDTO> findByCustId(long id);
+	List<CustomerDTO> findByCustId(long id);
 
 }

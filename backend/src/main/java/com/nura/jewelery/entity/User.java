@@ -46,7 +46,7 @@ public class User implements Serializable {
 	private String lastName;
 
 	@Embedded
-	private ProbeClass probeClass;
+	private ProbeClass probeClass = new ProbeClass();
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinTable(name = "user_addr", schema = Constants.SCHEMA_JEWEL, joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "addr_id"))

@@ -1,5 +1,4 @@
 <div class="container">
-
     <div class="card o-hidden border-0 shadow-lg my-5">
         <div class="card-body p-0">
             <!-- Nested Row within Card Body -->
@@ -38,20 +37,22 @@
                                 <i class="fab fa-google fa-fw "></i> Register with Google
                             </a>
                             <a href="# " class="btn btn-facebook btn-user btn-block ">
-                                <i class="fab fa-facebook-f fa-fw "></i> Register with Facebook
+                                <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
                             </a>
                         </form>
                         <hr>
                         <div class="text-center ">
-                            <a class="small " routerLink="/forget-password ">Forgot Password?</a>
+                            <a class="small" routerLink="/forget-password">Forgot Password?</a>
                         </div>
                         <div class="text-center ">
-                            <a class="small " routerLink="/login ">Already have an account? Login!</a>
+                            <a class="small" routerLink="/login">Already have an account? Login!</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+    </ngx-loading>
 
 </div>
