@@ -29,13 +29,13 @@ public class CustomerController {
 	@GetMapping(path = "/customer/{id}")
 	public ResponseEntity<ServiceResponse<CustomerDTO>> getCustomerDetailsBsdOnId(@PathVariable long id) {
 
-		/*
-		 * List<CustomerDTO> customer = customerService.get(id);
-		 * 
-		 * if (!customer.isEmpty()) { return ResponseEntity.ok(new
-		 * ServiceResponseWrapper<CustomerDTO>().wrapServiceResponse(customer.get(0),
-		 * HttpStatus.FOUND.getReasonPhrase(), HttpStatus.OK.value())); }
-		 */
+		List<CustomerDTO> customer = customerService.get(id);
+
+		if (!customer.isEmpty()) {
+			return ResponseEntity.ok(new ServiceResponseWrapper<CustomerDTO>().wrapServiceResponse(customer.get(0),
+					HttpStatus.FOUND.getReasonPhrase(), HttpStatus.OK.value()));
+		}
+
 		return ResponseEntity.ok(new ServiceResponseWrapper<CustomerDTO>().wrapServiceResponse(null,
 				HttpStatus.NO_CONTENT.getReasonPhrase(), HttpStatus.NO_CONTENT.value()));
 	}

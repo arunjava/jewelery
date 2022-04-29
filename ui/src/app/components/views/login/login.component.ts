@@ -29,14 +29,17 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     console.log('Login button pressed');
-    console.log(this.loginform.value.username +''  +this.loginform.value.password) ;
-    this.userService.login(this.loginform.value.username, this.loginform.value.password).subscribe(response =>
-      {
-        console.log("Server response -->" + response.statusCode);
-        if(response.statusCode === 200)  {
-          this.router.navigate(['home']);
-        }
+    console.log(this.loginform.value.username + '' + this.loginform.value.password);
+    this.userService.login(this.loginform.value.username, this.loginform.value.password).subscribe(response => {
+      console.log("Server response -->" + response.statusCode);
+      if (response.statusCode === 200) {
+        sessionStorage.setItem('user', JSON.stringify(response.result));
+        // sessionStorage.setItem('user', response.result);
+        this.router.navigate(['home']);
       }
+    }, err => {
+      console.log(err);
+    }
     );
   }
 

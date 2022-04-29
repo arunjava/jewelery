@@ -6,6 +6,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,21 +29,21 @@ public class UserController {
 	@Autowired
 	private ModelMapper modelMapper;
 
-//	@Autowired
-//	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@PostMapping(path = "/login")
-	public ResponseEntity<ServiceResponse<String>> login(@RequestBody LoginDTO loginDTO) {
+	public ResponseEntity<ServiceResponse<User>> login(@RequestBody LoginDTO loginDTO) {
 
 		User user = userService.findUserByUserName(loginDTO.getUsername());
 
-		if (user != null && loginDTO.getPassword().equals(user.getPassword())) {
+		if (user != null && passwordEncoder.matches(loginDTO.getPassword(), user.getPassword())) {
 
 			return ResponseEntity.ok(
-					new ServiceResponseWrapper<String>().wrapServiceResponse("", "ValidUser", HttpStatus.OK.value()));
+					new ServiceResponseWrapper<User>().wrapServiceResponse(user, "Valid User", HttpStatus.OK.value()));
 		}
 
-		return ResponseEntity.ok(new ServiceResponseWrapper<String>().wrapServiceResponse(null, "Not available",
+		return ResponseEntity.ok(new ServiceResponseWrapper<User>().wrapServiceResponse(null, "Not available",
 				HttpStatus.NO_CONTENT.value()));
 	}
 

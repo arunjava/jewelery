@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { UserSignup } from '../../../models/user/UserSignup.model';
+import { User } from '../../../models/user/UserSignup.model';
 import { UserService } from '../../../service/user-service/user-service.service';
+import { ModalComponent } from '../../helper/modal/modal.component';
+import { BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-signup',
@@ -10,10 +12,12 @@ import { UserService } from '../../../service/user-service/user-service.service'
 })
 export class SignupComponent implements OnInit {
   public loading = false;
-  userSignupModel = new UserSignup();
+  userSignupModel = new User();
 
   constructor(private formBuilder: FormBuilder,
-    private userService: UserService) { }
+    private userService: UserService,
+    @Inject(BsModalService)
+    private modalService: BsModalService) { }
 
   ngOnInit(): void {
   }
@@ -39,10 +43,25 @@ export class SignupComponent implements OnInit {
 
     this.userService.signup(this.userSignupModel).subscribe(response => {
       this.loading = false;
-      console.log(response);
+      if (response.statusCode == 201) {
+        this.showmodel(response.message);
+        this.signupForm.reset();
+      } else {
+        this.showmodel(JSON.stringify(response.result));
+      }
     }, err => {
+      console.log(err);
       this.loading = false;
+      this.showmodel(err.message);
     });
+
   }
 
+  showmodel(message: string) {
+    console.log('Inside modal dispaly');
+    console.log(message);
+    let modalRef: any = this.modalService.show(ModalComponent, { class: 'modal-lg' });
+    modalRef.content.title = 'Alert';
+    modalRef.content.message = message;
+  }
 }

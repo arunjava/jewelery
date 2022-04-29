@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment.prod';
-import { UserSignup } from '../../models/user/UserSignup.model';
+import { User } from '../../models/user/UserSignup.model';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -15,7 +15,7 @@ export class UserService {
     return this.http.post<any>(`${environment.apiURL}/user/login`, { username, password });
   }
 
-  signup(userSignup: UserSignup) {
+  signup(userSignup: User) {
     console.log(environment.apiURL + '/user/signup');
     return this.http.post<any>(environment.apiURL + '/user/signup', userSignup);
   }

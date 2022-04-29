@@ -15,9 +15,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.nura.jewelery.entity.address.Address;
 import com.nura.jewelery.utils.Constants;
 
 import lombok.Data;
@@ -46,16 +48,19 @@ public class User implements Serializable {
 	private String lastName;
 
 	@Embedded
+	@JsonIgnore
 	private ProbeClass probeClass = new ProbeClass();
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinTable(name = "user_addr", schema = Constants.SCHEMA_JEWEL, joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "addr_id"))
-	private Address address;
-
+//	@OneToMany(cascade = CascadeType.ALL)
+//	@JoinTable(name = "user_addr", schema = Constants.SCHEMA_JEWEL, joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "addr_id"))
+//	private Address address;
+	
+	@JsonIgnore
 	@Column(name = "is_active")
 	private boolean isActive;
 	@Column(name = "user_name")
 	private String username;
+	@JsonIgnore
 	@Column(name = "user_pwd")
 	private String password;
 

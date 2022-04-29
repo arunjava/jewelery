@@ -13,6 +13,10 @@ import { HomeComponent } from './components/views/home/home.component';
 import { CustomerAddComponent } from './components/views/customer-add/customer-add.component';
 import { CustomerUpdateComponent } from './components/views/customer-update/customer-update.component';
 import { NgxLoadingModule } from 'ngx-loading';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
+import { ModalComponent } from './components/helper/modal/modal.component';
+
 
 @NgModule({
   declarations: [
@@ -22,12 +26,15 @@ import { NgxLoadingModule } from 'ngx-loading';
     ForgetPasswordComponent,
     HomeComponent,
     CustomerAddComponent,
-    CustomerUpdateComponent
+    CustomerUpdateComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    NgbModule,
+    ModalModule,
     // NgxSpinnerModule,
     NgxLoadingModule.forRoot({}),
     BrowserAnimationsModule,
@@ -39,7 +46,7 @@ import { NgxLoadingModule } from 'ngx-loading';
     }),
   ],
   // schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [],
+  providers: [BsModalService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

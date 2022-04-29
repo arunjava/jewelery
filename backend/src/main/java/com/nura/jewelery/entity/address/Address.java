@@ -1,4 +1,4 @@
-package com.nura.jewelery.entity;
+package com.nura.jewelery.entity.address;
 
 import java.io.Serializable;
 
@@ -8,9 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.nura.jewelery.entity.ProbeClass;
 import com.nura.jewelery.utils.Constants;
 
 import lombok.Data;
@@ -35,23 +38,33 @@ public class Address implements Serializable {
 	private String addr2;
 	@Column(name = "addr_3")
 	private String addr3;
-	@Column(name = "city")
-	private String city;
-	@Column(name = "state")
-	private String state;
-	@Column(name = "country")
-	private String country;
-	@Column(name = "pin_code")
+
+	@ManyToOne
+	@JoinColumn(name = "sub_district_id")
+	private SubDistrict subDistrict;
+
+	@ManyToOne
+	@JoinColumn(name = "district_id")
+	private District district;
+
+	@ManyToOne
+	@JoinColumn(name = "state_id")
+	private State state;
+
+	@ManyToOne
+	@JoinColumn(name = "country_id")
+	private Country country;
+
+	@Column(name = "pin_code", length = 6)
 	private String pincode;
 	@Column(name = "land_mark")
 	private String landMark;
+	
 	@Column(name = "locality")
 	private String locality;
 
+	@JsonIgnore
 	@Embedded
-	private ProbeClass probeClass;
-
-//	@ManyToOne
-//	private User user;
+	private ProbeClass probeClass = new ProbeClass();
 
 }

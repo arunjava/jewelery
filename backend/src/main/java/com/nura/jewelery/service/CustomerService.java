@@ -19,8 +19,8 @@ public class CustomerService {
 		return customerRepository.save(customer);
 	}
 
-	/*
-	 * public List<CustomerDTO> get(long custId) { return
-	 * customerRepository.findByCustId(custId); }
-	 */
+	public List<CustomerDTO> get(long custId) {
+		return customerRepository.findByCustId(custId);
+	}
+
 }

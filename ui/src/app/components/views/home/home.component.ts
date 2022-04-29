@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { User } from 'src/app/models/user/UserSignup.model';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  user: User;
+
+  constructor() {
+    this.user = new User();
+  }
 
   ngOnInit(): void {
+    this.user = JSON.parse(sessionStorage.getItem('user') || '{}');
+    console.log(this.user);
   }
 
 }

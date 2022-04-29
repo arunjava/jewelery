@@ -2,6 +2,8 @@ package com.nura.textiles.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -9,32 +11,24 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 
-import com.nura.jewelery.entity.User;
-import com.nura.jewelery.repository.UserRepository;
+import com.nura.jewelery.entity.address.State;
+import com.nura.jewelery.repository.StateRepository;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Rollback(false)
-class UserRepositoryTest {
+public class SateRepostoryTest {
 
 	@Autowired
-	private UserRepository userRepo;
+	private StateRepository stateRepository;
 
 	@Test
-	void testSaveUser() {
-		User user = new User();
-		user.setActive(true);
-		user.setFirstName("Arun");
-		user.setPassword("Venkatesan@25#");
-		user.setUsername("arun@gmail.com");
-
-		User savedUser = userRepo.save(user);
-
-		System.out.println(savedUser.toString());
-
-		assertThat(user.getUsername().equals(savedUser.getUsername()));
-
-		assertThat(userRepo.getUserByUsername("arun@gmail.com").equals(user.getUsername()));
+	void validatefindStateBsdOnCountryID() {
+		List<State> states = stateRepository.findStateBsdOnCountryID(1l);
+		
+		System.out.println(states);
+		
+		assertThat(states.size() == 2);
 	}
 
 }

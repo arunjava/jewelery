@@ -14,6 +14,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.nura.jewelery.entity.address.Address;
 import com.nura.jewelery.utils.Constants;
 
 import lombok.Data;
@@ -40,6 +42,7 @@ public class Customer implements Serializable {
 
 	@Column(name = "primary_contact_no")
 	private String primaryContactNo;
+
 	@Column(name = "alternate_contact_no")
 	private String alterNateContactNo;
 
@@ -47,9 +50,10 @@ public class Customer implements Serializable {
 	private String referralCode;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinTable(name = "customer_addr", schema = Constants.SCHEMA_JEWEL, joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "addr_id"))
+	@JoinTable(name = "customer_addr", schema = Constants.SCHEMA_JEWEL, joinColumns = @JoinColumn(name = "customer_id"), inverseJoinColumns = @JoinColumn(name = "addr_id"))
 	private Address address;
 
+	@JsonIgnore
 	@Embedded
 	private ProbeClass probeClass = new ProbeClass();
 
