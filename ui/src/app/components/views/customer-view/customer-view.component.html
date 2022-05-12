@@ -1,0 +1,59 @@
+<div class="m-3">
+  <form [formControl]="filter">
+    <div class="form-group form-inline">
+      Search:
+      <input
+        class="form-control ml-2"
+        type="text"
+        name="searchTerm"
+        (input)="search($any($event.target).value)"
+      />
+    </div>
+  </form>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col" sortable="custName">Customer Name</th>
+        <th scope="col" sortable="primaryContactNumber">
+          Primary Contact Number
+        </th>
+        <th scope="col" sortable="referralCode">Referral Code</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="
+          let customer of filteredCustomers
+            | slice: (page - 1) * pageSize:page * pageSize;
+          index as i
+        "
+      >
+        <th scope="row">{{ (page - 1) * pageSize + i + 1 }}</th>
+        <td>
+          <ngb-highlight
+            [result]="customer.customerName"
+            [term]="filter.value"
+          ></ngb-highlight>
+        </td>
+        <!-- <td>{{ customer.customerName }}</td> -->
+        <td>{{ customer.primaryContactNo }}</td>
+        <td>{{ customer.referralCode }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-between p-2">
+    <ngb-pagination
+      [collectionSize]="collectionSize"
+      [(page)]="page"
+      [pageSize]="pageSize"
+    >
+    </ngb-pagination>
+
+    <select class="form-select" style="width: auto" [(ngModel)]="pageSize">
+      <option [ngValue]="5" selected>5 items per page</option>
+      <option [ngValue]="10">10 items per page</option>
+      <option [ngValue]="20">20 items per page</option>
+    </select>
+  </div>
+</div>

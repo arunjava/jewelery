@@ -1,5 +1,6 @@
-import { Component, OnInit, Injectable, Inject } from '@angular/core';
+import { Component, OnInit, Injectable, Inject, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { ModalBox } from '../../../models/ModalBox.model';
 
 
 @Component({
@@ -14,8 +15,13 @@ export class ModalComponent implements OnInit {
 
   title: string = '';
   message: string = '';
-  constructor(@Inject(BsModalRef)
-  public bsModalRef: BsModalRef) { }
 
+  constructor(@Inject(BsModalRef)
+  public bsModalRef: BsModalRef,
+    private modalService: BsModalService) { }
+
+  openModal(template: TemplateRef<any>) {
+    this.bsModalRef = this.modalService.show(template);
+  }
 
 }

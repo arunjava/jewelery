@@ -1,6 +1,9 @@
 package com.nura.jewelery.dto;
 
 import java.io.Serializable;
+import java.util.Set;
+
+import com.nura.jewelery.entity.Scheme;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,5 +23,7 @@ public class CustomerDTO implements Serializable {
 	private String primaryContactNo;
 	private String alterNateContactNo;
 	private String referralCode;
+	
+	private Set<Scheme> schemes;
 
 }

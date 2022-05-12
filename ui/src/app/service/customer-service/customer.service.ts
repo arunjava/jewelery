@@ -19,4 +19,8 @@ export class CustomerService {
     return this.http.get<Response<Customer>>(`${environment.apiURL}/customer` + customerID);
   }
 
+  getAllCustomers() {
+    return this.http.get<Response<Array<Customer>>>(`${environment.apiURL}/customer`);
+  }
+
 }

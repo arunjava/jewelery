@@ -7,19 +7,25 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/views/home/home.component';
 import { CustomerAddComponent } from './components/views/customer-add/customer-add.component';
 import { CustomerUpdateComponent } from './components/views/customer-update/customer-update.component';
+import { CustomerViewComponent } from './components/views/customer-view/customer-view.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent,
-    children:[
+  {
+    path: 'home', component: HomeComponent,
+    children: [
       {
-        path:'add-customer',
+        path: 'add-customer',
         component: CustomerAddComponent
       },
       {
-        path:'update-customer',
+        path: 'update-customer',
         component: CustomerUpdateComponent
+      },
+      {
+        path: 'list-customer',
+        component: CustomerViewComponent
       }
     ]
   },

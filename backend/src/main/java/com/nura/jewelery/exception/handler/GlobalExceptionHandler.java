@@ -10,6 +10,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.nura.jewelery.utils.ServiceResponse;
 import com.nura.jewelery.utils.ServiceResponseWrapper;
 
 @ControllerAdvice
@@ -27,4 +28,9 @@ public class GlobalExceptionHandler {
 				HttpStatus.BAD_REQUEST.value()));
 	}
 
+	@ExceptionHandler(Exception.class)
+	public ResponseEntity<ServiceResponse<String>> handleAllExceptions(Exception ex) {
+		return ResponseEntity.ok(new ServiceResponseWrapper<String>().wrapServiceResponse(ex.getLocalizedMessage(),
+				HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), HttpStatus.INTERNAL_SERVER_ERROR.value()));
+	}
 }

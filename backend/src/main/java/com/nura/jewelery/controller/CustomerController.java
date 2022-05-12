@@ -27,16 +27,30 @@ public class CustomerController {
 	private CustomerService customerService;
 
 	@GetMapping(path = "/customer/{id}")
-	public ResponseEntity<ServiceResponse<CustomerDTO>> getCustomerDetailsBsdOnId(@PathVariable long id) {
+	public ResponseEntity<ServiceResponse<Customer>> getCustomerDetailsBsdOnId(@PathVariable long id) {
 
-		List<CustomerDTO> customer = customerService.get(id);
+		Customer customer = customerService.getCustomerBsdOnID(id);
 
-		if (!customer.isEmpty()) {
-			return ResponseEntity.ok(new ServiceResponseWrapper<CustomerDTO>().wrapServiceResponse(customer.get(0),
+		if (customer != null) {
+			return ResponseEntity.ok(new ServiceResponseWrapper<Customer>().wrapServiceResponse(customer,
 					HttpStatus.FOUND.getReasonPhrase(), HttpStatus.OK.value()));
 		}
 
-		return ResponseEntity.ok(new ServiceResponseWrapper<CustomerDTO>().wrapServiceResponse(null,
+		return ResponseEntity.ok(new ServiceResponseWrapper<Customer>().wrapServiceResponse(null,
+				HttpStatus.NO_CONTENT.getReasonPhrase(), HttpStatus.NO_CONTENT.value()));
+	}
+
+	@GetMapping(path = "/customer")
+	public ResponseEntity<ServiceResponse<List<Customer>>> getAllCustomers() {
+
+		List<Customer> customer = customerService.findAll();
+
+		if (!customer.isEmpty()) {
+			return ResponseEntity.ok(new ServiceResponseWrapper<List<Customer>>().wrapServiceResponse(customer,
+					HttpStatus.FOUND.getReasonPhrase(), HttpStatus.OK.value()));
+		}
+
+		return ResponseEntity.ok(new ServiceResponseWrapper<List<Customer>>().wrapServiceResponse(null,
 				HttpStatus.NO_CONTENT.getReasonPhrase(), HttpStatus.NO_CONTENT.value()));
 	}
 
@@ -66,4 +80,9 @@ public class CustomerController {
 				HttpStatus.EXPECTATION_FAILED.getReasonPhrase(), HttpStatus.EXPECTATION_FAILED.value()));
 	}
 
+	@PutMapping(path = "/customer/{cust_id}/scheme/{scheme_id}")
+	public void updateSchemeForCustomer(@PathVariable(name = "cust_id") long custId,
+			@PathVariable(name = "scheme_id") long schemeID) {
+		customerService.updateSchemeDtls(custId, schemeID);
+	}
 }

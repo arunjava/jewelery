@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { LoginComponent } from './components/views/login/login.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SignupComponent } from './components/views/signup/signup.component';
 import { ForgetPasswordComponent } from './components/views/forget-password/forget-password.component';
 import { HomeComponent } from './components/views/home/home.component';
@@ -16,7 +16,9 @@ import { NgxLoadingModule } from 'ngx-loading';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { ModalComponent } from './components/helper/modal/modal.component';
-
+import { CustomerViewComponent } from './components/views/customer-view/customer-view.component';
+import { ListFilterPipe } from './pipes/ListFilterPipe.pipe';
+import { TopNavbarComponent } from './components/helper/top-navbar/top-navbar.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,10 @@ import { ModalComponent } from './components/helper/modal/modal.component';
     HomeComponent,
     CustomerAddComponent,
     CustomerUpdateComponent,
-    ModalComponent
+    ModalComponent,
+    CustomerViewComponent,
+    ListFilterPipe,
+    TopNavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +40,7 @@ import { ModalComponent } from './components/helper/modal/modal.component';
     ReactiveFormsModule,
     NgbModule,
     ModalModule,
-    // NgxSpinnerModule,
+    FormsModule,
     NgxLoadingModule.forRoot({}),
     BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
@@ -47,6 +52,7 @@ import { ModalComponent } from './components/helper/modal/modal.component';
   ],
   // schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [BsModalService],
+  entryComponents: [ModalComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

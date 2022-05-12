@@ -52,7 +52,9 @@ export class CustomerAddComponent implements OnInit {
     stateFormName: ['', Validators.required],
     districtFormName: ['', Validators.required],
     subDistirctFormName: ['', Validators.required],
-    pincode: ['', Validators.required]
+    pincode: ['', Validators.required],
+    referralCode: [],
+    altPhoneNumber: []
   });
 
   onCountrySelection(country: Country) {
@@ -97,7 +99,8 @@ export class CustomerAddComponent implements OnInit {
     console.log(this.customerForm);
     this.customer.customerName = this.customerForm.value.customerName;
     this.customer.primaryContactNo = this.customerForm.value.phoneNumber;
-    this.customer.referralCode = '';
+    this.customer.alterNateContactNo = this.customerForm.value.altPhoneNumber;
+    this.customer.referralCode = this.customerForm.value.referralCode;
     this.address.addr1 = this.customerForm.value.inputAddress;
     this.address.addr2 = this.customerForm.value.inputAddress2;
     this.address.subDistrict = this.customerForm.value.subDistirctFormName;
