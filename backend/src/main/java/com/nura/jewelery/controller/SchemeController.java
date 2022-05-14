@@ -31,8 +31,10 @@ public class SchemeController {
 	private SchemeMapper schemeMapper;
 
 	@PostMapping("/scheme")
-	public void saveScheme(@RequestBody SchemeDTO scheme) {
-		schemeService.saveScheme(schemeMapper.dtoToDomain(scheme));
+	public ResponseEntity<ServiceResponse<SchemeDTO>> saveScheme(@RequestBody SchemeDTO scheme) {
+		return ResponseEntity.ok(new ServiceResponseWrapper<SchemeDTO>().wrapServiceResponse(
+				schemeMapper.domainToDTO(schemeService.saveScheme(schemeMapper.dtoToDomain(scheme))),
+				HttpStatus.CREATED.getReasonPhrase(), HttpStatus.CREATED.value()));
 	}
 
 	@GetMapping("/scheme/{id}")

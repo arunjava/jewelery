@@ -1,7 +1,7 @@
 --USER ROLES
-INSERT INTO textiles.user_role(role_id_n, desc_v, hierarchy_n, created_by, created_on, modified_by, modified_on, role_v) VALUES (1, 'ADMIN Role', 999, 'System', NOW(), 'System', NOW(), 'ADMIN');
-INSERT INTO textiles.user_role(role_id_n, desc_v, hierarchy_n, created_by, created_on, modified_by, modified_on, role_v) VALUES (2, 'Guest Role', 1, 'System', NOW(), 'System', NOW(), 'GUEST');
-INSERT INTO textiles.user_role(role_id_n, desc_v, hierarchy_n, created_by, created_on, modified_by, modified_on, role_v) VALUES (3, 'Basic Role', 2, 'System', NOW(), 'System', NOW(), 'BASIC');
+INSERT INTO jewel.user_role(role_id_n, desc_v, hierarchy_n, created_by, created_on, modified_by, modified_on, role_v) VALUES (1, 'ADMIN Role', 999, 'System', NOW(), 'System', NOW(), 'ADMIN');
+INSERT INTO jewel.user_role(role_id_n, desc_v, hierarchy_n, created_by, created_on, modified_by, modified_on, role_v) VALUES (2, 'Guest Role', 1, 'System', NOW(), 'System', NOW(), 'GUEST');
+INSERT INTO jewel.user_role(role_id_n, desc_v, hierarchy_n, created_by, created_on, modified_by, modified_on, role_v) VALUES (3, 'Basic Role', 2, 'System', NOW(), 'System', NOW(), 'BASIC');
 
 --Country
 INSERT INTO jewel.ms_country(country_id, country_code, country_name) VALUES (1, 'IN','India' );
@@ -18,3 +18,7 @@ INSERT INTO jewel.ms_district(district_id, district_code, district_name, state_i
 
 --Sub District
 INSERT INTO jewel.ms_sub_district(sub_district_id, sub_district_code, sub_district_name, district_id) VALUES (100, '', 'AMMAPET', 100);
+
+
+--UOM Cateory
+insert into jewel.ms_uom_category(uom_cat_id , uom_category) values (1, 'Weight');

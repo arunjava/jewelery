@@ -15,9 +15,9 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-@Component
-@Order(Ordered.HIGHEST_PRECEDENCE)
-@ConditionalOnExpression("${filters.cors.enabled}")
+//@Component
+//@Order(Ordered.HIGHEST_PRECEDENCE)
+//@ConditionalOnExpression("${filters.cors.enabled}")
 public class CorsFilter implements Filter {
 
 	@Override

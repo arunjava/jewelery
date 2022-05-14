@@ -1,18 +1,19 @@
 package com.nura.jewelery.dto;
 
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
 
 @Data
 public class SchemeDTO {
 
+	@JsonProperty("scheme_id")
 	private long id;
+	@JsonProperty("scheme_name")
 	private String schemeName;
+	@JsonProperty("scheme_desc")
 	private String description;
+	@JsonProperty("scheme_active")
 	private boolean isActive;
-	private Date beginDate;
-	private Date endDate;
-	
 
 }
