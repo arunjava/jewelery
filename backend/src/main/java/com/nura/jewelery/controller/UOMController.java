@@ -1,6 +1,5 @@
 package com.nura.jewelery.controller;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,13 +17,8 @@ import com.nura.jewelery.service.UOMService;
 import com.nura.jewelery.utils.ServiceResponse;
 import com.nura.jewelery.utils.ServiceResponseWrapper;
 
-import lombok.extern.java.Log;
-import lombok.extern.slf4j.Slf4j;
-
-
 @RestController
 @RequestMapping("/api/v1")
-@Slf4j
 public class UOMController {
 
 	@Autowired
@@ -34,10 +28,10 @@ public class UOMController {
 	private UOMMapper uomMapper;
 
 	@PostMapping("/uom")
-	public ResponseEntity<ServiceResponse<UOM>> saveUOM(@RequestBody UomDTO uom) {
-		return ResponseEntity
-				.ok(new ServiceResponseWrapper<UOM>().wrapServiceResponse(uomService.save(uomMapper.dtoToDomain(uom)),
-						HttpStatus.CREATED.getReasonPhrase(), HttpStatus.CREATED.value()));
+	public ResponseEntity<ServiceResponse<UomDTO>> saveUOM(@RequestBody UomDTO uom) {
+		return ResponseEntity.ok(new ServiceResponseWrapper<UomDTO>().wrapServiceResponse(
+				uomMapper.domainToDTO(uomService.save(uomMapper.dtoToDomain(uom))),
+				HttpStatus.CREATED.getReasonPhrase(), HttpStatus.CREATED.value()));
 	}
 
 	@GetMapping("/{uom_id}")

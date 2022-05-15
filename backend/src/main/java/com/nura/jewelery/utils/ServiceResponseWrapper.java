@@ -9,5 +9,14 @@ public class ServiceResponseWrapper<T> {
 		response.setStatusCode(statusCode);
 		return response;
 	}
-
+	
+	
+	public static<T> ServiceResponse<T> staticWrapServiceResponse(T obj, String message, int statusCode) {
+		ServiceResponse<T> response = new ServiceResponse<>();
+		response.setMessage(message);
+		response.setResult(obj);
+		response.setStatusCode(statusCode);
+		return response;
+	}
+	
 }

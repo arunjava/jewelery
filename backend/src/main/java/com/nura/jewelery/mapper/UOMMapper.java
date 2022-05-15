@@ -18,6 +18,6 @@ public interface UOMMapper {
 
 	UOMCategoryDTO domainToDTO(UOMCategory uomCat);
 
-	UOMCategory dtoToDomain(UOMCategoryDTO uoomCatDTO);
+	UOMCategory dtoToDomain(UOMCategoryDTO uomCatDTO);
 
 }

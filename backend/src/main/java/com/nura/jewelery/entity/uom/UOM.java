@@ -40,7 +40,14 @@ public class UOM implements Serializable {
 	private String code;
 	@Column(name = "units")
 	private int units;
-
+	@Column(name = "hierarchy")
+	private int hierarchy;
+	/**
+	 * Base UOM to decide which will be used for stock manipulation
+	 */
+	@Column(name = "is_base_uom")
+	private boolean isBaseUOM;
+	
 	@JsonIgnore
 	@Embedded
 	ProbeClass probeClass = new ProbeClass();
