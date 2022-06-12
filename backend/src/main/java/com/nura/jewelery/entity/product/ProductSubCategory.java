@@ -13,9 +13,11 @@ import javax.persistence.Table;
 
 import com.nura.jewelery.utils.Constants;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "ms_product_sub_category", schema = Constants.SCHEMA_JEWEL)
 public class ProductSubCategory implements Serializable {
@@ -39,5 +41,5 @@ public class ProductSubCategory implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "category_id", referencedColumnName = "category_id")
 	private ProductCategory productCategory;
-	
+
 }

@@ -46,7 +46,7 @@ public class UOM implements Serializable {
 	 * Base UOM to decide which will be used for stock manipulation
 	 */
 	@Column(name = "is_base_uom")
-	private boolean isBaseUOM;
+	private Boolean isBaseUOM;
 	
 	@JsonIgnore
 	@Embedded

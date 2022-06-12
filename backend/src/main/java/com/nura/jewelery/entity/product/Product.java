@@ -11,13 +11,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.nura.jewelery.utils.Constants;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "ms_product", schema = Constants.SCHEMA_JEWEL)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Product implements Serializable {
 
 	/**
@@ -36,6 +41,7 @@ public class Product implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "category_id", referencedColumnName = "category_id")
 	private ProductCategory productCategory;
+	@ToString.Exclude
 	@ManyToOne
 	@JoinColumn(name = "sub_category_id", referencedColumnName = "sub_category_id")
 	private ProductSubCategory productSubCategory;

@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
+import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
+
 @Configuration
 public class GlobalConfiguration {
 
@@ -29,6 +31,11 @@ public class GlobalConfiguration {
 		LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
 		bean.setValidationMessageSource(messageSource());
 		return bean;
+	}
+
+	@Bean
+	public com.fasterxml.jackson.databind.Module datatypeHibernateModule() {
+		return new Hibernate5Module();
 	}
 
 }

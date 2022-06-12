@@ -11,9 +11,11 @@ import javax.persistence.Table;
 
 import com.nura.jewelery.utils.Constants;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "ms_product_category" , schema = Constants.SCHEMA_JEWEL)
 public class ProductCategory implements Serializable{

@@ -22,3 +22,12 @@ INSERT INTO jewel.ms_sub_district(sub_district_id, sub_district_code, sub_distri
 
 --UOM Cateory
 insert into jewel.ms_uom_category(uom_cat_id , uom_category) values (1, 'Weight');
+insert into jewel.ms_uom_category(uom_cat_id , uom_category) values (2, 'Quantity');
+insert into jewel.ms_uom_category(uom_cat_id , uom_category) values (3, 'Volume');
+insert into jewel.ms_uom_category(uom_cat_id , uom_category) values (4, 'Time');
+
+
+--Product 
+insert into jewel.ms_product_category (category_name, category_status, description) values ('Gold', true, 'Gold Ornaments');
+insert into jewel.ms_product_sub_category (description, is_active, category_id, sub_category_name) values ('22 Caret Gold' , true, 1, '22k Gold' );
+insert into jewel.ms_product (description, category_id, product_name, sub_category_id) values ('Mens Bracelet', 1, 'Bracelet', 1);
