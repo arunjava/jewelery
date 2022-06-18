@@ -38,10 +38,9 @@ public class Product implements Serializable {
 	private String productName;
 	@Column(name = "description")
 	private String description;
-	@ManyToOne
-	@JoinColumn(name = "category_id", referencedColumnName = "category_id")
-	private ProductCategory productCategory;
-	@ToString.Exclude
+//	@ManyToOne
+//	@JoinColumn(name = "category_id", referencedColumnName = "category_id")
+//	private ProductCategory productCategory;
 	@ManyToOne
 	@JoinColumn(name = "sub_category_id", referencedColumnName = "sub_category_id")
 	private ProductSubCategory productSubCategory;

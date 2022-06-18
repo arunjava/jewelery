@@ -23,14 +23,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.nura.jewelery.entity.address.Address;
 import com.nura.jewelery.utils.Constants;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "customer", schema = Constants.SCHEMA_JEWEL)
-@Data
-@EqualsAndHashCode(exclude = {"address" , "schemes"})
+@Getter @Setter
 @NoArgsConstructor
 public class Customer implements Serializable {
 	/**

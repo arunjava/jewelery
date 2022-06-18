@@ -1,23 +1,15 @@
-package com.nura.jewelery.dto;
+package com.nura.jewelery.dto.customer;
 
-import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 import com.nura.jewelery.entity.Scheme;
 import com.nura.jewelery.entity.address.Address;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-//@NoArgsConstructor -> don't add as causing failure during projection in repository
-@AllArgsConstructor
-public class CustomerDTO implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 6749034648802946711L;
+public class CustomerDTO {
 
 	private long custId;
 	private String customerName;

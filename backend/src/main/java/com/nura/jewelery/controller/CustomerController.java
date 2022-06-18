@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nura.jewelery.dto.CustomerDTO;
 import com.nura.jewelery.entity.Customer;
+import com.nura.jewelery.mapper.CustomerMapper;
 import com.nura.jewelery.service.CustomerService;
 import com.nura.jewelery.utils.ServiceResponse;
 import com.nura.jewelery.utils.ServiceResponseWrapper;
@@ -25,6 +26,9 @@ public class CustomerController {
 
 	@Autowired
 	private CustomerService customerService;
+
+	@Autowired
+	private CustomerMapper customerMapper;
 
 	@GetMapping(path = "/customer/{id}")
 	public ResponseEntity<ServiceResponse<Customer>> getCustomerDetailsBsdOnId(@PathVariable long id) {
@@ -55,28 +59,30 @@ public class CustomerController {
 	}
 
 	@PostMapping(path = "/customer")
-	public ResponseEntity<ServiceResponse<Customer>> saveCustomerDetails(@RequestBody Customer customer) {
-		Customer savedCustomer = customerService.save(customer);
+	public ResponseEntity<ServiceResponse<CustomerDTO>> saveCustomerDetails(@RequestBody CustomerDTO customer) {
+		Customer savedCustomer = customerService.save(customerMapper.dtoTODomain(customer));
 
 		if (savedCustomer != null) {
-			return ResponseEntity.ok(new ServiceResponseWrapper<Customer>().wrapServiceResponse(savedCustomer,
-					HttpStatus.CREATED.getReasonPhrase(), HttpStatus.CREATED.value()));
+			return ResponseEntity.ok(new ServiceResponseWrapper<CustomerDTO>().wrapServiceResponse(
+					customerMapper.domainTODTO(savedCustomer), HttpStatus.CREATED.getReasonPhrase(),
+					HttpStatus.CREATED.value()));
 		}
 
-		return ResponseEntity.ok(new ServiceResponseWrapper<Customer>().wrapServiceResponse(null,
+		return ResponseEntity.ok(new ServiceResponseWrapper<CustomerDTO>().wrapServiceResponse(null,
 				HttpStatus.EXPECTATION_FAILED.getReasonPhrase(), HttpStatus.EXPECTATION_FAILED.value()));
 	}
 
 	@PutMapping(path = "/customer")
-	public ResponseEntity<ServiceResponse<Customer>> updateCustomerDetails(@RequestBody Customer customer) {
-		Customer savedCustomer = customerService.save(customer);
+	public ResponseEntity<ServiceResponse<CustomerDTO>> updateCustomerDetails(@RequestBody CustomerDTO customer) {
+		Customer savedCustomer = customerService.save(customerMapper.dtoTODomain(customer));
 
 		if (savedCustomer != null) {
-			return ResponseEntity.ok(new ServiceResponseWrapper<Customer>().wrapServiceResponse(savedCustomer,
-					HttpStatus.ACCEPTED.getReasonPhrase(), HttpStatus.ACCEPTED.value()));
+			return ResponseEntity.ok(new ServiceResponseWrapper<CustomerDTO>().wrapServiceResponse(
+					customerMapper.domainTODTO(savedCustomer), HttpStatus.ACCEPTED.getReasonPhrase(),
+					HttpStatus.ACCEPTED.value()));
 		}
 
-		return ResponseEntity.ok(new ServiceResponseWrapper<Customer>().wrapServiceResponse(null,
+		return ResponseEntity.ok(new ServiceResponseWrapper<CustomerDTO>().wrapServiceResponse(null,
 				HttpStatus.EXPECTATION_FAILED.getReasonPhrase(), HttpStatus.EXPECTATION_FAILED.value()));
 	}
 
