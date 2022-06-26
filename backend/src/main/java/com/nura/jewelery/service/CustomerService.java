@@ -8,6 +8,8 @@ import com.nura.jewelery.entity.Customer;
 public interface CustomerService {
 
 	public Customer save(Customer customer);
+	
+	public Customer findByID(long custId);
 
 	public List<CustomerDTO> get(long custId);
 

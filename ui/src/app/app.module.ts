@@ -19,6 +19,8 @@ import { ModalComponent } from './components/helper/modal/modal.component';
 import { CustomerViewComponent } from './components/views/customer-view/customer-view.component';
 import { ListFilterPipe } from './pipes/ListFilterPipe.pipe';
 import { TopNavbarComponent } from './components/helper/top-navbar/top-navbar.component';
+import { CustomerDetailsComponent } from './components/views/customer-details/customer-details.component';
+import { SchemeAddComponent } from './components/views/scheme-add/scheme-add.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { TopNavbarComponent } from './components/helper/top-navbar/top-navbar.co
     ModalComponent,
     CustomerViewComponent,
     ListFilterPipe,
-    TopNavbarComponent
+    TopNavbarComponent,
+    CustomerDetailsComponent,
+    SchemeAddComponent
   ],
   imports: [
     BrowserModule,

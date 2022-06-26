@@ -16,10 +16,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nura.jewelery.entity.ProbeClass;
 import com.nura.jewelery.utils.Constants;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-//@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "ms_uom", schema = Constants.SCHEMA_JEWEL)
 public class UOM implements Serializable {
@@ -32,14 +33,10 @@ public class UOM implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "uom_id")
 	private Long id;
-	@Column(name = "from_uom")
-	private String fromUOM;
-	@Column(name = "to_uom")
-	private String toUOM;
 	@Column(name = "uom_code")
 	private String code;
-	@Column(name = "units")
-	private int units;
+	@Column(name = "uom_desc")
+	private String desc;
 	@Column(name = "hierarchy")
 	private int hierarchy;
 	/**
@@ -47,7 +44,7 @@ public class UOM implements Serializable {
 	 */
 	@Column(name = "is_base_uom")
 	private Boolean isBaseUOM;
-	
+
 	@JsonIgnore
 	@Embedded
 	ProbeClass probeClass = new ProbeClass();

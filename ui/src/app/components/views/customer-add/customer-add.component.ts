@@ -53,6 +53,7 @@ export class CustomerAddComponent implements OnInit {
     districtFormName: ['', Validators.required],
     subDistirctFormName: ['', Validators.required],
     pincode: ['', Validators.required],
+    locality: ['', Validators.required],
     referralCode: [],
     altPhoneNumber: []
   });
@@ -108,6 +109,7 @@ export class CustomerAddComponent implements OnInit {
     this.address.state = this.customerForm.value.stateFormName;
     this.address.country = this.customerForm.value.countryFormName;
     this.address.pincode = this.customerForm.value.pincode;
+    this.address.locality = this.customerForm.value.locality;
     this.customer.address = this.address;
     return this.customer;
   }

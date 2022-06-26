@@ -20,11 +20,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.nura.jewelery.utils.Constants;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@EqualsAndHashCode(exclude = { "customers" })
+@Getter @Setter
 @Entity
 @Table(name = "ms_scheme", schema = Constants.SCHEMA_JEWEL)
 public class Scheme implements Serializable {

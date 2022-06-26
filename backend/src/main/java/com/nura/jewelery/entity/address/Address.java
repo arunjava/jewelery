@@ -16,9 +16,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nura.jewelery.entity.ProbeClass;
 import com.nura.jewelery.utils.Constants;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter @Setter
 @Entity
 @Table(name = "addrs_dtls", schema = Constants.SCHEMA_JEWEL)
 public class Address implements Serializable {

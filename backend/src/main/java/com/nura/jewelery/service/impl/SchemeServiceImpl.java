@@ -33,4 +33,14 @@ public class SchemeServiceImpl implements SchemeService {
 		return schemeRepository.activeSchemes();
 	}
 
+	@Override
+	public List<Scheme> getActiveSchemesForCustomerID(long custID) {
+		return schemeRepository.getAllSchemsForCustID(custID);
+	}
+
+	@Override
+	public List<Scheme> getAllSchemesForCustomerID(long custID) {
+		return schemeRepository.getAllSchemsForCustID(custID);
+	}
+
 }

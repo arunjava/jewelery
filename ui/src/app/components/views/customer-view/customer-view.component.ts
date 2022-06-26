@@ -2,6 +2,7 @@ import { CustomerService } from './../../../service/customer-service/customer.se
 import { Component, OnInit, PipeTransform } from '@angular/core';
 import { Customer } from 'src/app/models/customer/customer.model';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customer-view',
@@ -18,7 +19,10 @@ export class CustomerViewComponent implements OnInit {
   filteredCustomers = [] as Customer[];
   filter = new FormControl('');
 
-  constructor(private customerService: CustomerService) {
+  constructor(
+    private customerService: CustomerService,
+    private router: Router
+    ) {
   }
 
   ngOnInit(): void {
@@ -39,4 +43,10 @@ export class CustomerViewComponent implements OnInit {
     });
     this.collectionSize = this.filteredCustomers.length;
   }
+
+  editCustomer(customerID: number) {
+     console.log(customerID);
+     this.router.navigateByUrl('/home/customer-update/' + customerID);
+  }
+
 }

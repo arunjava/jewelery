@@ -15,9 +15,10 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nura.jewelery.utils.Constants;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter @Setter
 @Entity
 @Table(name = "ms_sub_district", schema = Constants.SCHEMA_JEWEL)
 public class SubDistrict implements Serializable {

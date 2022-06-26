@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nura.jewelery.dto.CustomerDTO;
 import com.nura.jewelery.entity.Customer;
+import com.nura.jewelery.entity.Scheme;
 import com.nura.jewelery.mapper.CustomerMapper;
 import com.nura.jewelery.service.CustomerService;
+import com.nura.jewelery.service.SchemeService;
 import com.nura.jewelery.utils.ServiceResponse;
 import com.nura.jewelery.utils.ServiceResponseWrapper;
 
@@ -28,12 +30,15 @@ public class CustomerController {
 	private CustomerService customerService;
 
 	@Autowired
+	private SchemeService schemeService;
+
+	@Autowired
 	private CustomerMapper customerMapper;
 
 	@GetMapping(path = "/customer/{id}")
 	public ResponseEntity<ServiceResponse<Customer>> getCustomerDetailsBsdOnId(@PathVariable long id) {
 
-		Customer customer = customerService.getCustomerBsdOnID(id);
+		Customer customer = customerService.findByID(id);
 
 		if (customer != null) {
 			return ResponseEntity.ok(new ServiceResponseWrapper<Customer>().wrapServiceResponse(customer,
@@ -90,5 +95,13 @@ public class CustomerController {
 	public void updateSchemeForCustomer(@PathVariable(name = "cust_id") long custId,
 			@PathVariable(name = "scheme_id") long schemeID) {
 		customerService.updateSchemeDtls(custId, schemeID);
+	}
+
+	@GetMapping(path = "/customer/{cust_id}/scheme")
+	public ResponseEntity<ServiceResponse<List<Scheme>>> getListOfCustomerSchemes(
+			@PathVariable(name = "cust_id") long custId) {
+		return ResponseEntity.ok(new ServiceResponseWrapper<List<Scheme>>().wrapServiceResponse(
+				schemeService.getAllSchemesForCustomerID(custId), HttpStatus.OK.getReasonPhrase(),
+				HttpStatus.OK.value()));
 	}
 }

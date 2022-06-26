@@ -19,7 +19,7 @@ import com.nura.jewelery.service.SchemeService;
 
 @Service
 @Transactional
-public class CustomerServiceImpl implements CustomerService{
+public class CustomerServiceImpl implements CustomerService {
 
 	@Autowired
 	private CustomerRepository customerRepository;
@@ -36,7 +36,21 @@ public class CustomerServiceImpl implements CustomerService{
 	}
 
 	public Customer getCustomerBsdOnID(long custId) {
-		return customerRepository.findById(custId).get();
+		Optional<Customer> customer = customerRepository.findById(custId);
+		if (customer.isPresent()) {
+			return customer.get();
+		} else {
+			throw new NotFoundException("Customer not found for id :" + custId);
+		}
+	}
+	
+	public Customer findByID(long custId) {
+		Optional<Customer> customer = customerRepository.findById(custId);
+		if (customer.isPresent()) {
+			return customer.get();
+		} else {
+			throw new NotFoundException("Customer not found for id :" + custId);
+		}
 	}
 
 	public List<Customer> findAll() {

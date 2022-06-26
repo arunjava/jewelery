@@ -5,7 +5,6 @@ import org.mapstruct.ReportingPolicy;
 
 import com.nura.jewelery.dto.CustomerDTO;
 import com.nura.jewelery.entity.Customer;
-import com.nura.jewelery.entity.address.Address;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface CustomerMapper {

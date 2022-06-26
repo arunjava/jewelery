@@ -8,4 +8,5 @@ export interface Customer {
   referralCode: string;
   address: Address;
 
+
 }

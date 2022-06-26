@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.nura.jewelery.entity.address.Address;
 import com.nura.jewelery.entity.address.Country;
@@ -18,6 +19,7 @@ import com.nura.jewelery.repository.SubDistrictRepository;
 import com.nura.jewelery.service.AddressService;
 
 @Service
+@Transactional(readOnly = true)
 public class AddressServiceImpl implements AddressService {
 
 	@Autowired

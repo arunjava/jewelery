@@ -1,10 +1,5 @@
 package com.nura.jewelery.entity.address;
 
-import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.nura.jewelery.utils.Constants;
-
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -15,10 +10,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.nura.jewelery.utils.Constants;
 
-@Data
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter @Setter
 @Entity
 @Table(name = "ms_state", schema = Constants.SCHEMA_JEWEL)
 public class State implements Serializable {
@@ -38,7 +38,7 @@ public class State implements Serializable {
 	private String stateCode;
 
 	@JsonIgnore
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "country_id")
 	private Country country;
 }

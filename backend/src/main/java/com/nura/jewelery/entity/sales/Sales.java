@@ -1,6 +1,7 @@
 package com.nura.jewelery.entity.sales;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,17 +10,23 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import com.nura.jewelery.entity.Customer;
 import com.nura.jewelery.entity.product.Product;
 import com.nura.jewelery.entity.uom.UOM;
 import com.nura.jewelery.utils.Constants;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
-@Table(name = "tx_sales",  schema = Constants.SCHEMA_JEWEL)
+@Table(name = "tx_sales", schema = Constants.SCHEMA_JEWEL)
 public class Sales implements Serializable {
 
 	/**
@@ -29,21 +36,38 @@ public class Sales implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "seq_id")
-	private long seq;
-
-	@ManyToOne
+	@Column(name = "txn_id")
+	private long txnID;
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "prod_id")
 	private Product product;
-
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "uom_id")
 	private UOM uom;
-
 	@Column(name = "inv_no")
 	private String invoiceNumber;
-
+	@Column(name = "cp_amt")
+	private double costPrice;
+	@Column(name = "sp_amt")
+	private double sellingPrice;
+	@Column(name = "mrp_amt")
+	private double mrp;
 	@Column(name = "sold_amt")
-	private double soldAmount;
+	private double soldAmt;
+	@Column(name = "profit_amt")
+	private double profitAmt;
+	@Column(name = "qty")
+	private double qty;
+	@Column(name = "txn_dt")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date txnDate;
 
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "customer_id", referencedColumnName = "cust_id")
+	private Customer customer;
+
+	@PrePersist
+	public void setTxnDate() {
+		txnDate = new Date();
+	}
 }

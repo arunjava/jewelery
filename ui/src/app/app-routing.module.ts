@@ -8,6 +8,8 @@ import { HomeComponent } from './components/views/home/home.component';
 import { CustomerAddComponent } from './components/views/customer-add/customer-add.component';
 import { CustomerUpdateComponent } from './components/views/customer-update/customer-update.component';
 import { CustomerViewComponent } from './components/views/customer-view/customer-view.component';
+import { CustomerDetailsComponent } from './components/views/customer-details/customer-details.component';
+import { SchemeAddComponent } from './components/views/scheme-add/scheme-add.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -20,12 +22,20 @@ const routes: Routes = [
         component: CustomerAddComponent
       },
       {
-        path: 'update-customer',
+        path: 'customer-update/:id',
         component: CustomerUpdateComponent
       },
       {
         path: 'list-customer',
         component: CustomerViewComponent
+      },
+      {
+        path: 'customer-details/:id',
+        component: CustomerDetailsComponent
+      },
+      {
+        path: 'customer-scheme/:id',
+        component: SchemeAddComponent
       }
     ]
   },

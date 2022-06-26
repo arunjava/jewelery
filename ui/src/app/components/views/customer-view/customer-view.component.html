@@ -14,11 +14,17 @@
     <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col" sortable="custName">Customer Name</th>
+        <th scope="col" sortable="custName">Name</th>
         <th scope="col" sortable="primaryContactNumber">
-          Primary Contact Number
+          Contact Number
+        </th>
+        <th scope="col" sortable="altcontactNumber">
+          Alt Contact Number
         </th>
         <th scope="col" sortable="referralCode">Referral Code</th>
+        <th scope="col">Locality</th>
+        <th scope="col">Edit</th>
+        <th scope="col">View</th>
       </tr>
     </thead>
     <tbody>
@@ -31,14 +37,19 @@
       >
         <th scope="row">{{ (page - 1) * pageSize + i + 1 }}</th>
         <td>
+          <a [routerLink] = "['/home/customer-details', customer.custId]">
           <ngb-highlight
             [result]="customer.customerName"
             [term]="filter.value"
           ></ngb-highlight>
+          </a>
         </td>
-        <!-- <td>{{ customer.customerName }}</td> -->
         <td>{{ customer.primaryContactNo }}</td>
+        <td>{{ customer.alterNateContactNo }}</td>
         <td>{{ customer.referralCode }}</td>
+        <td>{{ customer.address.locality }}</td>
+        <td><button class="btn btn-primary" (click)="editCustomer(customer.custId)">Edit</button></td>
+        <td><button class="btn btn-info" >View</button></td>
       </tr>
     </tbody>
   </table>

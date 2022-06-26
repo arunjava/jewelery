@@ -28,6 +28,6 @@ insert into jewel.ms_uom_category(uom_cat_id , uom_category) values (4, 'Time');
 
 
 --Product 
-insert into jewel.ms_product_category (category_name, category_status, description) values ('Gold', true, 'Gold Ornaments');
-insert into jewel.ms_product_sub_category (description, is_active, category_id, sub_category_name) values ('22 Caret Gold' , true, 1, '22k Gold' );
-insert into jewel.ms_product (description, category_id, product_name, sub_category_id) values ('Mens Bracelet', 1, 'Bracelet', 1);
+insert into jewel.ms_product_category (category_id, category_name, category_status, description) values (1, 'Gold', 'Gold' , true);
+insert into jewel.ms_product_category (category_id, category_name, category_status, description) values (2, 'Silver', 'Silver',true);
+insert into jewel.ms_product_category (category_id, category_name, category_status, description) values (3, 'Diamond', 'Diamond Ornaments', true);

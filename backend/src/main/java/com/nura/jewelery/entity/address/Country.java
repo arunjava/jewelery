@@ -9,13 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.CollectionId;
-
 import com.nura.jewelery.utils.Constants;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter @Setter
 @Entity
 @Table(name = "ms_country", schema = Constants.SCHEMA_JEWEL)
 public class Country implements Serializable {

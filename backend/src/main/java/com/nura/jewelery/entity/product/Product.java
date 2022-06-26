@@ -16,7 +16,6 @@ import com.nura.jewelery.utils.Constants;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
@@ -26,7 +25,7 @@ import lombok.ToString;
 public class Product implements Serializable {
 
 	/**
-	 * 
+	 * 	
 	 */
 	private static final long serialVersionUID = 6776805204182880758L;
 	
@@ -38,9 +37,6 @@ public class Product implements Serializable {
 	private String productName;
 	@Column(name = "description")
 	private String description;
-//	@ManyToOne
-//	@JoinColumn(name = "category_id", referencedColumnName = "category_id")
-//	private ProductCategory productCategory;
 	@ManyToOne
 	@JoinColumn(name = "sub_category_id", referencedColumnName = "sub_category_id")
 	private ProductSubCategory productSubCategory;

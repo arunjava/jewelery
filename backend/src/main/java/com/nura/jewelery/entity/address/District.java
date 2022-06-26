@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,7 +15,8 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nura.jewelery.utils.Constants;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 
@@ -23,7 +25,7 @@ import lombok.Data;
  *         City/District details master data
  */
 
-@Data
+@Getter @Setter
 @Entity
 @Table(name = "ms_district", schema = Constants.SCHEMA_JEWEL)
 public class District implements Serializable {
@@ -42,7 +44,7 @@ public class District implements Serializable {
 	private String districtCode;
 
 	@JsonIgnore
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "state_id")
 	private State state;
 

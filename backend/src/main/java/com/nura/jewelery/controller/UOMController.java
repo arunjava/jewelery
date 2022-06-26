@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nura.jewelery.dto.UomDTO;
-import com.nura.jewelery.entity.uom.UOM;
 import com.nura.jewelery.mapper.UOMMapper;
 import com.nura.jewelery.service.UOMService;
 import com.nura.jewelery.utils.ServiceResponse;
