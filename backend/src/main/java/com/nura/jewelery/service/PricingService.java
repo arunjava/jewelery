@@ -7,5 +7,7 @@ public interface PricingService {
 	public Pricing save(Pricing pricing);
 
 	public Pricing getPricing(long productID);
+	
+	public Pricing getPricingBsdOnProdNUomID(long prodID, long uomID);
 
 }

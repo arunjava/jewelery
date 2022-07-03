@@ -9,7 +9,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.nura.jewelery.dto.CustomerDTO;
+import com.nura.jewelery.dto.customer.CustomerDTO;
+import com.nura.jewelery.dto.customer.CustomerDTO;
 import com.nura.jewelery.entity.Customer;
 import com.nura.jewelery.entity.Scheme;
 import com.nura.jewelery.exception.NotFoundException;
@@ -43,7 +44,7 @@ public class CustomerServiceImpl implements CustomerService {
 			throw new NotFoundException("Customer not found for id :" + custId);
 		}
 	}
-	
+
 	public Customer findByID(long custId) {
 		Optional<Customer> customer = customerRepository.findById(custId);
 		if (customer.isPresent()) {
@@ -74,5 +75,15 @@ public class CustomerServiceImpl implements CustomerService {
 		} else {
 			throw new NotFoundException("Customer not found for id " + custId);
 		}
+	}
+
+	@Override
+	public CustomerDTO findByContactNumber(String contactNumber) {
+		CustomerDTO customer = customerRepository.findByPrimaryContactNo(contactNumber);
+		if (customer != null) {
+			return customer;
+		}
+
+		throw new NotFoundException("Customer not found for contact number :" + contactNumber);
 	}
 }

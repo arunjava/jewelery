@@ -1,0 +1,146 @@
+<div>
+  <form [formGroup]="salesForm" (ngSubmit)="onFormSubmit()">
+    <div class="form-group row">
+      <div class="col-sm-6 mb-3 mb-sm-0">
+        <label for="customerName">Customer Name</label>
+        <input
+          type="text"
+          formControlName="customerName"
+          class="form-control form-control-user"
+          id="customerName"
+          placeholder="Customer Name"
+        />
+      </div>
+      <div class="col-sm-3 mb-3 mb-sm-0">
+        <label for="phoneNumber">Phone Number </label>
+        <input
+          type="text"
+          formControlName="phoneNumber"
+          class="form-control form-control-user"
+          id="phoneNumber"
+          placeholder="Customer Phone Number"
+        />
+      </div>
+      <div class="col-sm-3 mb-3 mb-sm-0">
+        <label for="phoneSearch">Search User</label>
+        <button
+          class="form-control form-control-user btn-primary"
+          (click)="getCustomerBsdOnPhoneNumber()"
+        >
+          Click
+        </button>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-3 mb-3 mb-sm-0">
+        <label for="productCategory">Product Category</label>
+        <select
+          id="productCategory"
+          class="form-control"
+          formControlName="productCategory"
+          [(ngModel)]="selectedProductCat"
+          (change)="onProductCatSelection(selectedProductCat)"
+        >
+          <option [ngValue]="null" disabled [selected]="true">Choose...</option>
+          <option
+            [ngValue]="productCat"
+            *ngFor="let productCat of productCategories"
+          >
+            {{ productCat.categoryName }}
+          </option>
+        </select>
+      </div>
+      <div class="col-sm-3 mb-3 mb-sm-0">
+        <label for="productSubCategory">Product Sub Category</label>
+        <select
+          id="productSubCategory"
+          class="form-control"
+          formControlName="productSubCategory"
+          [(ngModel)]="selectedProductSubCat"
+          (change)="onProductSubCatSelection(selectedProductSubCat)"
+        >
+          <option [ngValue]="null" disabled selected>Choose...</option>
+          <option
+            [ngValue]="productSubCat"
+            *ngFor="let productSubCat of productSubCategories"
+          >
+            {{ productSubCat.subCategoryName }}
+          </option>
+        </select>
+      </div>
+      <div class="col-sm-3 mb-3 mb-sm-0">
+        <label for="product">Product</label>
+        <select
+          id="product"
+          class="form-control"
+          formControlName="product"
+          [(ngModel)]="selectedProduct"
+          (change)="onProductSelection(selectedProduct)"
+        >
+          <option [ngValue]="null" disabled>Choose...</option>
+          <option [ngValue]="product" *ngFor="let product of products">
+            {{ product.productName }}
+          </option>
+        </select>
+      </div>
+      <div class="col-sm-3 mb-3 mb-sm-0">
+        <label for="uom">UOM</label>
+        <select
+          id="uom"
+          class="form-control"
+          formControlName="uom"
+          [(ngModel)]="selectedUOM"
+        >
+          <option [ngValue]="uom" [selected]>{{ uom.desc }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-3 mb-3 mb-sm-0">
+        <label for="uom">Quantity</label>
+        <input
+          type="text"
+          formControlName="qty"
+          class="form-control form-control-user"
+          id="qty"
+          placeholder="Enter Quantity"
+          (change)="onQtyUpdate()"
+        />
+      </div>
+      <div class="col-sm-3 mb-3 mb-sm-0">
+        <label for="cp">Cost Price</label>
+        <input
+          type="text"
+          formControlName="costPrice"
+          class="form-control form-control-user"
+          id="costPrice"
+          placeholder="Cost Price"
+        />
+      </div>
+      <div class="col-sm-3 mb-3 mb-sm-0">
+        <label for="sp">Selling Price</label>
+        <input
+          type="text"
+          formControlName="sellingPrice"
+          class="form-control form-control-user"
+          id="sellingPrice"
+          placeholder="Selling Price"
+          (change)="updateSalesValue()"
+        />
+      </div>
+      <div class="col-sm-3 mb-3 mb-sm-0">
+        <label for="total">Sales Value</label>
+        <input
+          type="text"
+          formControlName="salesValue"
+          class="form-control form-control-user"
+          id="salesValue"
+          placeholder="Total Amount"
+        />
+      </div>
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+</div>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+</ngx-loading>

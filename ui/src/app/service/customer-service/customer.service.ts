@@ -16,6 +16,10 @@ export class CustomerService {
     return this.http.post<Response<Customer>>(`${environment.apiURL}/customer`, customer);
   }
 
+  updateCustomer(customer: Customer) {
+    return this.http.put<Response<Customer>>(`${environment.apiURL}/customer`, customer);
+  }
+
   getCustomer(customerID: number) {
     return this.http.get<Response<Customer>>(`${environment.apiURL}/customer/` + customerID);
   }
@@ -28,4 +32,7 @@ export class CustomerService {
     return this.http.get<Response<Array<Scheme>>>(`${environment.apiURL}/customer/` + customerID + '/scheme');
   }
 
+  getCustomerBsdOnContactNumber(phoneNUmber: string) {
+    return this.http.get<Response<Customer>>(`${environment.apiURL}/customer/contactNo/` + phoneNUmber);
+  }
 }

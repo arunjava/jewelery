@@ -5,7 +5,7 @@ import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
-import com.nura.jewelery.dto.SchemeDTO;
+import com.nura.jewelery.dto.customer.SchemeDTO;
 import com.nura.jewelery.entity.Scheme;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")

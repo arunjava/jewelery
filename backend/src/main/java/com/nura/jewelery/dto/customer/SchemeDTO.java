@@ -1,4 +1,4 @@
-package com.nura.jewelery.dto;
+package com.nura.jewelery.dto.customer;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

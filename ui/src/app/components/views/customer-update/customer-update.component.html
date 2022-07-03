@@ -111,7 +111,6 @@
           [(ngModel)]="selectedDistrict"
           (change)="onDistrictSelection(selectedDistrict)"
         >
-          <option [ngValue]="null" selected>Choose...</option>
           <option *ngFor="let district of districts"
           [selected] = "district.id === customer.address.district.id"
           [value]="district">
@@ -131,7 +130,7 @@
           <option
             *ngFor="let subDistrict of subDistricts"
             [selected] = "subDistrict.id === customer.address.subDistrict.id"
-          [value]="subDistrict"
+            [value]="subDistrict"
           >
             {{ subDistrict.subDistrictName }}
           </option>

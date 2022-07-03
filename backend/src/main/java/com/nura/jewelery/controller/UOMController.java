@@ -33,10 +33,10 @@ public class UOMController {
 				HttpStatus.CREATED.getReasonPhrase(), HttpStatus.CREATED.value()));
 	}
 
-	@GetMapping("/{uom_id}")
+	@GetMapping("/uom/{uom_id}")
 	public ResponseEntity<ServiceResponse<UomDTO>> findUOMByID(@PathVariable("uom_id") long uomID) {
 		return ResponseEntity.ok(new ServiceResponseWrapper<UomDTO>().wrapServiceResponse(
-				uomMapper.domainToDTO(uomService.findByID(uomID)), HttpStatus.CREATED.getReasonPhrase(),
-				HttpStatus.CREATED.value()));
+				uomMapper.domainToDTO(uomService.findByID(uomID)), HttpStatus.FOUND.getReasonPhrase(),
+				HttpStatus.FOUND.value()));
 	}
 }

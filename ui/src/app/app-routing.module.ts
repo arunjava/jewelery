@@ -10,6 +10,7 @@ import { CustomerUpdateComponent } from './components/views/customer-update/cust
 import { CustomerViewComponent } from './components/views/customer-view/customer-view.component';
 import { CustomerDetailsComponent } from './components/views/customer-details/customer-details.component';
 import { SchemeAddComponent } from './components/views/scheme-add/scheme-add.component';
+import { TxSalesComponent } from './components/views/tx-sales/tx-sales.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -36,6 +37,10 @@ const routes: Routes = [
       {
         path: 'customer-scheme/:id',
         component: SchemeAddComponent
+      },
+      {
+        path: 'tx-sales',
+        component: TxSalesComponent
       }
     ]
   },

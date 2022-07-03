@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nura.jewelery.dto.SchemeDTO;
+import com.nura.jewelery.dto.customer.SchemeDTO;
 import com.nura.jewelery.entity.Scheme;
 import com.nura.jewelery.mapper.SchemeMapper;
 import com.nura.jewelery.service.SchemeService;

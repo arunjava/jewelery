@@ -3,6 +3,8 @@ package com.nura.jewelery.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +18,7 @@ import com.nura.jewelery.utils.ServiceResponse;
 import com.nura.jewelery.utils.ServiceResponseWrapper;
 
 @RestController
-@RequestMapping("/api/v1/pricing")
+@RequestMapping("/api/v1")
 public class PricingController {
 
 	@Autowired
@@ -25,12 +27,19 @@ public class PricingController {
 	@Autowired
 	private PricingService pricingService;
 
-	@PostMapping
+	@PostMapping("/pricing")
 	public ResponseEntity<ServiceResponse<PricingDTO>> savePricing(@RequestBody PricingDTO pricingDTO) {
 		Pricing pricing = pricingMapper.dtoTODomain(pricingDTO);
 		return ResponseEntity.ok(new ServiceResponseWrapper<PricingDTO>().wrapServiceResponse(
 				pricingMapper.domainTODTO(pricingService.save(pricing)), HttpStatus.CREATED.getReasonPhrase(),
 				HttpStatus.CREATED.value()));
+	}
+	
+	@GetMapping("/pricing/{prodID}/{uomID}")
+	public ResponseEntity<ServiceResponse<PricingDTO>> getPricingBsdOnProdIDNUOMID(@PathVariable long prodID, @PathVariable long uomID) {
+		return ResponseEntity.ok(new ServiceResponseWrapper<PricingDTO>().wrapServiceResponse(
+				pricingMapper.domainTODTO(pricingService.getPricingBsdOnProdNUomID(prodID, uomID)), HttpStatus.FOUND.getReasonPhrase(),
+				HttpStatus.FOUND.value()));
 	}
 
 }

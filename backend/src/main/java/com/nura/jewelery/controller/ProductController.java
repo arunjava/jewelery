@@ -1,5 +1,8 @@
 package com.nura.jewelery.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,12 +41,13 @@ public class ProductController {
 
 	}
 
-	@GetMapping("/category/{id}")
-	public ResponseEntity<ServiceResponse<ProductCategoryDTO>> getProductCatByID(@PathVariable long id) {
+	@GetMapping("/category")
+	public ResponseEntity<ServiceResponse<List<ProductCategoryDTO>>> getProductCategories() {
 
-		return ResponseEntity.ok(new ServiceResponseWrapper<ProductCategoryDTO>().wrapServiceResponse(
-				productMapper.domainTODTO(productService.getProdCatByID(id)), HttpStatus.FOUND.getReasonPhrase(),
-				HttpStatus.FOUND.value()));
+		List<ProductCategoryDTO> prodCatDTOS = productMapper.domainTOCatDTOs(productService.getProdCats());
+
+		return ResponseEntity.ok(new ServiceResponseWrapper<List<ProductCategoryDTO>>().wrapServiceResponse(prodCatDTOS,
+				HttpStatus.FOUND.getReasonPhrase(), HttpStatus.FOUND.value()));
 
 	}
 
@@ -55,6 +59,15 @@ public class ProductController {
 				productMapper.domainTODTO(
 						productService.saveProductSubCategory(productMapper.dtoTODomain(productSubCatDTO))),
 				HttpStatus.CREATED.getReasonPhrase(), HttpStatus.CREATED.value()));
+
+	}
+
+	@GetMapping("/sub_category/category/{id}")
+	public ResponseEntity<ServiceResponse<List<ProductSubCategoryDTO>>> getProductSubCatByCatID(@PathVariable long id) {
+		
+		return ResponseEntity.ok(new ServiceResponseWrapper<List<ProductSubCategoryDTO>>().wrapServiceResponse(
+				productMapper.domainTOCatSubDTOs(productService.getProdSubCatByCatID(id)), HttpStatus.FOUND.getReasonPhrase(),
+				HttpStatus.FOUND.value()));
 
 	}
 
@@ -82,6 +95,14 @@ public class ProductController {
 		return ResponseEntity.ok(new ServiceResponseWrapper<ProductDTO>().wrapServiceResponse(
 				productMapper.domainTODTO(productService.getProductByID(id)), HttpStatus.FOUND.getReasonPhrase(),
 				HttpStatus.FOUND.value()));
+
+	}
+
+	@GetMapping("/sub_category/products/{id}")
+	public ResponseEntity<ServiceResponse<List<ProductDTO>>> getProductBySubCatID(@PathVariable long id) {
+		List<ProductDTO> productDTOs = productMapper.domainsTODTOs(productService.getProductBySubCatID(id));
+		return ResponseEntity.ok(new ServiceResponseWrapper<List<ProductDTO>>().wrapServiceResponse(productDTOs,
+				HttpStatus.FOUND.getReasonPhrase(), HttpStatus.FOUND.value()));
 
 	}
 }

@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nura.jewelery.dto.CustomerDTO;
+import com.nura.jewelery.dto.customer.CustomerDTO;
+import com.nura.jewelery.dto.customer.CustomerDTO;
 import com.nura.jewelery.entity.Customer;
 import com.nura.jewelery.entity.Scheme;
 import com.nura.jewelery.mapper.CustomerMapper;
@@ -61,6 +62,13 @@ public class CustomerController {
 
 		return ResponseEntity.ok(new ServiceResponseWrapper<List<Customer>>().wrapServiceResponse(null,
 				HttpStatus.NO_CONTENT.getReasonPhrase(), HttpStatus.NO_CONTENT.value()));
+	}
+
+	@GetMapping(path = "/customer/contactNo/{phoneNo}")
+	public ResponseEntity<ServiceResponse<CustomerDTO>> getCustomerBsdOnContactNumber(@PathVariable String phoneNo) {
+		return ResponseEntity.ok(new ServiceResponseWrapper<CustomerDTO>().wrapServiceResponse(
+				customerService.findByContactNumber(phoneNo), HttpStatus.FOUND.getReasonPhrase(),
+				HttpStatus.FOUND.value()));
 	}
 
 	@PostMapping(path = "/customer")

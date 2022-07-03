@@ -11,4 +11,7 @@ public interface PricingRepository extends JpaRepository<Pricing, Long> {
 
 	@Query("Select p From Pricing p where p.product.productId =:productId")
 	public Pricing getLatestPricingForProduct(long productId);
+	
+	@Query("Select p From Pricing p where p.isActive = true and p.product.productId =:productId and p.uom.id =:uomId")
+	public Pricing getLatestPricingBsdOnProdIDNUOmID(long productId, long uomId);
 }

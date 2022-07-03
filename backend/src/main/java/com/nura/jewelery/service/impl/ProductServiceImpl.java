@@ -1,5 +1,6 @@
 package com.nura.jewelery.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,6 +70,21 @@ public class ProductServiceImpl implements ProductService {
 		}
 
 		return product.get();
+	}
+
+	@Override
+	public List<ProductSubCategory> getProdSubCatByCatID(long productCatID) {
+		return prodSubCatRepo.findByCategoryID(productCatID);
+	}
+
+	@Override
+	public List<ProductCategory> getProdCats() {
+		return prodCatRepo.findAll();
+	}
+
+	@Override
+	public List<Product> getProductBySubCatID(long subCatID) {
+		return productRepo.getProductBsdOnSubCatID(subCatID);
 	}
 
 }

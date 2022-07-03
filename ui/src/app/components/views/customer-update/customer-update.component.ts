@@ -56,6 +56,10 @@ export class CustomerUpdateComponent implements OnInit {
           console.log(this.address);
           console.log(this.customer);
           // this.setCustomerFields();
+          this.selectedCountry = this.customer.address.country;
+          this.selectedState = this.customer.address.state;
+          this.selectedDistrict = this.customer.address.district;
+          this.selectedSubDistrict = this.customer.address.subDistrict;
           this.onCountrySelection(this.customer.address.country);
           this.onStateSelection(this.customer.address.state);
           this.onDistrictSelection(this.customer.address.district);
@@ -84,13 +88,14 @@ export class CustomerUpdateComponent implements OnInit {
   });
 
   onCountrySelection(country: Country) {
-    console.log('Selected count -->' + country.countryName + ' ' + country.countryCode);
+    console.log('Selected country -->' + country.countryName + ' ' + country.countryCode);
     this.addressService.getListOfStatesBsdOnCountryID(country.id).subscribe(response => {
       this.states = response.result;
     });
   }
 
   onStateSelection(state: State) {
+    console.log('State selected ->' + state.stateName + ' '  + state.id);
     this.addressService.getListOfDistrictBsdOnStateID(state.id).subscribe(response => {
       this.districts = response.result;
     });

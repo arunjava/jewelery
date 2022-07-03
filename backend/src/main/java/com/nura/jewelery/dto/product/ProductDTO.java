@@ -10,5 +10,6 @@ public class ProductDTO {
 	private String description;
 	private ProductCategoryDTO productCategory;
 	private ProductSubCategoryDTO productSubCategory;
-
+	private long uomID;
+	
 }

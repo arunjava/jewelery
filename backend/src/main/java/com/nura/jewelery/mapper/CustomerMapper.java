@@ -3,7 +3,7 @@ package com.nura.jewelery.mapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
-import com.nura.jewelery.dto.CustomerDTO;
+import com.nura.jewelery.dto.customer.CustomerDTO;
 import com.nura.jewelery.entity.Customer;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")

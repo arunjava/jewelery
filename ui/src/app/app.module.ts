@@ -21,6 +21,7 @@ import { ListFilterPipe } from './pipes/ListFilterPipe.pipe';
 import { TopNavbarComponent } from './components/helper/top-navbar/top-navbar.component';
 import { CustomerDetailsComponent } from './components/views/customer-details/customer-details.component';
 import { SchemeAddComponent } from './components/views/scheme-add/scheme-add.component';
+import { TxSalesComponent } from './components/views/tx-sales/tx-sales.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { SchemeAddComponent } from './components/views/scheme-add/scheme-add.com
     ListFilterPipe,
     TopNavbarComponent,
     CustomerDetailsComponent,
-    SchemeAddComponent
+    SchemeAddComponent,
+    TxSalesComponent
   ],
   imports: [
     BrowserModule,

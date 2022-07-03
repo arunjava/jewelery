@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.nura.jewelery.entity.uom.UOM;
 import com.nura.jewelery.utils.Constants;
 
 import lombok.Getter;
@@ -28,7 +29,7 @@ public class Product implements Serializable {
 	 * 	
 	 */
 	private static final long serialVersionUID = 6776805204182880758L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "product_id")
@@ -40,5 +41,8 @@ public class Product implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "sub_category_id", referencedColumnName = "sub_category_id")
 	private ProductSubCategory productSubCategory;
+	@ManyToOne
+	@JoinColumn(name = "uom_id")
+	private UOM uom;
 
 }

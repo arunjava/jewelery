@@ -2,7 +2,6 @@ package com.nura.jewelery.entity;
 
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -16,14 +15,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.nura.jewelery.entity.address.Address;
-import com.nura.jewelery.entity.sales.Sales;
 import com.nura.jewelery.utils.Constants;
 
 import lombok.Getter;
@@ -32,7 +29,8 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "ms_customer", schema = Constants.SCHEMA_JEWEL)
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 public class Customer implements Serializable {
 	/**
@@ -56,19 +54,19 @@ public class Customer implements Serializable {
 	@Column(name = "referral_code")
 	private String referralCode;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinTable(name = "mp_customer_addr", schema = Constants.SCHEMA_JEWEL, joinColumns = @JoinColumn(name = "customer_id"), inverseJoinColumns = @JoinColumn(name = "addr_id"))
 	private Address address;
 
-	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	@JoinTable(name = "mp_customer_scheme", schema = Constants.SCHEMA_JEWEL, joinColumns = @JoinColumn(name = "customer_id"), inverseJoinColumns = @JoinColumn(name = "scheme_id"))
 	@JsonIgnoreProperties("customers")
 	private Set<Scheme> schemes = new HashSet<>();
-	
+
 	@JsonIgnore
 	@Embedded
 	private ProbeClass probeClass = new ProbeClass();
-	
+
 //	@OneToMany
 //	@JoinColumn(name = "customer_id", referencedColumnName = "cust_id")
 //	private List<Sales> sales;
