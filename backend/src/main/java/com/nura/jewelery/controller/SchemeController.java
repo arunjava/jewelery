@@ -9,12 +9,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nura.jewelery.dto.customer.SchemeDTO;
-import com.nura.jewelery.entity.Scheme;
+import com.nura.jewelery.entity.scheme.Scheme;
 import com.nura.jewelery.mapper.SchemeMapper;
 import com.nura.jewelery.service.SchemeService;
 import com.nura.jewelery.utils.ServiceResponse;
@@ -65,4 +66,10 @@ public class SchemeController {
 				schemeMapper.domainToDTO(activeSchemes), HttpStatus.NOT_FOUND.getReasonPhrase(),
 				HttpStatus.NOT_FOUND.value()));
 	}
+	
+	@PutMapping("/scheme/{scheme_id}/offer/{offer_id}")
+	public void updateSchemeOffers(@PathVariable("scheme_id") long schemeId, @PathVariable("offer_id") long offerId) {
+		schemeService.updateSchemeOffers(schemeId, offerId);
+	}
+	
 }

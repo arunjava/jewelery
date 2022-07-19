@@ -21,6 +21,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.nura.jewelery.entity.address.Address;
+import com.nura.jewelery.entity.scheme.Scheme;
 import com.nura.jewelery.utils.Constants;
 
 import lombok.Getter;
@@ -67,6 +68,11 @@ public class Customer implements Serializable {
 	@Embedded
 	private ProbeClass probeClass = new ProbeClass();
 
+//	@ManyToMany
+//	@JoinTable(name = "mp_customer_scheme" , schema = Constants.SCHEMA_JEWEL, 
+//				joinColumns = @JoinColumn(name = "customer_id") , inverseJoinColumns = @JoinColumn(name = "scheme_id"))
+//	private List<Scheme> schemes2;
+	
 //	@OneToMany
 //	@JoinColumn(name = "customer_id", referencedColumnName = "cust_id")
 //	private List<Sales> sales;

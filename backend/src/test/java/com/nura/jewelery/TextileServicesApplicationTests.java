@@ -1,4 +1,4 @@
-package com.nura.textiles;
+package com.nura.jewelery;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

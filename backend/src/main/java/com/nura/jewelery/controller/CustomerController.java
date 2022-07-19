@@ -14,9 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nura.jewelery.dto.customer.CustomerDTO;
+import com.nura.jewelery.dto.customer.CustomerSchemeDTO;
 import com.nura.jewelery.dto.customer.CustomerDTO;
 import com.nura.jewelery.entity.Customer;
-import com.nura.jewelery.entity.Scheme;
+import com.nura.jewelery.entity.scheme.Scheme;
 import com.nura.jewelery.mapper.CustomerMapper;
 import com.nura.jewelery.service.CustomerService;
 import com.nura.jewelery.service.SchemeService;
@@ -99,17 +100,19 @@ public class CustomerController {
 				HttpStatus.EXPECTATION_FAILED.getReasonPhrase(), HttpStatus.EXPECTATION_FAILED.value()));
 	}
 
-	@PutMapping(path = "/customer/{cust_id}/scheme/{scheme_id}")
-	public void updateSchemeForCustomer(@PathVariable(name = "cust_id") long custId,
-			@PathVariable(name = "scheme_id") long schemeID) {
-		customerService.updateSchemeDtls(custId, schemeID);
+	@PostMapping(path = "/customer/updateScheme")
+	public ResponseEntity<ServiceResponse<String>> updateSchemeForCustomer(@RequestBody CustomerSchemeDTO customerSchemeDTO) {
+		customerService.updateSchemeDtls(customerSchemeDTO);
+
+		return ResponseEntity.ok(new ServiceResponseWrapper<String>().wrapServiceResponse("Customer Scheme update",
+				HttpStatus.CREATED.getReasonPhrase(), HttpStatus.CREATED.value()));
 	}
 
-	@GetMapping(path = "/customer/{cust_id}/scheme")
-	public ResponseEntity<ServiceResponse<List<Scheme>>> getListOfCustomerSchemes(
-			@PathVariable(name = "cust_id") long custId) {
-		return ResponseEntity.ok(new ServiceResponseWrapper<List<Scheme>>().wrapServiceResponse(
-				schemeService.getAllSchemesForCustomerID(custId), HttpStatus.OK.getReasonPhrase(),
-				HttpStatus.OK.value()));
-	}
+//	@GetMapping(path = "/customer/{cust_id}/scheme")
+//	public ResponseEntity<ServiceResponse<List<Scheme>>> getListOfCustomerSchemes(
+//			@PathVariable(name = "cust_id") long custId) {
+//		return ResponseEntity.ok(new ServiceResponseWrapper<List<Scheme>>().wrapServiceResponse(
+//				schemeService.getAllSchemesForCustomerID(custId), HttpStatus.OK.getReasonPhrase(),
+//				HttpStatus.OK.value()));
+//	}
 }

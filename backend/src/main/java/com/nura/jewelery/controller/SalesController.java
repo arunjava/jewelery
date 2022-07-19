@@ -15,9 +15,8 @@ import com.nura.jewelery.service.SalesService;
 import com.nura.jewelery.utils.ServiceResponse;
 import com.nura.jewelery.utils.ServiceResponseWrapper;
 
-
 @RestController
-@RequestMapping("/api/v1/sales")
+@RequestMapping("/api/v1")
 public class SalesController {
 
 	@Autowired
@@ -26,11 +25,10 @@ public class SalesController {
 	@Autowired
 	private SalesService salesService;
 
-	@PostMapping
+	@PostMapping("/sales")
 	public ResponseEntity<ServiceResponse<SalesDTO>> sales(@RequestBody SalesDTO salesDTO) {
-		Sales sale = salesMapper.dtoTODomain(salesDTO);
 		return ResponseEntity.ok(new ServiceResponseWrapper<SalesDTO>().wrapServiceResponse(
-				salesMapper.domainTODTO(salesService.saveSales(sale)), HttpStatus.CREATED.getReasonPhrase(),
+				salesMapper.domainTODTO(salesService.saveSales(salesDTO)), HttpStatus.CREATED.getReasonPhrase(),
 				HttpStatus.CREATED.value()));
 	}
 

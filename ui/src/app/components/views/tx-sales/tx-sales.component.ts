@@ -11,6 +11,8 @@ import { Product } from '../../../models/product/Product.model';
 import { UOM } from '../../../models/uom/UOM.model';
 import { Pricing } from '../../../models/pricing/Pricing.model';
 import { PricingService } from '../../../service/pricing-service/pricing.service';
+import { Sales } from '../../../models/sales/Sales.model';
+import { SalesService } from '../../../service/sales/sales.service';
 
 @Component({
   selector: 'app-tx-sales',
@@ -30,12 +32,14 @@ export class TxSalesComponent implements OnInit {
   selectedProduct =  {} as Product;
   selectedUOM = {} as UOM;
   pricing  = {} as Pricing;
+  sales = {} as Sales;
 
   constructor(
     private formBuilder: FormBuilder,
     private customerService: CustomerService,
     private modalService: BsModalService,
     private productService: ProductServiceService,
+    private salesService: SalesService,
     private pricingService: PricingService) { }
 
   ngOnInit(): void {
@@ -61,7 +65,23 @@ export class TxSalesComponent implements OnInit {
   });
 
   onFormSubmit() {
+    console.log(JSON.stringify(this.salesForm.value));
+    this.sales.costPrice = this.salesForm.value.costPrice;
+    this.sales.sellingPrice = this.salesForm.value.sellingPrice;
+    this.sales.custID = this.customer.custId;
+    this.sales.productID = this.selectedProduct.productId;
+    this.sales.uomID = this.selectedUOM.uom_id;
+    this.sales.qty = this.salesForm.value.qty;
+    console.log(JSON.stringify(this.sales));
 
+    this.salesService.createSales(this.sales).subscribe(resp => {
+      if(resp.statusCode == 201) {
+        console.log(resp.result);
+        this.showmodel('Transaction successful : ' + resp.result.invoiceNumber);
+      } else {
+        console.log('Failed to update');
+      }
+    })
   }
 
   onProductCatSelection(productCatSel : ProductCategory) {
@@ -116,7 +136,6 @@ export class TxSalesComponent implements OnInit {
     console.log('Overall sales value -->' + salesValue);
 
   }
-
 
   getCustomerBsdOnPhoneNumber() {
     console.log(this.salesForm.value.phoneNumber);

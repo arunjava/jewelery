@@ -1,4 +1,4 @@
-package com.nura.textiles.repository;
+package com.nura.jewelery.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

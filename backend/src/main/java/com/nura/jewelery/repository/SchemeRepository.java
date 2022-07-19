@@ -6,14 +6,17 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.nura.jewelery.entity.Scheme;
+import com.nura.jewelery.entity.scheme.Scheme;
 
 @Repository
 public interface SchemeRepository extends JpaRepository<Scheme, Long> {
 
 	@Query("select s from Scheme s where s.isActive = true")
 	List<Scheme> activeSchemes();
+	
+	@Query("select s from Scheme s left join s.offers o where s.id =:id")
+	Scheme getOffersBsdOnSchemeID(long id);
 
-	@Query("select s from Scheme s join s.customers c where c.custId = :custId")
-	List<Scheme> getAllSchemsForCustID(long custId);
+//	@Query("select s from Scheme s join s.customers c where c.custId = :custId")
+//	List<Scheme> getAllSchemsForCustID(long custId);
 }

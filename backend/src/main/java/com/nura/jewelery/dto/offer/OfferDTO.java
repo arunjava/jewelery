@@ -12,6 +12,8 @@ public class OfferDTO {
 	private String desc;
 	private Date startDt;
 	private Date endDt;
-	private long productID;
-
+	private String offerCode;
+	private String applicableOn;
+	private String expression;
+	
 }

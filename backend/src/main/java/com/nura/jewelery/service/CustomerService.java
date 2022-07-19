@@ -3,7 +3,7 @@ package com.nura.jewelery.service;
 import java.util.List;
 
 import com.nura.jewelery.dto.customer.CustomerDTO;
-import com.nura.jewelery.dto.customer.CustomerDTO;
+import com.nura.jewelery.dto.customer.CustomerSchemeDTO;
 import com.nura.jewelery.entity.Customer;
 
 public interface CustomerService {
@@ -20,5 +20,5 @@ public interface CustomerService {
 
 	public List<Customer> findAll();
 
-	public void updateSchemeDtls(long custId, long schemeId);
+	public void updateSchemeDtls(CustomerSchemeDTO cusSchemeDTO);
 }

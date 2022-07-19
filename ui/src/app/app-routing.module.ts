@@ -41,6 +41,10 @@ const routes: Routes = [
       {
         path: 'tx-sales',
         component: TxSalesComponent
+      },
+      {
+        path: 'scheme-add',
+        component: SchemeAddComponent
       }
     ]
   },

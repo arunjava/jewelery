@@ -26,6 +26,11 @@ insert into jewel.ms_uom_category(uom_cat_id , uom_category) values (2, 'Quantit
 insert into jewel.ms_uom_category(uom_cat_id , uom_category) values (3, 'Volume');
 insert into jewel.ms_uom_category(uom_cat_id , uom_category) values (4, 'Time');
 
+--time related UOM
+INSERT INTO jewel.ms_uom(uom_id, uom_code, uom_desc, hierarchy, is_base_uom, created_by, created_on, modified_by, modified_on, uom_cat_id) VALUES (201, 'DAYS', 'DAYS', 0, FALSE, NULL, NULL, NULL, NULL, 4);
+INSERT INTO jewel.ms_uom(uom_id, uom_code, uom_desc, hierarchy, is_base_uom, created_by, created_on, modified_by, modified_on, uom_cat_id) VALUES (202, 'MONTHS', 'MONTHS', 0, FALSE, NULL, NULL, NULL, NULL, 4);
+INSERT INTO jewel.ms_uom(uom_id, uom_code, uom_desc, hierarchy, is_base_uom, created_by, created_on, modified_by, modified_on, uom_cat_id) VALUES (203, 'YEARS', 'YEARS', 0, FALSE, NULL, NULL, NULL, NULL, 4);
+
 
 --Product 
 insert into jewel.ms_product_category (category_id, category_name, category_status, description) values (1, 'Gold', 'Gold' , true);
