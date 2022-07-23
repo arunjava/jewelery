@@ -53,8 +53,6 @@ export class CustomerUpdateComponent implements OnInit {
         if (response.statusCode == 200) {
           this.customer = response.result;
           this.address = this.customer.address;
-          console.log(this.address);
-          console.log(this.customer);
           // this.setCustomerFields();
           this.selectedCountry = this.customer.address.country;
           this.selectedState = this.customer.address.state;
@@ -134,7 +132,8 @@ export class CustomerUpdateComponent implements OnInit {
     this.customer.referralCode = this.customerForm.value.referralCode;
     this.address.addr1 = this.customerForm.value.inputAddress;
     this.address.addr2 = this.customerForm.value.inputAddress2;
-    this.address.subDistrict = this.customerForm.value.subDistirctFormName;
+    console.log(this.selectedSubDistrict.id);
+    this.address.subDistrict = this.customerForm.value.subDistirctFormName != null ? this.customerForm.value.subDistirctFormName : '';
     this.address.district = this.customerForm.value.districtFormName;
     this.address.state = this.customerForm.value.stateFormName;
     this.address.country = this.customerForm.value.countryFormName;

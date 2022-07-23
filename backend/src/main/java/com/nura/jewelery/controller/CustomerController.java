@@ -15,12 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nura.jewelery.dto.customer.CustomerDTO;
 import com.nura.jewelery.dto.customer.CustomerSchemeDTO;
-import com.nura.jewelery.dto.customer.CustomerDTO;
 import com.nura.jewelery.entity.Customer;
-import com.nura.jewelery.entity.scheme.Scheme;
 import com.nura.jewelery.mapper.CustomerMapper;
 import com.nura.jewelery.service.CustomerService;
-import com.nura.jewelery.service.SchemeService;
 import com.nura.jewelery.utils.ServiceResponse;
 import com.nura.jewelery.utils.ServiceResponseWrapper;
 
@@ -30,9 +27,6 @@ public class CustomerController {
 
 	@Autowired
 	private CustomerService customerService;
-
-	@Autowired
-	private SchemeService schemeService;
 
 	@Autowired
 	private CustomerMapper customerMapper;
@@ -101,18 +95,19 @@ public class CustomerController {
 	}
 
 	@PostMapping(path = "/customer/updateScheme")
-	public ResponseEntity<ServiceResponse<String>> updateSchemeForCustomer(@RequestBody CustomerSchemeDTO customerSchemeDTO) {
+	public ResponseEntity<ServiceResponse<String>> updateSchemeForCustomer(
+			@RequestBody CustomerSchemeDTO customerSchemeDTO) {
 		customerService.updateSchemeDtls(customerSchemeDTO);
 
 		return ResponseEntity.ok(new ServiceResponseWrapper<String>().wrapServiceResponse("Customer Scheme update",
 				HttpStatus.CREATED.getReasonPhrase(), HttpStatus.CREATED.value()));
 	}
 
-//	@GetMapping(path = "/customer/{cust_id}/scheme")
-//	public ResponseEntity<ServiceResponse<List<Scheme>>> getListOfCustomerSchemes(
-//			@PathVariable(name = "cust_id") long custId) {
-//		return ResponseEntity.ok(new ServiceResponseWrapper<List<Scheme>>().wrapServiceResponse(
-//				schemeService.getAllSchemesForCustomerID(custId), HttpStatus.OK.getReasonPhrase(),
-//				HttpStatus.OK.value()));
-//	}
+	@GetMapping(path = "/customer/{cust_id}/scheme")
+	public ResponseEntity<ServiceResponse<List<CustomerSchemeDTO>>> getListOfCustomerSchemes(
+			@PathVariable(name = "cust_id") long custId) {
+		return ResponseEntity.ok(new ServiceResponseWrapper<List<CustomerSchemeDTO>>().wrapServiceResponse(
+				customerService.getActiveCustomerSchemeBsdOnCustomerID(custId), HttpStatus.OK.getReasonPhrase(),
+				HttpStatus.OK.value()));
+	}
 }

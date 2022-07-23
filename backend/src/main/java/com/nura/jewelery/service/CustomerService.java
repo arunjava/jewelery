@@ -21,4 +21,6 @@ public interface CustomerService {
 	public List<Customer> findAll();
 
 	public void updateSchemeDtls(CustomerSchemeDTO cusSchemeDTO);
+	
+	public List<CustomerSchemeDTO> getActiveCustomerSchemeBsdOnCustomerID(long customerID);
 }

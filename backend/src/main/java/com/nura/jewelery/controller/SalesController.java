@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nura.jewelery.dto.sales.SalesDTO;
-import com.nura.jewelery.entity.sales.Sales;
 import com.nura.jewelery.mapper.SalesMapper;
 import com.nura.jewelery.service.SalesService;
 import com.nura.jewelery.utils.ServiceResponse;

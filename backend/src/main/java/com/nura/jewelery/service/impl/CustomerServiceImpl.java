@@ -109,4 +109,9 @@ public class CustomerServiceImpl implements CustomerService {
 
 		throw new NotFoundException("Customer not found for contact number :" + contactNumber);
 	}
+
+	@Override
+	public List<CustomerSchemeDTO> getActiveCustomerSchemeBsdOnCustomerID(long customerID) {
+		return customerSchemeRepository.getActiveCustomerSchemeBsdOnID(customerID);
+	}
 }

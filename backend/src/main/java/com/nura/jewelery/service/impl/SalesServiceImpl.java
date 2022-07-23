@@ -15,6 +15,7 @@ import com.nura.jewelery.entity.sales.Sales;
 import com.nura.jewelery.entity.scheme.CustomerScheme;
 import com.nura.jewelery.entity.uom.UOM;
 import com.nura.jewelery.entity.uom.UOMConversion;
+import com.nura.jewelery.exception.ApplicationException;
 import com.nura.jewelery.exception.NotFoundException;
 import com.nura.jewelery.mapper.SalesMapper;
 import com.nura.jewelery.repository.CustomerSchemeRepository;
@@ -73,10 +74,14 @@ public class SalesServiceImpl implements SalesService {
 			}
 			if (salesDTO.getCustomerSchemeID() > 0) {
 				CustomerScheme custScheme = customerSchemeRepo.getCustomerSchemeBsdOnID(salesDTO.getCustomerSchemeID());
-				if (custScheme != null && custScheme.isActive()) {
-					offerCalculation(custScheme, sale);
-					custScheme.setActive(false);
-					customerSchemeRepo.save(custScheme);
+				if (custScheme != null) {
+					if (custScheme.isActive()) {
+						offerCalculation(custScheme, sale);
+						custScheme.setActive(false);
+						customerSchemeRepo.save(custScheme);
+					} else {
+						throw new ApplicationException("Selected scheme is not active");
+					}
 				}
 			}
 
@@ -92,10 +97,14 @@ public class SalesServiceImpl implements SalesService {
 		offers.forEach(offer -> {
 			switch (Constants.OFFER_TYPES.valueOf(offer.getApplicableOn())) {
 			case MAKING_CHARGES:
+				sale.setMakingCharges(
+						(double) ExpressionParserUtil.parseExp(offer.getExpression(), "" + sale.getQty()));
 				break;
 			case MONEY:
 				break;
 			case WASTAGE_CHARGES:
+				sale.setWastageCharges(
+						(double) ExpressionParserUtil.parseExp(offer.getExpression(), "" + sale.getQty()));
 				break;
 			case WEIGHT:
 				double newQty = sale.getQty()
@@ -104,7 +113,6 @@ public class SalesServiceImpl implements SalesService {
 				break;
 			default:
 				break;
-
 			}
 		});
 	}

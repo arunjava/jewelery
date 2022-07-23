@@ -56,7 +56,8 @@ public class Customer implements Serializable {
 	private String referralCode;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinTable(name = "mp_customer_addr", schema = Constants.SCHEMA_JEWEL, joinColumns = @JoinColumn(name = "customer_id"), inverseJoinColumns = @JoinColumn(name = "addr_id"))
+//	@JoinTable(name = "mp_customer_addr", schema = Constants.SCHEMA_JEWEL, joinColumns = @JoinColumn(name = "customer_id"), inverseJoinColumns = @JoinColumn(name = "addr_id"))
+	@JoinColumn(name = "addr_id")
 	private Address address;
 
 	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)

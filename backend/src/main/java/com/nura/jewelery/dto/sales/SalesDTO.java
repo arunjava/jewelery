@@ -15,5 +15,7 @@ public class SalesDTO {
 	private long custID;
 	private double qty;
 	private long customerSchemeID;
-	
+	private double makingCharges;
+	private double wastageCharges;
+
 }

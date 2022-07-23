@@ -65,6 +65,10 @@ public class Sales implements Serializable {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "customer_id", referencedColumnName = "cust_id")
 	private Customer customer;
+	@Column(name = "making_charges")
+	private double makingCharges;
+	@Column(name = "wastage_charges")
+	private double wastageCharges;
 
 	@PrePersist
 	public void setTxnDate() {
