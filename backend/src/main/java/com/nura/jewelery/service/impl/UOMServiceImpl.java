@@ -1,5 +1,6 @@
 package com.nura.jewelery.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -62,6 +63,11 @@ public class UOMServiceImpl implements UOMService {
 		}
 
 		return uomCatRepo.save(uomCategory);
+	}
+
+	@Override
+	public List<UOM> findUOMsByUOMCatID(long catID) {
+		return uomRepo.getUOMsBsdOnUOMCatID(catID);
 	}
 
 }

@@ -16,4 +16,8 @@ export class SchemeService {
   saveScheme(scheme: Scheme) {
     return this.http.post<Response<Scheme>>(`${environment.apiURL}/scheme`, scheme);
   }
+
+  getAllActiveSchemes() {
+    return this.http.get<Response<Array<Scheme>>>(`${environment.apiURL}/scheme/active`);
+  }
 }

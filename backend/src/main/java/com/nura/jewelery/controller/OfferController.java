@@ -1,5 +1,7 @@
 package com.nura.jewelery.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,9 +25,15 @@ public class OfferController {
 
 	@Autowired
 	private OfferService offerService;
-	
+
 	@Autowired
 	private OfferMapper offerMapper;
+
+	@GetMapping({ "/all" })
+	public ResponseEntity<ServiceResponse<List<Offer>>> getAllActiveOffers() {
+		return ResponseEntity.ok(new ServiceResponseWrapper<List<Offer>>().wrapServiceResponse(
+				offerService.getAllOffers(), HttpStatus.FOUND.getReasonPhrase(), HttpStatus.FOUND.value()));
+	}
 
 	@GetMapping({ "/{id}" })
 	public ResponseEntity<ServiceResponse<Offer>> getOfferBsdOnID(@PathVariable("id") Long offerID) {
@@ -42,8 +50,7 @@ public class OfferController {
 	@PostMapping
 	public ResponseEntity<ServiceResponse<Offer>> saveOffer(@RequestBody OfferDTO offerDTO) {
 		Offer offer = offerMapper.dtoToDomain(offerDTO);
-		return ResponseEntity.ok(new ServiceResponseWrapper<Offer>().wrapServiceResponse(
-				offerService.saveOffer(offer),
+		return ResponseEntity.ok(new ServiceResponseWrapper<Offer>().wrapServiceResponse(offerService.saveOffer(offer),
 				HttpStatus.CREATED.getReasonPhrase(), HttpStatus.CREATED.value()));
 	}
 

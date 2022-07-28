@@ -1,15 +1,15 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AddressService } from '../../../service/address-service/address-service.service';
-import { Country } from '../../../models/address/Country.model';
-import { State } from '../../../models/address/State.model';
-import { District } from '../../../models/address/District.model';
-import { SubDistrict } from '../../../models/address/SubDistrict.model';
+import { AddressService } from '../../../../service/address-service/address-service.service';
+import { Country } from '../../../../models/address/Country.model';
+import { State } from '../../../../models/address/State.model';
+import { District } from '../../../../models/address/District.model';
+import { SubDistrict } from '../../../../models/address/SubDistrict.model';
 import { Customer } from 'src/app/models/customer/customer.model';
-import { CustomerService } from '../../../service/customer-service/customer.service';
+import { CustomerService } from '../../../../service/customer-service/customer.service';
 import { Address } from 'src/app/models/Address.model';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { ModalComponent } from '../../helper/modal/modal.component';
+import { ModalComponent } from '../../../helper/modal/modal.component';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({

@@ -40,7 +40,7 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(AlreadyExistException.class)
 	public ResponseEntity<ServiceResponse<String>> alreadyExistExceptions(AlreadyExistException ex) {
 		return ResponseEntity.ok(new ServiceResponseWrapper<String>().wrapServiceResponse(ex.getLocalizedMessage(),
-				HttpStatus.CONFLICT.getReasonPhrase(), HttpStatus.CONFLICT.value()));
+				ex.getLocalizedMessage(), HttpStatus.CONFLICT.value()));
 	}
 
 	@ExceptionHandler(NotFoundException.class)

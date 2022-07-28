@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CustomerService } from '../../../service/customer-service/customer.service';
-import { Customer } from '../../../models/customer/customer.model';
-import { Address } from '../../../models/Address.model';
+import { CustomerService } from '../../../../service/customer-service/customer.service';
+import { Customer } from '../../../../models/customer/customer.model';
+import { Address } from '../../../../models/Address.model';
 
 @Component({
   selector: 'app-customer-details',

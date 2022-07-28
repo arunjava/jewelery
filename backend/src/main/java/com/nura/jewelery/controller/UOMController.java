@@ -1,5 +1,7 @@
 package com.nura.jewelery.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,4 +41,12 @@ public class UOMController {
 				uomMapper.domainToDTO(uomService.findByID(uomID)), HttpStatus.FOUND.getReasonPhrase(),
 				HttpStatus.FOUND.value()));
 	}
+
+	@GetMapping("/uom/category/{cat_id}")
+	public ResponseEntity<ServiceResponse<List<UomDTO>>> getUOMsBsdOnCatID(@PathVariable("cat_id") long uomCatID) {
+		return ResponseEntity.ok(new ServiceResponseWrapper<List<UomDTO>>().wrapServiceResponse(
+				uomMapper.domaisToDTOS(uomService.findUOMsByUOMCatID(uomCatID)), HttpStatus.FOUND.getReasonPhrase(),
+				HttpStatus.FOUND.value()));
+	}
+
 }

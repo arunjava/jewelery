@@ -1,0 +1,85 @@
+<div>
+  <form [formGroup]="schemeForm" (ngSubmit)="onFormSubmit()">
+    <div class="form-group row">
+      <div class="col-sm-6 mb-3 mb-sm-0">
+        <label for="schemeName">Scheme Name</label>
+        <input type="text" formControlName="schemeName" class="form-control form-control-user" id="schemeName"
+          placeholder="Scheme Name" />
+      </div>
+      <div class="col-sm-6 mb-3 mb-sm-0">
+        <label for="description">Scheme description</label>
+        <input type="text" formControlName="description" class="form-control form-control-user" id="description"
+          placeholder="Scheme description" />
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-6 mb-3 mb-sm-0">
+        <label for="uomType">UOM Type</label>
+        <select id="uomType" class="form-control" formControlName="uomType" [(ngModel)]="selectedUOMType">
+          <option [ngValue]="null" selected disabled>Choose...</option>
+          <option *ngFor="let uom of uoms" [ngValue]="uom">
+            {{ uom.desc }}
+          </option>
+        </select>
+      </div>
+      <div class="col-sm-6 mb-3 mb-sm-0">
+        <label for="uomValue">UOM Value</label>
+        <input type="text" formControlName="uomValue" class="form-control form-control-user" id="uomValue"
+          placeholder="UOM Value" />
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-6 mb-3 mb-sm-0">
+        <label for="offerType">Select Offers</label>
+        <div class="input-group">
+          <select id="offerType" class="form-control" formControlName="offerType" [(ngModel)]="selectedOffer">
+            <option [ngValue]="null" selected disabled>Choose...</option>
+            <option *ngFor="let offer of offers" [ngValue]="offer">
+              {{ offer.desc }}
+            </option>
+          </select>
+          <button class="btn btn-outline-secondary" type="button" (click)="addOffer()">
+            <i class="fa fa-plus-square" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row" *ngIf="this.selectedOffers.length > 0">
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th>Offer ID</th>
+            <th>Desc</th>
+            <th>Remove</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let selOffer of this.selectedOffers; let i = index;">
+            <td>{{i + 1}}</td>
+            <td>{{ selOffer.offerId }}</td>
+            <td>{{ selOffer.desc }}</td>
+            <td>
+              <button class="btn btn-danger" type="button" (click)="removeOffer(selOffer.offerId)">Remove
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- <div class="col-sm-6 mb-3 mb-sm-0">
+        <label for="addOffer"> </label>
+        <button class="btn btn-primary btn-user btn-block">
+          Add Offer
+        </button>
+      </div>
+    </div> -->
+    <div class="form-group row">
+      <button type="submit" class="btn btn-primary btn-user btn-block">
+        Add
+      </button>
+    </div>
+  </form>
+</div>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+</ngx-loading>

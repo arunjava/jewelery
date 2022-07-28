@@ -1,4 +1,4 @@
-import { CustomerService } from './../../../service/customer-service/customer.service';
+import { CustomerService } from '../../../../service/customer-service/customer.service';
 import { Component, OnInit, PipeTransform } from '@angular/core';
 import { Customer } from 'src/app/models/customer/customer.model';
 import { FormControl } from '@angular/forms';

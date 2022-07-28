@@ -1,5 +1,7 @@
 package com.nura.jewelery.mapper;
 
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.ReportingPolicy;
@@ -15,6 +17,8 @@ public interface UOMMapper {
 	UOM dtoToDomain(UomDTO uomDTO);
 
 	UomDTO domainToDTO(UOM uom);
+
+	List<UomDTO> domaisToDTOS(List<UOM> uoms);
 
 	UOMCategoryDTO domainToDTO(UOMCategory uomCat);
 

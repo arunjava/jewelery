@@ -1,0 +1,28 @@
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Desc</th>
+      <th scope="col">Applicable On</th>
+      <th scope="col">Code</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let offer of filteredOffers; index as i">
+      <td scope="row">{{ i + 1 }}</td>
+      <td>{{ offer.desc }}</td>
+      <td>{{ offer.applicableOn }}</td>
+      <td>{{ offer.offerCode }}</td>
+    </tr>
+  </tbody>
+</table>
+<div class="d-flex justify-content-between p-2">
+  <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshOffers()">
+  </ngb-pagination>
+
+  <select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshOffers()">
+    <option [ngValue]="5">5 items per page</option>
+    <option [ngValue]="10">10 items per page</option>
+    <option [ngValue]="15">15 items per page</option>
+  </select>
+</div>

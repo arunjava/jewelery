@@ -1,0 +1,43 @@
+<div>
+  <form [formGroup]="offerForm" (ngSubmit)="onFormSubmit()">
+    <div class="form-group row">
+      <div class="col-sm-6 mb-3 mb-sm-0">
+        <label for="desc">Description</label>
+        <input type="text" formControlName="desc" class="form-control form-control-user" id="desc"
+          placeholder="Offer Description" />
+      </div>
+      <div class="col-sm-6 mb-3 mb-sm-0">
+        <label for="offerCode">Offer Code </label>
+        <input type="text" formControlName="offerCode" class="form-control form-control-user" id="offerCode"
+          placeholder="Offer Code" />
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-6 mb-3 mb-sm-0">
+        <label for="applicableOn">Offer Type</label>
+        <select
+          formControlName="offerApplicableOn"
+                  class="form-control">
+          <option [ngValue]="null" selected="true" disabled>Choose...</option>
+          <option *ngFor="let offer of offerApplicableOn" [ngValue]="offer">
+            {{ offer }}
+          </option>
+        </select>
+      </div>
+      <div class="col-sm-6 mb-3 mb-sm-0">
+        <label for="expression">Offer Expression </label>
+        <input type="text" formControlName="expression" class="form-control form-control-user" id="expression"
+          placeholder="Offer Expression" />
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-3 mb-3 mb-sm-0">
+        <button type="submit" class="btn btn-primary btn-user btn-block">
+          Add
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+</ngx-loading>

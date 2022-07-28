@@ -1,0 +1,61 @@
+<div class="form-group row" *ngIf="this.schemes.length > 0">
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th>Scheme Name</th>
+        <th>Desc</th>
+        <th>Duration</th>
+        <th>Offers</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let scheme of this.schemes; let i = index">
+        <tr>
+          <td>{{ i + 1 }}</td>
+          <td>{{ scheme.scheme_name }}</td>
+          <td>{{ scheme.scheme_desc }}</td>
+          <td>{{ scheme.duration }}</td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-toggle="collapse"
+              [attr.data-target]="'#demo1' + i"
+            >
+              View
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <ng-container *ngIf="scheme.offers.length > 0">
+            <td colspan="12" class="accordian-body collapse" [id]="'demo1' + i">
+              <table
+                class="table table-nostriped thead-dark table-bordered table-hover"
+              >
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Offer Desc</th>
+                    <th>Offer Code</th>
+                    <th>Applicable On</th>
+                    <th>Expression</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let offer of scheme.offers; let j = index">
+                    <td>{{ j + 1 }}</td>
+                    <td>{{ offer.desc }}</td>
+                    <td>{{ offer.offerCode }}</td>
+                    <td>{{ offer.applicableOn }}</td>
+                    <td>{{ offer.expression }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </ng-container>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>
