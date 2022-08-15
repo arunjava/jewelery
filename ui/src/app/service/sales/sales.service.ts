@@ -17,4 +17,8 @@ export class SalesService {
     return this.http.post<Response<Sales>>(`${environment.apiURL}/sales`, sales);
   }
 
+  getSalesDetails(sales: Sales) {
+    return this.http.post<Response<Sales>>(`${environment.apiURL}/sales/preCalculate`, sales);
+  }
+
 }

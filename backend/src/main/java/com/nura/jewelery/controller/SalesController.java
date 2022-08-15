@@ -31,4 +31,10 @@ public class SalesController {
 				HttpStatus.CREATED.value()));
 	}
 
+	@PostMapping("/sales/preCalculate")
+	public ResponseEntity<ServiceResponse<SalesDTO>> preCalculateSales(@RequestBody SalesDTO salesDTO) {
+		return ResponseEntity.ok(new ServiceResponseWrapper<SalesDTO>().wrapServiceResponse(
+				salesMapper.domainTODTO(salesService.preCalculate(salesDTO)), HttpStatus.OK.getReasonPhrase(),
+				HttpStatus.OK.value()));
+	}
 }

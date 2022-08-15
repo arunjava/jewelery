@@ -6,5 +6,7 @@ import com.nura.jewelery.entity.sales.Sales;
 public interface SalesService {
 
 	public Sales saveSales(SalesDTO sale);
+	
+	public Sales preCalculate(SalesDTO salesDTO);
 
 }

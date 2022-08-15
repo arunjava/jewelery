@@ -24,6 +24,7 @@ import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nura.jewelery.entity.ProbeClass;
+import com.nura.jewelery.entity.product.ProductCategory;
 import com.nura.jewelery.entity.offers.Offer;
 import com.nura.jewelery.entity.uom.UOM;
 import com.nura.jewelery.utils.Constants;
@@ -69,6 +70,10 @@ public class Scheme implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "uom_id")
 	private UOM uom;
+	
+	@ManyToOne
+	@JoinColumn(name = "applicable_on")
+	private ProductCategory prodCategory;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "mp_scheme_offers", schema = Constants.SCHEMA_JEWEL, joinColumns = {

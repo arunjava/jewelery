@@ -11,6 +11,8 @@ import { ModalComponent } from '../../../helper/modal/modal.component';
 import { OfferServiceService } from 'src/app/service/offer-service/offer-service.service';
 import { UomService } from 'src/app/service/uom/uom.service';
 import { Offer } from 'src/app/models/offers/Offer.model';
+import { ProductCategory } from 'src/app/models/product/ProductCategory.model';
+import { ProductServiceService } from 'src/app/service/product-service/product-service.service';
 
 @Component({
   selector: 'app-scheme-add',
@@ -21,6 +23,8 @@ export class SchemeAddComponent implements OnInit {
 
   scheme = {} as Scheme;
   offers = {} as Array<Offer>;
+  selectedProdCategory = {} as ProductCategory;
+  prodCategories = [] as ProductCategory[];
   selectedOffers = [] as Offer[];
   selectedOffer = {} as Offer;
   customerID: number = 0;
@@ -48,7 +52,8 @@ export class SchemeAddComponent implements OnInit {
     private ngbCalendar: NgbCalendar,
     private dateAdapter: NgbDateAdapter<string>,
     private offerService: OfferServiceService,
-    private uomService: UomService
+    private uomService: UomService,
+    private productService: ProductServiceService
   ) { }
 
   ngOnInit(): void {
@@ -77,6 +82,16 @@ export class SchemeAddComponent implements OnInit {
       console.log(error.statusText);
     });
 
+    this.productService.getProductCategories().subscribe(response => {
+      if(response.statusCode == 302) {
+        this.prodCategories = response.result;
+      } else {
+        console.log(response.message);
+      }
+    } , error => {
+      console.log(error.statusText);
+    })
+
   }
 
   schemeForm = this.formBuilder.group({
@@ -84,7 +99,8 @@ export class SchemeAddComponent implements OnInit {
     description: ['', Validators.required],
     uomType: ['', Validators.required],
     uomValue: ['', Validators.required],
-    offerType: ['', Validators.required]
+    offerType: ['', Validators.required],
+    prodCategory: ['', Validators.required]
   });
 
   onFormSubmit() {
@@ -96,6 +112,7 @@ export class SchemeAddComponent implements OnInit {
     this.scheme.duration = this.schemeForm.value.uomValue;
     this.scheme.uomID = this.selectedUOMType.uom_id;
     this.scheme.offers = this.selectedOffers;
+    this.scheme.prodCategory = this.selectedProdCategory;
     // this.scheme.beginDate = new Date(this.schemeForm.value.startDate.year, this.schemeForm.value.startDate.month, this.schemeForm.value.startDate.date);
     this.schmeService.saveScheme(this.scheme).subscribe(
       (response) => {

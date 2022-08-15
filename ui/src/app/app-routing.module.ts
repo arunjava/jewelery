@@ -14,6 +14,7 @@ import { TxSalesComponent } from './components/views/tx-sales/tx-sales.component
 import { OffersAddComponent } from './components/views/offers/offers-add/offers-add.component';
 import { OffersViewComponent } from './components/views/offers/offers-view/offers-view.component';
 import { SchemeViewComponent } from './components/views/scheme/scheme-view/scheme-view.component';
+import { CustomerSchemeComponent } from './components/views/customer/customer-scheme/customer-scheme.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -36,6 +37,10 @@ const routes: Routes = [
       {
         path: 'customer-details/:id',
         component: CustomerDetailsComponent
+      },
+      {
+        path: 'customer-scheme/add',
+        component: CustomerSchemeComponent
       },
       {
         path: 'tx-sales',

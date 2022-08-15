@@ -43,6 +43,17 @@
           </button>
         </div>
       </div>
+      <div class="col-sm-6 mb-3 mb-sm-0">
+        <label for="prodCategory">Select Product Category</label>
+        <div class="input-group">
+          <select id="prodCategory" class="form-control" formControlName="prodCategory" [(ngModel)]="selectedProdCategory">
+            <option [ngValue]="null" selected disabled>Choose...</option>
+            <option *ngFor="let prodCat of prodCategories" [ngValue]="prodCat">
+              {{ prodCat.categoryName }}
+            </option>
+          </select>
+        </div>
+      </div>
     </div>
     <div class="form-group row" *ngIf="this.selectedOffers.length > 0">
       <table class="table table-striped">

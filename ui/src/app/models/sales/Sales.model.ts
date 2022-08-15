@@ -7,4 +7,8 @@ export interface Sales {
   mrp: number;
   custID: number;
   qty: number;
+  makingCharges: number;
+  wastageCharges: number;
+  soldAmt: number;
+  customerSchemeID: number;
 }

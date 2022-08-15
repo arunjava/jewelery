@@ -1,4 +1,5 @@
 import { Offer } from "../offers/Offer.model";
+import { ProductCategory } from "../product/ProductCategory.model";
 
 export interface Scheme {
   scheme_id: number;
@@ -10,4 +11,6 @@ export interface Scheme {
   uomID: number;
   duration: number;
   offers: Array<Offer>;
+  prodCategory: ProductCategory;
+
 }

@@ -13,6 +13,8 @@ import { Pricing } from '../../../models/pricing/Pricing.model';
 import { PricingService } from '../../../service/pricing-service/pricing.service';
 import { Sales } from '../../../models/sales/Sales.model';
 import { SalesService } from '../../../service/sales/sales.service';
+import { CustomerScheme } from 'src/app/models/customer/CustomerScheme.model';
+import { Scheme } from '../../../models/scheme/Scheme.model';
 
 @Component({
   selector: 'app-tx-sales',
@@ -26,6 +28,8 @@ export class TxSalesComponent implements OnInit {
   productCategories = [] as ProductCategory[];
   productSubCategories = [] as ProductSubCategory[];
   products = [] as Product[];
+  customerSchemes = [] as CustomerScheme[];
+  selectedCustomerScheme = {} as CustomerScheme;
   uom =  {} as UOM;
   selectedProductCat =  {} as ProductCategory;
   selectedProductSubCat = {} as ProductSubCategory;
@@ -61,6 +65,8 @@ export class TxSalesComponent implements OnInit {
     qty: ['', Validators.required],
     costPrice: ['', Validators.required],
     sellingPrice: ['', Validators.required],
+    wastageCharges: ['', Validators.required],
+    makingCharges: ['', Validators.required],
     salesValue: ['', Validators.required]
   });
 
@@ -70,14 +76,19 @@ export class TxSalesComponent implements OnInit {
     this.sales.sellingPrice = this.salesForm.value.sellingPrice;
     this.sales.custID = this.customer.custId;
     this.sales.productID = this.selectedProduct.productId;
-    this.sales.uomID = this.selectedUOM.uom_id;
+    // this.sales.uomID = this.selectedUOM.uom_id;
+    this.sales.uomID = this.uom.uom_id;
     this.sales.qty = this.salesForm.value.qty;
+    if(this.selectedCustomerScheme) {
+      this.sales.customerSchemeID = this.selectedCustomerScheme.id;
+    }
     console.log(JSON.stringify(this.sales));
 
     this.salesService.createSales(this.sales).subscribe(resp => {
       if(resp.statusCode == 201) {
         console.log(resp.result);
         this.showmodel('Transaction successful : ' + resp.result.invoiceNumber);
+        this.resetValues();
       } else {
         console.log('Failed to update');
       }
@@ -92,6 +103,16 @@ export class TxSalesComponent implements OnInit {
          if(response.statusCode == 302) {
           this.productSubCategories = response.result;
          }
+      }
+    );
+
+    //Get available schemes for selected Prod Category
+    this.customerService.getListOfCustomerSchemesBsdOnProdCatID(this.customer.custId , productCatSel.categoryId).subscribe(
+      response => {
+        if(response.statusCode == 302) {
+          this.customerSchemes = response.result;
+        }
+      }, error => {
       }
     );
   }
@@ -131,8 +152,10 @@ export class TxSalesComponent implements OnInit {
   updateSalesValue() {
     let sp: number = this.salesForm.value.sellingPrice;
     let qty: number = this.salesForm.value.qty;
-    let salesValue = sp * qty;
-    this.salesForm.controls['salesValue'].setValue(salesValue.toFixed(2));
+    let wc: number = this.salesForm.value.wastageCharges;
+    let mc: number = this.salesForm.value.makingCharges;
+    let salesValue: number = (sp * qty) + wc + mc;
+    this.salesForm.controls['salesValue'].setValue(salesValue);
     console.log('Overall sales value -->' + salesValue);
 
   }
@@ -157,9 +180,41 @@ export class TxSalesComponent implements OnInit {
     }
   }
 
+  selectedScheme(customerScheme : CustomerScheme) {
+    console.log('Selected customer scheme ->' + JSON.stringify(customerScheme));
+    let tempSale = {} as Sales;
+    this.selectedCustomerScheme = customerScheme;
+    this.sales.costPrice = this.salesForm.value.costPrice;
+    this.sales.sellingPrice = this.salesForm.value.sellingPrice;
+    this.sales.custID = this.customer.custId;
+    this.sales.productID = this.selectedProduct.productId;
+    this.uom.uom_id = customerScheme.uomExchangeID;
+    this.sales.uomID = customerScheme.uomExchangeID;
+    this.sales.qty = this.salesForm.value.qty;
+    console.log(JSON.stringify(this.sales));
+
+    this.salesService.getSalesDetails(this.sales).subscribe(resp => {
+      if(resp.statusCode == 200) {
+        console.log(resp.result);
+        tempSale = resp.result;
+        //Update form values
+        this.salesForm.controls['qty'].setValue(customerScheme.uomExchangeVal);
+        this.salesForm.controls['wastageCharges'].setValue(tempSale.wastageCharges);
+        this.salesForm.controls['makingCharges'].setValue(tempSale.makingCharges);
+        this.salesForm.controls['salesValue'].setValue(tempSale.soldAmt);
+      } else {
+        console.log('Failed to update');
+      }
+    });
+
+  
+
+  }
+
   resetValues(){
     this.customer = {} as Customer;
     this.salesForm.reset();
+    this.customerSchemes = [] as CustomerScheme[];
   }
 
   showmodel(message: string) {

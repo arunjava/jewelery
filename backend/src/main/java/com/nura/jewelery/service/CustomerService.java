@@ -9,9 +9,9 @@ import com.nura.jewelery.entity.Customer;
 public interface CustomerService {
 
 	public Customer save(Customer customer);
-	
+
 	public Customer findByID(long custId);
-	
+
 	public CustomerDTO findByContactNumber(String contactNumber);
 
 	public List<CustomerDTO> get(long custId);
@@ -22,5 +22,9 @@ public interface CustomerService {
 
 	public void updateSchemeDtls(CustomerSchemeDTO cusSchemeDTO);
 	
+	public void updateSchemeStatus(long cusSchemeId);
+
 	public List<CustomerSchemeDTO> getActiveCustomerSchemeBsdOnCustomerID(long customerID);
+
+	public List<CustomerSchemeDTO> getActiveCustomerSchemeBsdOnCustomerIDAndProdCatID(long customerID, long prodCatID);
 }

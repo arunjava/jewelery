@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.nura.jewelery.dto.offer.OfferDTO;
+import com.nura.jewelery.entity.product.ProductCategory;
 
 import lombok.Data;
 
@@ -24,4 +25,6 @@ public class SchemeDTO {
 	private long uomID;
 	private int duration;
 	private List<OfferDTO> offers;
+	private ProductCategory prodCategory;
+	
 }

@@ -55,6 +55,7 @@ public class SalesServiceImpl implements SalesService {
 		salesDTO.setInvoiceNumber(IDGenerator.getSalesTxID());
 		Sales sale = salesMapper.dtoTODomain(salesDTO);
 		Optional<UOM> uom = uomRepo.findById(sale.getUom().getId());
+
 		if (uom.isPresent()) {
 			Pricing pricing = pricingRepo.getLatestPricingForProduct(sale.getProduct().getProductId());
 			if (pricing != null) {
@@ -84,9 +85,43 @@ public class SalesServiceImpl implements SalesService {
 					}
 				}
 			}
-
+			salesAmt += sale.getWastageCharges() + sale.getMakingCharges();
 			sale.setSoldAmt(salesAmt);
 			return salesRepo.save(sale);
+		} else {
+			throw new NotFoundException("Invalid UOM selected id ::" + sale.getUom().getId());
+		}
+	}
+
+	@Override
+	public Sales preCalculate(SalesDTO salesDTO) {
+		double salesAmt;
+		double qty = salesDTO.getQty();
+		salesDTO.setInvoiceNumber(IDGenerator.getSalesTxID());
+		Sales sale = salesMapper.dtoTODomain(salesDTO);
+		Optional<UOM> uom = uomRepo.findById(sale.getUom().getId());
+		if (uom.isPresent()) {
+			Pricing pricing = pricingRepo.getLatestPricingForProduct(sale.getProduct().getProductId());
+			if (pricing != null) {
+				if (pricing.getUom().getId().equals(uom.get().getId())) {
+					salesAmt = qty * salesDTO.getSellingPrice();
+					sale.setProfitAmt(salesAmt - (qty * salesDTO.getCostPrice()));
+				} else {
+					UOMConversion uomConversion = uomConversionRepo.getConversion(sale.getUom().getId(),
+							pricing.getUom().getId());
+					salesAmt = qty * salesDTO.getSellingPrice() * uomConversion.getConversionVal();
+					sale.setProfitAmt(salesAmt - (qty * salesDTO.getCostPrice()));
+				}
+
+			} else {
+				salesAmt = qty * salesDTO.getSellingPrice();
+				sale.setProfitAmt(salesAmt - (qty * salesDTO.getCostPrice()));
+			}
+			
+			salesAmt += sale.getWastageCharges() + sale.getMakingCharges();
+			sale.setSoldAmt(salesAmt);
+			
+			return sale;
 		} else {
 			throw new NotFoundException("Invalid UOM selected id ::" + sale.getUom().getId());
 		}

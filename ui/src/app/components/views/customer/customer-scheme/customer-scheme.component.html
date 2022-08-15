@@ -1,1 +1,85 @@
-<p>customer-scheme works!</p>
+<div>
+  <form [formGroup]="customerSchemeForm" (ngSubmit)="onFormSubmit()">
+    <div class="form-group row">
+      <div class="col-sm-6 mb-3 mb-sm-0">
+        <label for="customerName">Customer Name</label>
+        <input
+          type="text"
+          formControlName="customerName"
+          class="form-control form-control-user"
+          id="customerName"
+          placeholder="Customer Name"
+        />
+      </div>
+      <div class="col-sm-3 mb-3 mb-sm-0">
+        <label for="phoneNumber">Phone Number </label>
+        <input
+          type="text"
+          formControlName="phoneNumber"
+          class="form-control form-control-user"
+          id="phoneNumber"
+          placeholder="Customer Phone Number"
+        />
+      </div>
+      <div class="col-sm-3 mb-3 mb-sm-0">
+        <label for="phoneSearch">Search User</label>
+        <button
+          class="form-control form-control-user btn-success"
+          (click)="getCustomerBsdOnPhoneNumber()"
+        >
+          Click
+        </button>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-3 mb-3 mb-sm-0">
+        <label for="scheme">Scheme</label>
+        <select
+          id="scheme"
+          class="form-control"
+          formControlName="scheme"
+          [(ngModel)]="selectedScheme"
+        >
+          <option [ngValue]="null" [selected] disabled>Choose...</option>
+          <option [ngValue]="scheme" *ngFor="let scheme of schemes">
+            {{ scheme.scheme_desc }}
+          </option>
+        </select>
+      </div>
+      <div class="col-sm-3 mb-3 mb-sm-0">
+        <label for="uom">UOM</label>
+        <select
+          id="uom"
+          class="form-control"
+          formControlName="uom"
+          [(ngModel)]="selectedUOM"
+        >
+          <option [ngValue]="null" [selected] disabled>Choose...</option>
+          <option [ngValue]="uom" *ngFor="let uom of uoms">
+            {{ uom.desc }}
+          </option>
+        </select>
+      </div>
+      <div class="col-sm-3 mb-3 mb-sm-0">
+        <label for="uomExchangeVal">Exchange Value </label>
+        <input
+          type="text"
+          formControlName="uomExchangeVal"
+          class="form-control form-control-user"
+          id="uomExchangeVal"
+          placeholder="Exchange Value"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-3 mb-3 mb-sm-0">
+        <button
+          class="form-control form-control-user btn-primary"
+          type="submit"
+        >
+          <i class="fas fa-save"> Save</i>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

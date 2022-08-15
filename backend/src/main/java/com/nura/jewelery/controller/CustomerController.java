@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nura.jewelery.dto.customer.CustomerDTO;
 import com.nura.jewelery.dto.customer.CustomerSchemeDTO;
 import com.nura.jewelery.entity.Customer;
+import com.nura.jewelery.entity.scheme.CustomerScheme;
 import com.nura.jewelery.mapper.CustomerMapper;
 import com.nura.jewelery.service.CustomerService;
 import com.nura.jewelery.utils.ServiceResponse;
@@ -109,5 +110,13 @@ public class CustomerController {
 		return ResponseEntity.ok(new ServiceResponseWrapper<List<CustomerSchemeDTO>>().wrapServiceResponse(
 				customerService.getActiveCustomerSchemeBsdOnCustomerID(custId), HttpStatus.OK.getReasonPhrase(),
 				HttpStatus.OK.value()));
+	}
+
+	@GetMapping(path = "/customer/{cust_id}/scheme/{prodCatID}")
+	public ResponseEntity<ServiceResponse<List<CustomerSchemeDTO>>> getListOfCustomerSchemesBsdOnProdCatID(
+			@PathVariable(name = "cust_id") long custId, @PathVariable(name = "prodCatID") long prodCatID) {
+		return ResponseEntity.ok(new ServiceResponseWrapper<List<CustomerSchemeDTO>>().wrapServiceResponse(
+				customerService.getActiveCustomerSchemeBsdOnCustomerIDAndProdCatID(custId, prodCatID),
+				HttpStatus.FOUND.getReasonPhrase(), HttpStatus.FOUND.value()));
 	}
 }

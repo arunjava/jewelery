@@ -17,6 +17,7 @@ import com.nura.jewelery.entity.scheme.CustomerScheme;
 import com.nura.jewelery.entity.scheme.Scheme;
 import com.nura.jewelery.entity.uom.UOM;
 import com.nura.jewelery.exception.NotFoundException;
+import com.nura.jewelery.mapper.SchemeMapper;
 import com.nura.jewelery.repository.CustomerRepository;
 import com.nura.jewelery.repository.CustomerSchemeRepository;
 import com.nura.jewelery.repository.UOMRepository;
@@ -39,6 +40,9 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Autowired
 	private SchemeService schemeService;
+	
+	@Autowired
+	private SchemeMapper schemeMapper;
 
 	public Customer save(Customer customer) {
 		return customerRepository.save(customer);
@@ -113,5 +117,20 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public List<CustomerSchemeDTO> getActiveCustomerSchemeBsdOnCustomerID(long customerID) {
 		return customerSchemeRepository.getActiveCustomerSchemeBsdOnID(customerID);
+	}
+
+	@Override
+	public List<CustomerSchemeDTO> getActiveCustomerSchemeBsdOnCustomerIDAndProdCatID(long customerID, long prodCatID) {
+		List<CustomerSchemeDTO> customerSchemes = customerSchemeRepository
+				.getActiveCustomerSchemeBsdOnIDAndProdCatID(customerID, prodCatID);
+		for (CustomerSchemeDTO customSchemeDTO : customerSchemes) {
+			customSchemeDTO.setScheme(schemeMapper.domainToDTO(schemeService.getSchemeBsdOnID(customSchemeDTO.getSchemeID()).get()));
+		}
+		return customerSchemes;
+	}
+
+	@Override
+	public void updateSchemeStatus(long cusSchemeId) {
+		customerSchemeRepository.updateCustomerSchemeStatus(false, cusSchemeId);
 	}
 }
