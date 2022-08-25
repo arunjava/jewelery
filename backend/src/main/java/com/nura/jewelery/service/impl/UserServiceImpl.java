@@ -28,9 +28,25 @@ public class UserServiceImpl implements UserService {
 		return userRepo.getUserByUsername(username);
 	}
 
-	
 	private String encryptUserPassword(String password) {
 		return passwordEncoder.encode(password);
 	}
+
+	/**
+	 * Spring security for User
+	 */
+//	@Override
+//	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//		final User user = userRepo.getUserByUsername(username);
+//		if (user == null) {
+//			throw new UsernameNotFoundException(username);
+//		}
+//
+//		UserDetails userDtls = org.springframework.security.core.userdetails.User.withUsername(username)
+//				.password(user.getPassword()).authorities("ROLE_USER").build();
+//		System.out.println(userDtls.toString());
+//		return userDtls;
+//
+//	}
 
 }

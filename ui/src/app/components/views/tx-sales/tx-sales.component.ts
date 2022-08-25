@@ -79,6 +79,9 @@ export class TxSalesComponent implements OnInit {
     // this.sales.uomID = this.selectedUOM.uom_id;
     this.sales.uomID = this.uom.uom_id;
     this.sales.qty = this.salesForm.value.qty;
+    this.sales.makingCharges = this.salesForm.value.makingCharges;
+    this.sales.wastageCharges = this.salesForm.value.wastageCharges;
+    
     if(this.selectedCustomerScheme) {
       this.sales.customerSchemeID = this.selectedCustomerScheme.id;
     }
@@ -152,8 +155,8 @@ export class TxSalesComponent implements OnInit {
   updateSalesValue() {
     let sp: number = this.salesForm.value.sellingPrice;
     let qty: number = this.salesForm.value.qty;
-    let wc: number = this.salesForm.value.wastageCharges;
-    let mc: number = this.salesForm.value.makingCharges;
+    let wc: number = Number(this.salesForm.value.wastageCharges);
+    let mc: number = Number(this.salesForm.value.makingCharges);
     let salesValue: number = (sp * qty) + wc + mc;
     this.salesForm.controls['salesValue'].setValue(salesValue);
     console.log('Overall sales value -->' + salesValue);

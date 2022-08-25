@@ -23,8 +23,9 @@
         </th>
         <th scope="col" sortable="referralCode">Referral Code</th>
         <th scope="col">Locality</th>
+        <th scope="col">Gold Exchange</th>
+        <th scope="col">Silver Exchange</th>
         <th scope="col">Edit</th>
-        <th scope="col">View</th>
       </tr>
     </thead>
     <tbody>
@@ -48,8 +49,11 @@
         <td>{{ customer.alterNateContactNo }}</td>
         <td>{{ customer.referralCode }}</td>
         <td>{{ customer.address.locality }}</td>
+        <td *ngIf="this.productExhchangeMap.get(customer.custId) != undefined && this.productExhchangeMap.get(customer.custId)!.length>0; else goldBlock">{{ this.productExhchangeMap.get(customer.custId)![0]!.exchangeVal}} {{ this.productExhchangeMap.get(customer.custId)![0]!.uomDesc }}</td>
+        <ng-template #goldBlock><td></td></ng-template>
+        <td *ngIf="this.productExhchangeMap.get(customer.custId) != undefined && this.productExhchangeMap.get(customer.custId)!.length>1; else silverBlock">{{ this.productExhchangeMap.get(customer.custId)![1]!.exchangeVal }} {{ this.productExhchangeMap.get(customer.custId)![1]!.uomDesc }}</td>
+        <ng-template #silverBlock><td></td></ng-template>
         <td><button class="btn btn-primary" (click)="editCustomer(customer.custId)">Edit</button></td>
-        <td><button class="btn btn-info" >View</button></td>
       </tr>
     </tbody>
   </table>

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nura.jewelery.dto.sales.SalesDTO;
+import com.nura.jewelery.entity.ProductExchange;
 import com.nura.jewelery.entity.offers.Offer;
 import com.nura.jewelery.entity.product.Pricing;
 import com.nura.jewelery.entity.sales.Sales;
@@ -23,6 +24,7 @@ import com.nura.jewelery.repository.PricingRepository;
 import com.nura.jewelery.repository.SalesRepository;
 import com.nura.jewelery.repository.UOMConversionRepository;
 import com.nura.jewelery.repository.UOMRepository;
+import com.nura.jewelery.service.ProductExchangeService;
 import com.nura.jewelery.service.SalesService;
 import com.nura.jewelery.service.SchemeService;
 import com.nura.jewelery.utils.Constants;
@@ -47,6 +49,8 @@ public class SalesServiceImpl implements SalesService {
 	private SalesMapper salesMapper;
 	@Autowired
 	private SchemeService schemeService;
+	@Autowired
+	private ProductExchangeService productExchangeService;
 
 	@Override
 	public Sales saveSales(SalesDTO salesDTO) {
@@ -78,6 +82,16 @@ public class SalesServiceImpl implements SalesService {
 				if (custScheme != null) {
 					if (custScheme.isActive()) {
 						offerCalculation(custScheme, sale);
+
+						ProductExchange prodExchange = new ProductExchange();
+						prodExchange.setCustomerID(salesDTO.getCustID());
+						prodExchange.setExchangeProduct(sale.getProduct());
+						prodExchange.setExchangeUOM(uom.get());
+						prodExchange.setSchemeID(custScheme.getScheme());
+						prodExchange.setExchangeVal(sale.getQty());
+						prodExchange.setInvoiceID(sale.getInvoiceNumber());
+						productExchangeService.saveProductExchange(prodExchange);
+
 						custScheme.setActive(false);
 						customerSchemeRepo.save(custScheme);
 					} else {
@@ -117,10 +131,10 @@ public class SalesServiceImpl implements SalesService {
 				salesAmt = qty * salesDTO.getSellingPrice();
 				sale.setProfitAmt(salesAmt - (qty * salesDTO.getCostPrice()));
 			}
-			
+
 			salesAmt += sale.getWastageCharges() + sale.getMakingCharges();
 			sale.setSoldAmt(salesAmt);
-			
+
 			return sale;
 		} else {
 			throw new NotFoundException("Invalid UOM selected id ::" + sale.getUom().getId());

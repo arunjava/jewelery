@@ -13,12 +13,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nura.jewelery.dto.ProductExchangeDTO;
 import com.nura.jewelery.dto.customer.CustomerDTO;
 import com.nura.jewelery.dto.customer.CustomerSchemeDTO;
 import com.nura.jewelery.entity.Customer;
-import com.nura.jewelery.entity.scheme.CustomerScheme;
 import com.nura.jewelery.mapper.CustomerMapper;
 import com.nura.jewelery.service.CustomerService;
+import com.nura.jewelery.service.ProductExchangeService;
 import com.nura.jewelery.utils.ServiceResponse;
 import com.nura.jewelery.utils.ServiceResponseWrapper;
 
@@ -28,6 +29,9 @@ public class CustomerController {
 
 	@Autowired
 	private CustomerService customerService;
+
+	@Autowired
+	private ProductExchangeService productExchangeService;
 
 	@Autowired
 	private CustomerMapper customerMapper;
@@ -53,7 +57,7 @@ public class CustomerController {
 
 		if (!customer.isEmpty()) {
 			return ResponseEntity.ok(new ServiceResponseWrapper<List<Customer>>().wrapServiceResponse(customer,
-					HttpStatus.FOUND.getReasonPhrase(), HttpStatus.OK.value()));
+					HttpStatus.FOUND.getReasonPhrase(), HttpStatus.FOUND.value()));
 		}
 
 		return ResponseEntity.ok(new ServiceResponseWrapper<List<Customer>>().wrapServiceResponse(null,
@@ -118,5 +122,13 @@ public class CustomerController {
 		return ResponseEntity.ok(new ServiceResponseWrapper<List<CustomerSchemeDTO>>().wrapServiceResponse(
 				customerService.getActiveCustomerSchemeBsdOnCustomerIDAndProdCatID(custId, prodCatID),
 				HttpStatus.FOUND.getReasonPhrase(), HttpStatus.FOUND.value()));
+	}
+
+	@GetMapping(path = "/customer/{cust_id}/productExchanges")
+	public ResponseEntity<ServiceResponse<List<ProductExchangeDTO>>> getProductExchangeTotal(
+			@PathVariable(name = "cust_id") long custId) {
+		return ResponseEntity.ok(new ServiceResponseWrapper<List<ProductExchangeDTO>>().wrapServiceResponse(
+				productExchangeService.getExchangeTotal(custId), HttpStatus.FOUND.getReasonPhrase(),
+				HttpStatus.FOUND.value()));
 	}
 }

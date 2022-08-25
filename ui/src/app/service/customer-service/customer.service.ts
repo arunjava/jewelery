@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Customer } from 'src/app/models/customer/customer.model';
 import { Response } from 'src/app/models/Response.model';
 import { CustomerScheme } from '../../models/customer/CustomerScheme.model';
+import { ProductExchange } from '../../models/product/ProductExchange.model';
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +43,10 @@ export class CustomerService {
 
   getListOfCustomerSchemesBsdOnProdCatID(customerID: number, prodCatID: number) {
     return this.http.get<Response<CustomerScheme[]>>(`${environment.apiURL}/customer/` + customerID + `/scheme/` + prodCatID);
+  }
+
+  getProductExcahngeSumBsdOnCustID(customerID: number) {
+    return this.http.get<Response<ProductExchange[]>>(`${environment.apiURL}/customer/` + customerID + `/productExchanges`);
   }
 
 }
