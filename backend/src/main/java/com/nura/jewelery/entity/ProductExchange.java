@@ -38,7 +38,7 @@ import lombok.Setter;
 		+ "LEFT JOIN JEWEL.MS_PRODUCT AS PRODUCT ON PRODUCT.PRODUCT_ID = TXPE.EXCHANGE_PROD  LEFT JOIN  "
 		+ "	JEWEL.MS_UOM AS UOM ON TXPE.EXCHANGE_UOM = UOM.UOM_ID  GROUP BY  "
 		+ "	TXPE.EXCHANGE_PROD, TXPE.CUST_ID, PRODUCT.PRODUCT_ID, PRODUCT.PRODUCT_NAME , TXPE.EXCHANGE_UOM, UOM.UOM_DESC"
-		+ "  HAVING TXPE.CUST_ID = :customerID", resultSetMapping = "ProductExchangeDTO", name = "ProductExchangeDTO")
+		+ "  HAVING TXPE.CUST_ID = :customerID ORDER BY PRODUCT.PRODUCT_ID" , resultSetMapping = "ProductExchangeDTO", name = "ProductExchangeDTO")
 @SqlResultSetMapping(name = "ProductExchangeDTO", classes = @ConstructorResult(
 		targetClass = ProductExchangeDTO.class,
 		columns = {
