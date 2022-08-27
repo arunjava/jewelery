@@ -15,12 +15,14 @@ import { OffersAddComponent } from './components/views/offers/offers-add/offers-
 import { OffersViewComponent } from './components/views/offers/offers-view/offers-view.component';
 import { SchemeViewComponent } from './components/views/scheme/scheme-view/scheme-view.component';
 import { CustomerSchemeComponent } from './components/views/customer/customer-scheme/customer-scheme.component';
+import { AuthGuardService } from './security/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   {
     path: 'home', component: HomeComponent,
+    canActivate: [AuthGuardService],
     children: [
       {
         path: 'add-customer',

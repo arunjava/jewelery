@@ -26,6 +26,9 @@ import { OffersViewComponent } from './components/views/offers/offers-view/offer
 import { SchemeViewComponent } from './components/views/scheme/scheme-view/scheme-view.component';
 import { CustomerSchemeComponent } from './components/views/customer/customer-scheme/customer-scheme.component';
 import { CustomerAddComponent } from './components/views/customer/customer-add/customer-add.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './helper/jwt.interceptor';
+import { ErrorInterceptor } from './helper/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -65,7 +68,12 @@ import { CustomerAddComponent } from './components/views/customer/customer-add/c
     }),
   ],
   // schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [BsModalService],
+  providers:
+  [
+    BsModalService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  ],
   entryComponents: [ModalComponent],
   bootstrap: [AppComponent]
 })

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = "/")
 public class HomePageController {
 
-	@GetMapping(value = "/")
+	@GetMapping(value = "/login")
 	public String index() {
 		return "forward:/index.html";
 	}
