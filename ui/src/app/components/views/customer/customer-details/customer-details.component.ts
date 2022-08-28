@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { CustomerService } from '../../../../service/customer-service/customer.service';
 import { Customer } from '../../../../models/customer/customer.model';
 import { Address } from '../../../../models/Address.model';
+import { Sales } from 'src/app/models/sales/Sales.model';
+import { SalesService } from 'src/app/service/sales/sales.service';
 
 @Component({
   selector: 'app-customer-details',
@@ -14,10 +16,12 @@ export class CustomerDetailsComponent implements OnInit {
   customerId: number  = 0;
   customer!: Customer;
   address!: Address;
+  sales = [] as Sales[];
 
   constructor(
     private _route: ActivatedRoute,
-    private customerService: CustomerService
+    private customerService: CustomerService,
+    private salesService: SalesService
   ) { }
 
   ngOnInit(): void {
@@ -28,13 +32,19 @@ export class CustomerDetailsComponent implements OnInit {
         if (response.statusCode == 200) {
           this.customer = response.result;
           this.address = this.customer.address;
-          console.log(this.address);
-          console.log(this.customer);
+          this.salesService.getAllSalesBsdOnCustomerID(this.customerId).subscribe(response => {
+            if(response.statusCode == 302) {
+               this.sales = response.result;
+            } else {
+              console.log('No data available');
+            }
+          }, error => {
+            console.log('Failed to retreive sales');
+          });
         } else {
           console.log('Customer not found');
         }
       })
     })
   }
-
 }

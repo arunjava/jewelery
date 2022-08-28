@@ -1,8 +1,12 @@
 package com.nura.jewelery.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,5 +40,12 @@ public class SalesController {
 		return ResponseEntity.ok(new ServiceResponseWrapper<SalesDTO>().wrapServiceResponse(
 				salesMapper.domainTODTO(salesService.preCalculate(salesDTO)), HttpStatus.OK.getReasonPhrase(),
 				HttpStatus.OK.value()));
+	}
+
+	@GetMapping("/sales/{custID}")
+	public ResponseEntity<ServiceResponse<List<SalesDTO>>> getSales(@PathVariable("custID") long custID) {
+		return ResponseEntity.ok(new ServiceResponseWrapper<List<SalesDTO>>().wrapServiceResponse(
+				salesMapper.domainTODTOs(salesService.getSalesBsdOnCutomerID(custID)), HttpStatus.FOUND.getReasonPhrase(),
+				HttpStatus.FOUND.value()));
 	}
 }

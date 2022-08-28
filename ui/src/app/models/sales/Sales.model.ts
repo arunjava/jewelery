@@ -1,6 +1,8 @@
 export interface Sales {
   productID: number;
+  productName: string;
   uomID: number;
+  uomDesc: string;
   invoiceNumber: string;
   costPrice: number;
   sellingPrice: number;
@@ -11,4 +13,5 @@ export interface Sales {
   wastageCharges: number;
   soldAmt: number;
   customerSchemeID: number;
+  txnDate: Date;
 }

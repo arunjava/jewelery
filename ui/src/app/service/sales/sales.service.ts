@@ -21,4 +21,8 @@ export class SalesService {
     return this.http.post<Response<Sales>>(`${environment.apiURL}/sales/preCalculate`, sales);
   }
 
+  getAllSalesBsdOnCustomerID(customerID: number) {
+    return this.http.get<Response<Sales[]>>(`${environment.apiURL}/sales/`+ customerID);
+  }
+
 }

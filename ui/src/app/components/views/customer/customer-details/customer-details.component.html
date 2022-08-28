@@ -1,5 +1,5 @@
 <div class="m-3">
-  <table class="table">
+  <!-- <table class="table">
     <thead class="thead-dark">
       <tr>
         <th>Sno</th>
@@ -20,6 +20,39 @@
         <td>{{customer.referralCode}}</td>
         <td>{{customer.address.locality}}</td>
         <td>{{customer.address.district.districtName}}</td>
+      </tr>
+    </tbody>
+  </table> -->
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th>Sno</th>
+        <!-- <th>Invoice Number</th> -->
+        <th>Date</th>
+        <th>Product Name</th>
+        <th>Qty</th>
+        <th>UOM Desc</th>
+        <th>Selling Price</th>
+        <th>Making Charges</th>
+        <th>Wastage Charges</th>
+        <th>Total Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr  *ngFor="
+        let sale of sales;
+        index as i
+      ">
+        <td>{{i+1}}</td>
+        <!-- <td>{{sale.invoiceNumber}}</td> -->
+        <td>{{sale.txnDate | date :'mediumDate'}}</td>
+        <td>{{sale.productName}}</td>
+        <td>{{sale.qty}}</td>
+        <td>{{sale.uomDesc}}</td>
+        <td>{{sale.sellingPrice}}</td>
+        <td>{{sale.makingCharges}}</td>
+        <td>{{sale.wastageCharges}}</td>
+        <td>{{sale.soldAmt}}</td>
       </tr>
     </tbody>
   </table>
