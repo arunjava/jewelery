@@ -1,10 +1,17 @@
 package com.nura.jewelery.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.nura.jewelery.entity.User;
+import com.nura.jewelery.entity.UserRole;
 import com.nura.jewelery.repository.UserRepository;
 import com.nura.jewelery.service.UserService;
 
@@ -32,6 +39,14 @@ public class UserServiceImpl implements UserService {
 		return passwordEncoder.encode(password);
 	}
 
+	private List<GrantedAuthority> getGrantedAuthorities(Set<UserRole> roles) {
+		List<GrantedAuthority> authorities = new ArrayList<>();
+		for (UserRole role : roles) {
+			authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRole()));
+		}
+		return authorities;
+	}
+	
 	/**
 	 * Spring security for User
 	 */

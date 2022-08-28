@@ -10,14 +10,14 @@
       <div class="sidebar-brand-text mx-3">Jewlers <sup>1</sup></div>
     </a>
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item">
+    <!-- <li class="nav-item">
       <a class="nav-link" routerLink="/home">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span></a>
-    </li>
+    </li> -->
 
     <!-- Divider -->
-    <hr class="sidebar-divider" />
+    <!-- <hr class="sidebar-divider" /> -->
 
     <!-- Heading -->
     <!-- <div class="sidebar-heading">
@@ -284,7 +284,7 @@
                 Activity Log
               </a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" routerLink="/login" data-toggle="modal" data-target="#logoutModal">
+              <a class="dropdown-item" (click)  =  "logout()" data-toggle="modal" data-target="#logoutModal">
                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                 Logout
               </a>

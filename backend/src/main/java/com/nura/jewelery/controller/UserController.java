@@ -1,6 +1,7 @@
 package com.nura.jewelery.controller;
 
-import javax.validation.Valid;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nura.jewelery.dto.UserDTO;
 import com.nura.jewelery.dto.request.user.LoginDTO;
-import com.nura.jewelery.dto.request.user.UserDTO;
 import com.nura.jewelery.entity.User;
+import com.nura.jewelery.entity.UserRole;
+import com.nura.jewelery.jwt.JwtTokenUtil;
 import com.nura.jewelery.service.UserService;
 import com.nura.jewelery.utils.ServiceResponse;
 import com.nura.jewelery.utils.ServiceResponseWrapper;
@@ -32,39 +35,51 @@ public class UserController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
+	@Autowired
+	private JwtTokenUtil jwtTokenUtil;
+
 	@PostMapping(path = "/login")
-	public ResponseEntity<ServiceResponse<User>> login(@RequestBody LoginDTO loginDTO) {
+	public ResponseEntity<ServiceResponse<UserDTO>> login(@RequestBody LoginDTO loginDTO) {
 
 		User user = userService.findUserByUserName(loginDTO.getUsername());
 
 		if (user != null && passwordEncoder.matches(loginDTO.getPassword(), user.getPassword())) {
+			UserDTO userResponse = modelMapper.map(user, UserDTO.class);
+			userResponse.setToken(jwtTokenUtil.generateToken(user.getUsername()));
+			Set<UserRole> userRoles = user.getRoles();
+			Set<String> roles = new HashSet<>();
+			for (UserRole userRole : userRoles) {
+				roles.add(userRole.getDesc());
+			}
 
-			return ResponseEntity.ok(
-					new ServiceResponseWrapper<User>().wrapServiceResponse(user, "Valid User", HttpStatus.OK.value()));
+			userResponse.setRoles(roles);
+
+			return ResponseEntity.ok(new ServiceResponseWrapper<UserDTO>().wrapServiceResponse(userResponse,
+					"Valid User", HttpStatus.OK.value()));
 		}
 
-		return ResponseEntity.ok(new ServiceResponseWrapper<User>().wrapServiceResponse(null, "Not available",
+		return ResponseEntity.ok(new ServiceResponseWrapper<UserDTO>().wrapServiceResponse(null, "Not available",
 				HttpStatus.NO_CONTENT.value()));
 	}
 
-	@PostMapping(path = "/signup")
-	public ResponseEntity<ServiceResponse<?>> signup(@Valid @RequestBody UserDTO userDTO) {
-
-		User userExist = userService.findUserByUserName(userDTO.getUsername());
-
-		if (userExist != null) {
-			return ResponseEntity.ok(new ServiceResponseWrapper<String>().wrapServiceResponse(null,
-					"User Already Exist", HttpStatus.EXPECTATION_FAILED.value()));
-		}
-
-		User user = userService.saveUser(modelMapper.map(userDTO, User.class));
-
-		if (user != null) {
-			return ResponseEntity.ok(new ServiceResponseWrapper<String>().wrapServiceResponse(null,
-					"User Saved Successfully", HttpStatus.CREATED.value()));
-		}
-
-		return ResponseEntity.ok(new ServiceResponseWrapper<String>().wrapServiceResponse(null,
-				"Unable to save the details", HttpStatus.NOT_MODIFIED.value()));
-	}
+//	@PostMapping(path = "/signup")
+//	public ResponseEntity<ServiceResponse<?>> signup(@Valid @RequestBody UserDTO userDTO) {
+//
+//		User userExist = userService.findUserByUserName(userDTO.getUsername());
+//
+//		if (userExist != null) {
+//			return ResponseEntity.ok(new ServiceResponseWrapper<String>().wrapServiceResponse(null,
+//					"User Already Exist", HttpStatus.EXPECTATION_FAILED.value()));
+//		}
+//
+//		User user = userService.saveUser(modelMapper.map(userDTO, User.class));
+//
+//		if (user != null) {
+//			return ResponseEntity.ok(new ServiceResponseWrapper<String>().wrapServiceResponse(null,
+//					"User Saved Successfully", HttpStatus.CREATED.value()));
+//		}
+//
+//		return ResponseEntity.ok(new ServiceResponseWrapper<String>().wrapServiceResponse(null,
+//				"Unable to save the details", HttpStatus.NOT_MODIFIED.value()));
+//	}
 }

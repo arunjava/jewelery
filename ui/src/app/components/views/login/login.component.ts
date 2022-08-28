@@ -39,12 +39,11 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     console.log('Login button pressed');
     console.log(this.loginform.value.username + '' + this.loginform.value.password);
+    // this.userService.jwtAuthentication(this.loginform.value.username, this.loginform.value.password).subscribe(response => {
     this.userService.login(this.loginform.value.username, this.loginform.value.password).subscribe(response => {
       this.loading = false;
-      console.log("Server response -->" + response.statusCode);
-      if (response.statusCode === 200) {
-        sessionStorage.setItem('user', JSON.stringify(response.result));
-        // sessionStorage.setItem('user', response.result);
+      if (response.statusCode == 200) {
+        localStorage.setItem('user_dtls', JSON.stringify(response.result));
         this.router.navigate(['home']);
       } else {
         this.openModal(response.message);
