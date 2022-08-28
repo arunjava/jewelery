@@ -16,13 +16,12 @@ import io.swagger.v3.oas.models.security.SecurityScheme;
 @Configuration
 //@formatter:off
 @OpenAPIDefinition(
-      info = @Info(title = "User API", version = "${api.version}",
-              contact = @Contact(name = "Baeldung", email = "user-apis@baeldung.com", url = "https://www.baeldung.com"),
-              license = @License(name = "Apache 2.0", url = "https://www.apache.org/licenses/LICENSE-2.0"), termsOfService = "${tos.uri}",
+      info = @Info(title = "User API", version = "1.0",
+              contact = @Contact(name = "Arun Kumar V", email = "aprodigalboy@gmail.com", url = ""),
+              license = @License(name = "Apache 2.0", url = "https://www.apache.org/licenses/LICENSE-2.0"), termsOfService = "",
               description = "${api.description}"),
       servers = {
-              @Server(url = "http://localhost:8080", description = "Development"),
-              @Server(url = "${api.server.url}", description = "Production")})
+              @Server(url = "http://localhost:8080", description = "Development")})
 public class OpenAPISecurityConfiguration {
 	 @Bean
 	    public OpenAPI customizeOpenAPI() {
