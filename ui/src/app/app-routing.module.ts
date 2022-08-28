@@ -16,6 +16,9 @@ import { OffersViewComponent } from './components/views/offers/offers-view/offer
 import { SchemeViewComponent } from './components/views/scheme/scheme-view/scheme-view.component';
 import { CustomerSchemeComponent } from './components/views/customer/customer-scheme/customer-scheme.component';
 import { AuthGuardService } from './security/auth.guard';
+import { ProductCategoryComponent } from './components/views/product/product-category/product-category.component';
+import { ProductSubcategoryComponent } from './components/views/product/product-subcategory/product-subcategory.component';
+import { ProductComponent } from './components/views/product/product/product.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -63,6 +66,18 @@ const routes: Routes = [
       {
         path: 'offers-view',
         component: OffersViewComponent
+      },
+      {
+        path: 'product-cat',
+        component: ProductCategoryComponent
+      },
+      {
+        path: 'product-subcat',
+        component: ProductSubcategoryComponent
+      },
+      {
+        path: 'product-save',
+        component: ProductComponent
       }
     ]
   },

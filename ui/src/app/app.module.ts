@@ -29,6 +29,9 @@ import { CustomerAddComponent } from './components/views/customer/customer-add/c
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './helper/jwt.interceptor';
 import { ErrorInterceptor } from './helper/error.interceptor';
+import { ProductCategoryComponent } from './components/views/product/product-category/product-category.component';
+import { ProductSubcategoryComponent } from './components/views/product/product-subcategory/product-subcategory.component';
+import { ProductComponent } from './components/views/product/product/product.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +52,10 @@ import { ErrorInterceptor } from './helper/error.interceptor';
     OffersAddComponent,
     OffersViewComponent,
     SchemeViewComponent,
-    CustomerSchemeComponent
+    CustomerSchemeComponent,
+    ProductCategoryComponent,
+    ProductSubcategoryComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,

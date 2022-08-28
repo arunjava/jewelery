@@ -98,6 +98,25 @@
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block" />
 
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProduct" aria-expanded="true"
+        aria-controls="collapseProduct">
+        <i class="fas fa-fw fa-box-open"></i>
+        <span>Product</span>
+      </a>
+      <div id="collapseProduct" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <h6 class="collapse-header">Pages:</h6>
+          <a class="collapse-item" routerLink="/home/product-cat"><i class="fas fa-fw fa-cart-plus"></i>Category</a>
+          <a class="collapse-item" routerLink="/home/product-subcat"><i class="fas fa-fw fa-cart-plus"></i>Sub Category</a>
+          <a class="collapse-item" routerLink="/home/product-save"><i class="fas fa-fw fa-cart-plus"></i>Product</a>
+        </div>
+      </div>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block" />
+
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
       <button class="rounded-circle border-0" id="sidebarToggle"></button>

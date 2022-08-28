@@ -1,0 +1,55 @@
+<div>
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      <div class="form-group row">
+        <div class="col-sm-3 mb-3 mb-sm-0">
+          <label for="productCategory">Product Category</label>
+          <select
+            formControlName="productCategory"
+            [(ngModel)]="selectedProdCategory"
+            (change)="onProductCategorySelection(selectedProdCategory)"
+            class="form-control"
+          >
+            <option [ngValue]="null" selected disabled>Choose...</option>
+            <option *ngFor="let prodCat of productCategories" [ngValue]="prodCat">{{prodCat.categoryName}}</option>
+          </select>
+        </div>
+        <div class="col-sm-3 mb-3 mb-sm-0">
+          <label for="productSubCategory">Product Sub Category</label>
+          <select
+            formControlName="productSubCategory"
+            class="form-control"
+          >
+            <option [ngValue]="null" selected disabled>Choose...</option>
+            <option *ngFor="let productSubCat of productSubCategories" [ngValue]="productSubCat">{{productSubCat.subCategoryName}}</option>
+          </select>
+        </div>  
+        <div class="col-sm-3 mb-3 mb-sm-0">
+          <label for="productName">Product Name</label>
+          <input
+            type="text"
+            formControlName="productName"
+            class="form-control form-control-user"
+            id="productName"
+            placeholder="Product Name"
+          />
+        </div>
+        <div class="col-sm-3 mb-3 mb-sm-0">
+          <label for="description">Description</label>
+          <input
+            type="text"
+            formControlName="description"
+            class="form-control form-control-user"
+            id="description"
+            placeholder="Product Description"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-3 mb-3 mb-sm-0">
+        <button type="submit" class="btn btn-success btn-user btn-block">
+          Add
+        </button>
+      </div>
+    </div>
+    </form>
+  </div>

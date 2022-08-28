@@ -6,6 +6,9 @@ import { environment } from 'src/environments/environment';
 import { ProductSubCategory } from '../../models/product/ProductSubCategory.model';
 import { Product } from '../../models/product/Product.model';
 import { UOM } from '../../models/uom/UOM.model';
+import { ProductCategorySave } from 'src/app/models/product/ProductCategorySave.model';
+import { ProductSubCategorySave } from 'src/app/models/product/ProductSubCategorySave.model';
+import { ProductSave } from '../../models/product/ProductSave.model';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +36,18 @@ export class ProductServiceService {
 
   getUOMByID(uomID: number) {
     return this.http.get<Response<UOM>>(`${environment.apiURL}/uom/` + uomID);
+  }
+
+  saveProduct(product: ProductSave) {
+    return this.http.post<Response<Product>>(`${environment.apiURL}/product`, product);
+  }
+
+  saveProductCategory(prodCat: ProductCategorySave) {
+    return this.http.post<Response<ProductCategory>>(`${environment.apiURL}/product/category`, prodCat);
+  }
+
+  saveProductSubCategory(prodSubCat: ProductSubCategorySave) {
+    return this.http.post<Response<ProductSubCategory>>(`${environment.apiURL}/product/sub_category`, prodSubCat);
   }
 
 }

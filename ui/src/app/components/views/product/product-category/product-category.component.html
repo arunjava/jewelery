@@ -1,0 +1,33 @@
+<div>
+  <form [formGroup]="productCatForm" (ngSubmit)="onSubmit()">
+    <div class="form-group row">
+      <div class="col-sm-6 mb-3 mb-sm-0">
+        <label for="categoryName">Product Category Name</label>
+        <input
+          type="text"
+          formControlName="categoryName"
+          class="form-control form-control-user"
+          id="categoryName"
+          placeholder="Product Category Name"
+        />
+      </div>
+      <div class="col-sm-6 mb-3 mb-sm-0">
+        <label for="description">Product Description</label>
+        <input
+          type="text"
+          formControlName="description"
+          class="form-control form-control-user"
+          id="description"
+          placeholder="Product Description"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-3 mb-3 mb-sm-0">
+      <button type="submit" class="btn btn-success btn-user btn-block">
+        Add
+      </button>
+    </div>
+  </div>
+  </form>
+</div>
