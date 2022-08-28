@@ -1,0 +1,32 @@
+<div>
+  <form [formGroup]="stateForm" (ngSubmit)="onFormSubmit()">
+    <div class="form-group row">
+      <div class="col-sm-3 mb-3 mb-sm-0">
+        <label for="country">Country</label>
+        <select formControlName="country" class="form-control">
+          <option [ngValue]="null" selected disabled>Choose...</option>
+          <option *ngFor="let country of countries" [ngValue] = "country">
+            {{ country.countryName }}
+          </option>
+        </select>
+      </div>
+      <div class="col-sm-3 mb-3 mb-sm-0">
+        <label for="stateName">State Name</label>
+        <input type="text" formControlName="stateName" class="form-control form-control-user" id="stateName"
+          placeholder="State Name" />
+      </div>
+      <div class="col-sm-3 mb-3 mb-sm-0">
+        <label for="stateCode">Code</label>
+        <input type="text" formControlName="stateCode" class="form-control form-control-user" id="stateCode"
+          placeholder="Code" />
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-3 mb-3 mb-sm-0">
+        <button type="submit" class="btn btn-success btn-user btn-block">
+          Add
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

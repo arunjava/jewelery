@@ -19,7 +19,7 @@ import com.nura.jewelery.repository.SubDistrictRepository;
 import com.nura.jewelery.service.AddressService;
 
 @Service
-@Transactional(readOnly = true)
+@Transactional
 public class AddressServiceImpl implements AddressService {
 
 	@Autowired
@@ -59,6 +59,21 @@ public class AddressServiceImpl implements AddressService {
 	@Override
 	public Address saveAddress(Address address) {
 		return addressRepository.save(address);
+	}
+
+	@Override
+	public State saveState(State state) {
+		return stateRepository.save(state);
+	}
+
+	@Override
+	public District saveDistrict(District district) {
+		return districtRepository.save(district);
+	}
+
+	@Override
+	public SubDistrict saveSubDistrict(SubDistrict subDistrict) {
+		return subDistrictRepository.save(subDistrict);
 	}
 
 }

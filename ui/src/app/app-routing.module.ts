@@ -19,6 +19,7 @@ import { AuthGuardService } from './security/auth.guard';
 import { ProductCategoryComponent } from './components/views/product/product-category/product-category.component';
 import { ProductSubcategoryComponent } from './components/views/product/product-subcategory/product-subcategory.component';
 import { ProductComponent } from './components/views/product/product/product.component';
+import { StateSaveComponent } from './components/views/address/state-save/state-save.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -78,6 +79,10 @@ const routes: Routes = [
       {
         path: 'product-save',
         component: ProductComponent
+      },
+      {
+        path: 'state-save',
+        component: StateSaveComponent
       }
     ]
   },

@@ -2,7 +2,6 @@ package com.nura.jewelery.entity.address;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,7 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nura.jewelery.utils.Constants;
 
 import lombok.Getter;
@@ -37,7 +35,6 @@ public class SubDistrict implements Serializable {
 	@Column(name = "sub_district_code", length = 3)
 	private String subDistrictCode;
 
-	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "district_id")
 	private District district;

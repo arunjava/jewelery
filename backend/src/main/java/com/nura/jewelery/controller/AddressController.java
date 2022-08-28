@@ -85,4 +85,24 @@ public class AddressController {
 		return ResponseEntity.ok(new ServiceResponseWrapper<Address>().wrapServiceResponse(
 				addressService.saveAddress(address), HttpStatus.OK.getReasonPhrase(), HttpStatus.OK.value()));
 	}
+
+	@PostMapping(path = "/address/save/state")
+	public ResponseEntity<ServiceResponse<State>> saveState(@RequestBody State state) {
+		return ResponseEntity.ok(new ServiceResponseWrapper<State>().wrapServiceResponse(
+				addressService.saveState(state), HttpStatus.CREATED.getReasonPhrase(), HttpStatus.CREATED.value()));
+	}
+
+	@PostMapping(path = "/address/save/district")
+	public ResponseEntity<ServiceResponse<District>> saveDistrict(@RequestBody District district) {
+		return ResponseEntity
+				.ok(new ServiceResponseWrapper<District>().wrapServiceResponse(addressService.saveDistrict(district),
+						HttpStatus.CREATED.getReasonPhrase(), HttpStatus.CREATED.value()));
+	}
+
+	@PostMapping(path = "/address/save/subDistrict")
+	public ResponseEntity<ServiceResponse<SubDistrict>> saveSubDistrict(@RequestBody SubDistrict subDistrict) {
+		return ResponseEntity.ok(new ServiceResponseWrapper<SubDistrict>().wrapServiceResponse(
+				addressService.saveSubDistrict(subDistrict), HttpStatus.CREATED.getReasonPhrase(),
+				HttpStatus.CREATED.value()));
+	}
 }

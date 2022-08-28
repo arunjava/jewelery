@@ -32,6 +32,9 @@ import { ErrorInterceptor } from './helper/error.interceptor';
 import { ProductCategoryComponent } from './components/views/product/product-category/product-category.component';
 import { ProductSubcategoryComponent } from './components/views/product/product-subcategory/product-subcategory.component';
 import { ProductComponent } from './components/views/product/product/product.component';
+import { StateSaveComponent } from './components/views/address/state-save/state-save.component';
+import { DistrictSaveComponent } from './components/views/address/district-save/district-save.component';
+import { SubDistrictSaveComponent } from './components/views/address/sub-district-save/sub-district-save.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +58,10 @@ import { ProductComponent } from './components/views/product/product/product.com
     CustomerSchemeComponent,
     ProductCategoryComponent,
     ProductSubcategoryComponent,
-    ProductComponent
+    ProductComponent,
+    StateSaveComponent,
+    DistrictSaveComponent,
+    SubDistrictSaveComponent
   ],
   imports: [
     BrowserModule,

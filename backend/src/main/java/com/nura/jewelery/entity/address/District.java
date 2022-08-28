@@ -12,7 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nura.jewelery.utils.Constants;
 
 import lombok.Getter;
@@ -25,7 +24,8 @@ import lombok.Setter;
  *         City/District details master data
  */
 
-@Getter @Setter
+@Getter
+@Setter
 @Entity
 @Table(name = "ms_district", schema = Constants.SCHEMA_JEWEL)
 public class District implements Serializable {
@@ -43,7 +43,6 @@ public class District implements Serializable {
 	@Column(name = "district_code", length = 3)
 	private String districtCode;
 
-	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "state_id")
 	private State state;

@@ -11,7 +11,7 @@ import com.nura.jewelery.entity.address.SubDistrict;
 public interface AddressService {
 
 	public Address saveAddress(Address address);
-	
+
 	public List<Country> getListOfCountries();
 
 	public List<State> getListOfState(long countryId);
@@ -19,5 +19,11 @@ public interface AddressService {
 	public List<District> getListOfDistrict(long stateId);
 
 	public List<SubDistrict> getListOfSubDistrict(long districtId);
+
+	public State saveState(State state);
+
+	public District saveDistrict(District district);
+
+	public SubDistrict saveSubDistrict(SubDistrict subDistrict);
 
 }

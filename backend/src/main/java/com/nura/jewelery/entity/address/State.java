@@ -12,13 +12,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nura.jewelery.utils.Constants;
 
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter @Setter
+@Getter
+@Setter
 @Entity
 @Table(name = "ms_state", schema = Constants.SCHEMA_JEWEL)
 public class State implements Serializable {
@@ -37,7 +37,6 @@ public class State implements Serializable {
 	@Column(name = "state_code", length = 3)
 	private String stateCode;
 
-	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "country_id")
 	private Country country;
