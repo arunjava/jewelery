@@ -3,6 +3,8 @@ package com.nura.jewelery.controller;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.validation.Valid;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -51,7 +53,7 @@ public class UserController {
 			for (UserRole userRole : userRoles) {
 				roles.add(userRole.getDesc());
 			}
-
+			userResponse.setPassword(null);
 			userResponse.setRoles(roles);
 
 			return ResponseEntity.ok(new ServiceResponseWrapper<UserDTO>().wrapServiceResponse(userResponse,
@@ -62,24 +64,24 @@ public class UserController {
 				HttpStatus.NO_CONTENT.value()));
 	}
 
-//	@PostMapping(path = "/signup")
-//	public ResponseEntity<ServiceResponse<?>> signup(@Valid @RequestBody UserDTO userDTO) {
-//
-//		User userExist = userService.findUserByUserName(userDTO.getUsername());
-//
-//		if (userExist != null) {
-//			return ResponseEntity.ok(new ServiceResponseWrapper<String>().wrapServiceResponse(null,
-//					"User Already Exist", HttpStatus.EXPECTATION_FAILED.value()));
-//		}
-//
-//		User user = userService.saveUser(modelMapper.map(userDTO, User.class));
-//
-//		if (user != null) {
-//			return ResponseEntity.ok(new ServiceResponseWrapper<String>().wrapServiceResponse(null,
-//					"User Saved Successfully", HttpStatus.CREATED.value()));
-//		}
-//
-//		return ResponseEntity.ok(new ServiceResponseWrapper<String>().wrapServiceResponse(null,
-//				"Unable to save the details", HttpStatus.NOT_MODIFIED.value()));
-//	}
+	@PostMapping(path = "/signup")
+	public ResponseEntity<ServiceResponse<?>> signup(@Valid @RequestBody UserDTO userDTO) {
+
+		User userExist = userService.findUserByUserName(userDTO.getUsername());
+
+		if (userExist != null) {
+			return ResponseEntity.ok(new ServiceResponseWrapper<String>().wrapServiceResponse(null,
+					"User Already Exist", HttpStatus.EXPECTATION_FAILED.value()));
+		}
+
+		User user = userService.saveUser(modelMapper.map(userDTO, User.class));
+
+		if (user != null) {
+			return ResponseEntity.ok(new ServiceResponseWrapper<String>().wrapServiceResponse(null,
+					"User Saved Successfully", HttpStatus.CREATED.value()));
+		}
+
+		return ResponseEntity.ok(new ServiceResponseWrapper<String>().wrapServiceResponse(null,
+				"Unable to save the details", HttpStatus.NOT_MODIFIED.value()));
+	}
 }

@@ -16,5 +16,5 @@ public class UserDTO {
 	private String username;
 	private Set<String> roles = new HashSet<>();
 	private String token;
-
+	private String password;
 }
