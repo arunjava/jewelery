@@ -7,6 +7,8 @@ import { State } from '../../models/address/State.model';
 import { District } from '../../models/address/District.model';
 import { SubDistrict } from '../../models/address/SubDistrict.model';
 import { StateRequestModel } from 'src/app/models/address/SateSave.model';
+import { DistrictSaveRequest } from 'src/app/models/address/DistrictSaveRequest.model';
+import { SubDistrictSaveRequest } from 'src/app/models/address/SubDistrictSaveRequest.model';
 
 @Injectable({
   providedIn: 'root'
@@ -35,12 +37,12 @@ export class AddressService {
     return this.http.post<Response<State>>(`${environment.apiURL}/address/save/state`,  state);
   }
 
-  saveDistrict(district: StateRequestModel) {
-    return this.http.post<Response<State>>(`${environment.apiURL}/address/save/district`,  district);
+  saveDistrict(district: DistrictSaveRequest) {
+    return this.http.post<Response<District>>(`${environment.apiURL}/address/save/district`,  district);
   }
 
-  saveSubDistrict(state: StateRequestModel) {
-    return this.http.post<Response<State>>(`${environment.apiURL}/address/save/subDistrict`,  state);
+  saveSubDistrict(subDistrictReq: SubDistrictSaveRequest) {
+    return this.http.post<Response<State>>(`${environment.apiURL}/address/save/subDistrict`,  subDistrictReq);
   }
 
 }

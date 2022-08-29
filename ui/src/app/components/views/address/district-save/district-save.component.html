@@ -1,1 +1,41 @@
-<p>district-save works!</p>
+<div>
+  <form [formGroup]="districtForm" (ngSubmit)="onFormSubmit()">
+    <div class="form-group row">
+      <div class="col-sm-3 mb-3 mb-sm-0">
+        <label for="country">Country</label>
+        <select
+          formControlName="country"
+          class="form-control"
+          [(ngModel)]="selectedCountry"
+          (change)="onCountrySelection(selectedCountry)"
+        >
+          <option [ngValue]="null" selected disabled>Choose...</option>
+          <option *ngFor="let country of countries" [ngValue]="country">
+            {{ country.countryName }}
+          </option>
+        </select>
+      </div>
+      <div class="col-sm-3 mb-3 mb-sm-0">
+        <label for="state">State</label>
+        <select formControlName="state" class="form-control">
+          <option [ngValue]="null" selected disabled>Choose...</option>
+          <option *ngFor="let state of states" [ngValue]="state">
+            {{ state.stateName }}
+          </option>
+        </select>
+      </div>
+      <div class="col-sm-3 mb-3 mb-sm-0">
+        <label for="districtName">District Name</label>
+        <input type="text" formControlName="districtName" class="form-control form-control-user" id="districtName"
+          placeholder="District Name" />
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-3 mb-3 mb-sm-0">
+        <button type="submit" class="btn btn-success btn-user btn-block">
+          Add
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

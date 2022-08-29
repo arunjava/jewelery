@@ -20,6 +20,8 @@ import { ProductCategoryComponent } from './components/views/product/product-cat
 import { ProductSubcategoryComponent } from './components/views/product/product-subcategory/product-subcategory.component';
 import { ProductComponent } from './components/views/product/product/product.component';
 import { StateSaveComponent } from './components/views/address/state-save/state-save.component';
+import { DistrictSaveComponent } from './components/views/address/district-save/district-save.component';
+import { SubDistrictSaveComponent } from './components/views/address/sub-district-save/sub-district-save.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -83,6 +85,14 @@ const routes: Routes = [
       {
         path: 'state-save',
         component: StateSaveComponent
+      },
+      {
+        path: 'district-save',
+        component: DistrictSaveComponent
+      },
+      {
+        path: 'sub-district-save',
+        component: SubDistrictSaveComponent
       }
     ]
   },
