@@ -4,6 +4,7 @@ import { User } from '../../../models/user/UserSignup.model';
 import { UserService } from '../../../service/user-service/user-service.service';
 import { ModalComponent } from '../../helper/modal/modal.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { PasswordValidator } from '../../../helper/validators/password.validator';
 
 @Component({
   selector: 'app-signup',
@@ -28,8 +29,11 @@ export class SignupComponent implements OnInit {
     repassword: ['', Validators.required],
     firstName: ['', Validators.required],
     lastName: ['', Validators.required]
-  });
+  }, { validator: PasswordValidator });
 
+
+  // convenience getter for easy access to form fields
+  get f() { return this.signupForm.controls; }
 
   onFormSubmit(): void {
     this.loading = true;
