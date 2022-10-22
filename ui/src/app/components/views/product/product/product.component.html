@@ -8,6 +8,7 @@
             [(ngModel)]="selectedProdCategory"
             (change)="onProductCategorySelection(selectedProdCategory)"
             class="form-control"
+            [ngClass]="{ 'is-invalid': f['productCategory'].errors && f['productCategory'].touched && f['productCategory'].dirty}"
           >
             <option [ngValue]="null" selected disabled>Choose...</option>
             <option *ngFor="let prodCat of productCategories" [ngValue]="prodCat">{{prodCat.categoryName}}</option>
@@ -18,6 +19,7 @@
           <select
             formControlName="productSubCategory"
             class="form-control"
+            [ngClass]="{ 'is-invalid': f['productSubCategory'].errors && f['productSubCategory'].touched && f['productSubCategory'].dirty}"
           >
             <option [ngValue]="null" selected disabled>Choose...</option>
             <option *ngFor="let productSubCat of productSubCategories" [ngValue]="productSubCat">{{productSubCat.subCategoryName}}</option>
@@ -29,6 +31,7 @@
             type="text"
             formControlName="productName"
             class="form-control form-control-user"
+            [ngClass]="{ 'is-invalid': f['productName'].errors && f['productName'].touched && f['productName'].dirty}"
             id="productName"
             placeholder="Product Name"
           />
@@ -39,6 +42,7 @@
             type="text"
             formControlName="description"
             class="form-control form-control-user"
+            [ngClass]="{ 'is-invalid': f['description'].errors && f['description'].touched && f['description'].dirty}"
             id="description"
             placeholder="Product Description"
           />
@@ -46,7 +50,7 @@
       </div>
       <div class="form-group row">
         <div class="col-sm-3 mb-3 mb-sm-0">
-        <button type="submit" class="btn btn-success btn-user btn-block">
+        <button type="submit" [disabled]="productForm.invalid" class="btn btn-success btn-user btn-block">
           Add
         </button>
       </div>

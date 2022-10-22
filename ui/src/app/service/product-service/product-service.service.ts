@@ -9,6 +9,7 @@ import { UOM } from '../../models/uom/UOM.model';
 import { ProductCategorySave } from 'src/app/models/product/ProductCategorySave.model';
 import { ProductSubCategorySave } from 'src/app/models/product/ProductSubCategorySave.model';
 import { ProductSave } from '../../models/product/ProductSave.model';
+import { Pricing } from 'src/app/models/pricing/Pricing.model';
 
 @Injectable({
   providedIn: 'root'
@@ -49,5 +50,10 @@ export class ProductServiceService {
   saveProductSubCategory(prodSubCat: ProductSubCategorySave) {
     return this.http.post<Response<ProductSubCategory>>(`${environment.apiURL}/product/sub_category`, prodSubCat);
   }
+
+  saveProductPricing(pricing: Pricing) {
+    return this.http.post<Response<Pricing>>(`${environment.apiURL}/pricing`, pricing);
+  }
+
 
 }

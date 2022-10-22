@@ -35,6 +35,9 @@ import { ProductComponent } from './components/views/product/product/product.com
 import { StateSaveComponent } from './components/views/address/state-save/state-save.component';
 import { DistrictSaveComponent } from './components/views/address/district-save/district-save.component';
 import { SubDistrictSaveComponent } from './components/views/address/sub-district-save/sub-district-save.component';
+import { EmailValidatorDirective } from './helper/validators/email-validator.directive';
+import { ProductPricingComponent } from './components/views/product/product-pricing/product-pricing.component';
+
 
 @NgModule({
   declarations: [
@@ -61,7 +64,9 @@ import { SubDistrictSaveComponent } from './components/views/address/sub-distric
     ProductComponent,
     StateSaveComponent,
     DistrictSaveComponent,
-    SubDistrictSaveComponent
+    SubDistrictSaveComponent,
+    EmailValidatorDirective,
+    ProductPricingComponent
   ],
   imports: [
     BrowserModule,

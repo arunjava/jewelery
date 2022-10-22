@@ -103,6 +103,9 @@ export class SchemeAddComponent implements OnInit {
     prodCategory: ['', Validators.required]
   });
 
+  // convenience getter for easy access to form fields
+  get f() { return this.schemeForm.controls; }
+
   onFormSubmit() {
     console.log('Submit button clicked --> ' + JSON.stringify(this.schemeForm.value));
     this.loading = true;
@@ -114,21 +117,26 @@ export class SchemeAddComponent implements OnInit {
     this.scheme.offers = this.selectedOffers;
     this.scheme.prodCategory = this.selectedProdCategory;
     // this.scheme.beginDate = new Date(this.schemeForm.value.startDate.year, this.schemeForm.value.startDate.month, this.schemeForm.value.startDate.date);
-    this.schmeService.saveScheme(this.scheme).subscribe(
-      (response) => {
-        this.resetForm();
+    if(this.scheme.offers.length == 0) {
         this.loading = false;
-        if (response.statusCode == 201) {
-          this.showmodel('Scheme created!', 'Success');
-        } else {
-          console.log(response.message);
-          this.showmodel(response.message, 'Error');
+        this.showmodel('Select atleast 1 Offer', 'Offer Not Selected');
+    } else {
+      this.schmeService.saveScheme(this.scheme).subscribe(
+        (response) => {
+          this.resetForm();
+          this.loading = false;
+          if (response.statusCode == 201) {
+            this.showmodel('Scheme created!', 'Success');
+          } else {
+            console.log(response.message);
+            this.showmodel(response.message, 'Error');
+          }
+        },
+        (error) => {
+          this.showmodel(error.statusText, 'Error');
         }
-      },
-      (error) => {
-        this.showmodel(error.statusText, 'Error');
-      }
-    )
+      )
+    }
   }
 
   resetForm() {

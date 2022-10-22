@@ -6,24 +6,28 @@
         <input
           type="text"
           formControlName="customerName"
+          [ngClass]="{ 'is-invalid': f['customerName'].errors && f['customerName'].touched && f['customerName'].dirty}"
           class="form-control form-control-user"
           id="customerName"
           placeholder="Customer Name"
         />
+        <small class="text-danger" *ngIf="f['customerName'].errors?.['required'] && f['customerName'].touched">CustomerName Required</small>
       </div>
       <div class="col-sm-3 mb-3 mb-sm-0">
         <label for="phoneNumber">Phone Number </label>
         <input
           type="text"
           formControlName="phoneNumber"
+          [ngClass]="{ 'is-invalid': f['phoneNumber'].errors && f['phoneNumber'].touched && f['phoneNumber'].dirty}"
           class="form-control form-control-user"
           id="phoneNumber"
           placeholder="Customer Phone Number"
         />
+        <small class="text-danger" *ngIf="f['phoneNumber'].errors?.['required'] && f['phoneNumber'].touched">PhoneNumber Required</small>
       </div>
       <div class="col-sm-3 mb-3 mb-sm-0">
         <label for="phoneSearch">Search User</label>
-        <button
+        <button type="button"
           class="form-control form-control-user btn-success"
           (click)="getCustomerBsdOnPhoneNumber()"
         >
@@ -37,19 +41,22 @@
         <select
           id="scheme"
           class="form-control"
+          [ngClass]="{ 'is-invalid': f['scheme'].errors && f['scheme'].touched && f['scheme'].dirty}"
           formControlName="scheme"
           [(ngModel)]="selectedScheme"
         >
           <option [ngValue]="null" [selected] disabled>Choose...</option>
           <option [ngValue]="scheme" *ngFor="let scheme of schemes">
-            {{ scheme.scheme_desc }}
+            {{ scheme.scheme_name }}
           </option>
         </select>
+        <small class="text-danger" *ngIf="f['scheme'].errors?.['required'] && f['scheme'].touched">Scheme Required</small>
       </div>
       <div class="col-sm-3 mb-3 mb-sm-0">
         <label for="uom">UOM</label>
         <select
           id="uom"
+          [ngClass]="{ 'is-invalid': f['uom'].errors && f['uom'].touched && f['uom'].dirty}"
           class="form-control"
           formControlName="uom"
           [(ngModel)]="selectedUOM"
@@ -59,23 +66,26 @@
             {{ uom.desc }}
           </option>
         </select>
+        <small class="text-danger" *ngIf="f['uom'].errors?.['required'] && f['uom'].touched">UOM Required</small>
       </div>
       <div class="col-sm-3 mb-3 mb-sm-0">
         <label for="uomExchangeVal">Exchange Value </label>
         <input
           type="text"
           formControlName="uomExchangeVal"
+          [ngClass]="{ 'is-invalid': f['uomExchangeVal'].errors && f['uomExchangeVal'].touched && f['uomExchangeVal'].dirty}"
           class="form-control form-control-user"
           id="uomExchangeVal"
           placeholder="Exchange Value"
         />
+        <small class="text-danger" *ngIf="f['uomExchangeVal'].errors?.['required'] && f['uomExchangeVal'].touched">Exchange Value Required</small>
       </div>
     </div>
     <div class="form-group row">
       <div class="col-sm-3 mb-3 mb-sm-0">
         <button
-          class="form-control form-control-user btn-primary"
-          type="submit"
+          class="btn btn-primary btn-user btn-block"
+          type="submit" [disabled] = "customerSchemeForm.invalid"
         >
           <i class="fas fa-save"> Save</i>
         </button>

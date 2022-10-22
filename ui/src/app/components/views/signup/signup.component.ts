@@ -5,6 +5,7 @@ import { UserService } from '../../../service/user-service/user-service.service'
 import { ModalComponent } from '../../helper/modal/modal.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { PasswordValidator } from '../../../helper/validators/password.validator';
+import { emailValidator } from '../../../helper/validators/email-validator.directive';
 
 @Component({
   selector: 'app-signup',
@@ -24,11 +25,11 @@ export class SignupComponent implements OnInit {
   }
 
   signupForm = this.formBuilder.group({
-    username: ['', Validators.required],
+    username: ['', [Validators.required, emailValidator()]],
     password: ['', Validators.required],
     repassword: ['', Validators.required],
     firstName: ['', Validators.required],
-    lastName: ['', Validators.required]
+    lastName: ['']
   }, { validator: PasswordValidator });
 
 
@@ -51,12 +52,12 @@ export class SignupComponent implements OnInit {
         this.showmodel(response.message);
         this.signupForm.reset();
       } else {
-        this.showmodel(JSON.stringify(response.result));
+        this.showmodel(response.message);
       }
     }, err => {
       console.log(err);
       this.loading = false;
-      this.showmodel(err.message);
+      this.showmodel('Connection Failed!');
     });
 
   }

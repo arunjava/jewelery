@@ -30,6 +30,10 @@ export class CustomerSchemeComponent implements OnInit {
     uomExchangeVal: ['', Validators.required]
   });
 
+  get f() {
+    return this.customerSchemeForm.controls;
+  }
+
   constructor(
     private formBuilder: FormBuilder,
     private modalService: BsModalService,

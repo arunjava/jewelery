@@ -41,6 +41,9 @@ export class OffersAddComponent implements OnInit {
     });
   }
 
+  // convenience getter for easy access to form fields
+  get f() { return this.offerForm.controls; }
+
   onFormSubmit(){
     this.loading = true;
     console.log('Offer type selected ->' + this.offerForm.value.offerApplicableOn);

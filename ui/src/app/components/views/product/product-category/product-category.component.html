@@ -6,6 +6,7 @@
         <input
           type="text"
           formControlName="categoryName"
+          [ngClass]="{ 'is-invalid': f['categoryName'].errors && f['categoryName'].touched && f['categoryName'].dirty}"
           class="form-control form-control-user"
           id="categoryName"
           placeholder="Product Category Name"
@@ -16,6 +17,7 @@
         <input
           type="text"
           formControlName="description"
+          [ngClass]="{ 'is-invalid': f['description'].errors && f['description'].touched && f['description'].dirty}"
           class="form-control form-control-user"
           id="description"
           placeholder="Product Description"
@@ -24,7 +26,7 @@
     </div>
     <div class="form-group row">
       <div class="col-sm-3 mb-3 mb-sm-0">
-        <button type="submit" class="btn btn-success btn-user btn-block">
+        <button type="submit" [disabled]="productCatForm.invalid" class="btn btn-success btn-user btn-block">
           Add
         </button>
       </div>

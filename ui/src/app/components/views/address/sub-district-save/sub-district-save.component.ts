@@ -71,6 +71,9 @@ export class SubDistrictSaveComponent implements OnInit {
     subDistrictName : ['', Validators.required]
   });
 
+  // convenience getter for easy access to form fields
+  get f() { return this.subDistrictForm.controls; }
+
   onFormSubmit() {
     let subDistrictReq = {} as SubDistrictSaveRequest;
     subDistrictReq.subDistrictName = this.subDistrictForm.value.subDistrictName;

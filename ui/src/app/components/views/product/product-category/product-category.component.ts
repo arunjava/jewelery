@@ -45,6 +45,9 @@ export class ProductCategoryComponent implements OnInit {
     });
   }
 
+  // convenience getter for easy access to form fields
+  get f() { return this.productCatForm.controls; }
+
   showmodel(message: string) {
     let modalRef: any = this.modalService.show(ModalComponent, { class: 'modal-lg' });
     modalRef.content.title = 'Alert';

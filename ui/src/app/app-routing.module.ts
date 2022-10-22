@@ -22,6 +22,7 @@ import { ProductComponent } from './components/views/product/product/product.com
 import { StateSaveComponent } from './components/views/address/state-save/state-save.component';
 import { DistrictSaveComponent } from './components/views/address/district-save/district-save.component';
 import { SubDistrictSaveComponent } from './components/views/address/sub-district-save/sub-district-save.component';
+import { ProductPricingComponent } from './components/views/product/product-pricing/product-pricing.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -81,6 +82,10 @@ const routes: Routes = [
       {
         path: 'product-save',
         component: ProductComponent
+      },
+      {
+        path: 'product-pricing',
+        component: ProductPricingComponent
       },
       {
         path: 'state-save',

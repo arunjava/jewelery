@@ -70,6 +70,10 @@ export class TxSalesComponent implements OnInit {
     salesValue: ['', Validators.required]
   });
 
+  get f() {
+    return this.salesForm.controls;
+  }
+
   onFormSubmit() {
     console.log(JSON.stringify(this.salesForm.value));
     this.sales.costPrice = this.salesForm.value.costPrice;

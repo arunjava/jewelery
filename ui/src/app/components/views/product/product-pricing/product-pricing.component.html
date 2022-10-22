@@ -1,0 +1,85 @@
+<div>
+    <form [formGroup]="productPricingForm" (ngSubmit)="onSubmit()">
+      <div class="form-group row">
+        <div class="col-sm-3 mb-3 mb-sm-0">
+          <label for="productCategory">Product Category</label>
+          <select
+            formControlName="productCategory"
+            [(ngModel)]="selectedProdCategory"
+            (change)="onProductCategorySelection(selectedProdCategory)"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': f['productCategory'].errors && f['productCategory'].touched && f['productCategory'].dirty}"
+          >
+            <option [ngValue]="null" selected disabled>Choose...</option>
+            <option *ngFor="let prodCat of productCategories" [ngValue]="prodCat">{{prodCat.categoryName}}</option>
+          </select>
+        </div>
+        <div class="col-sm-3 mb-3 mb-sm-0">
+          <label for="productSubCategory">Product Sub Category</label>
+          <select
+            formControlName="productSubCategory"
+            [(ngModel)]="selectedProdSubCategory"
+            (change)="onProductSubCategorySelection(selectedProdSubCategory)"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': f['productSubCategory'].errors && f['productSubCategory'].touched && f['productSubCategory'].dirty}"
+          >
+            <option [ngValue]="null" selected disabled>Choose...</option>
+            <option *ngFor="let productSubCat of productSubCategories" [ngValue]="productSubCat">{{productSubCat.subCategoryName}}</option>
+          </select>
+        </div>
+        <div class="col-sm-3 mb-3 mb-sm-0">
+          <label for="productName">Product</label>
+          <select
+            formControlName="productName"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': f['productName'].errors && f['productName'].touched && f['productName'].dirty}"
+          >
+            <option [ngValue]="null" selected disabled>Choose...</option>
+            <option *ngFor="let product of products" [ngValue]="product">{{product.productName}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-3 mb-3 mb-sm-0">
+          <label for="costPrice">Cost Price</label>
+          <input
+            type="text"
+            formControlName="costPrice"
+            class="form-control form-control-user"
+            [ngClass]="{ 'is-invalid': f['costPrice'].errors && f['costPrice'].touched && f['costPrice'].dirty}"
+            id="costPrice"
+            placeholder="Cost Price"
+          />
+        </div>
+        <div class="col-sm-3 mb-3 mb-sm-0">
+          <label for="sellingPrice">Selling Price</label>
+          <input
+            type="text"
+            formControlName="sellingPrice"
+            class="form-control form-control-user"
+            [ngClass]="{ 'is-invalid': f['sellingPrice'].errors && f['sellingPrice'].touched && f['sellingPrice'].dirty}"
+            id="sellingPrice"
+            placeholder="Selling Price"
+          />
+        </div>
+        <div class="col-sm-3 mb-3 mb-sm-0">
+          <label for="mrp">MRP</label>
+          <input
+            type="text"
+            formControlName="mrp"
+            class="form-control form-control-user"
+            [ngClass]="{ 'is-invalid': f['mrp'].errors && f['mrp'].touched && f['mrp'].dirty}"
+            id="mrp"
+            placeholder="MRP"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-3 mb-3 mb-sm-0">
+        <button type="submit" [disabled]="productPricingForm.invalid" class="btn btn-success btn-user btn-block">
+          Add
+        </button>
+      </div>
+    </div>
+    </form>
+  </div>

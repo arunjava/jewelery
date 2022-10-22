@@ -15,14 +15,14 @@
                 <form class="user" [formGroup]="loginform" (ngSubmit)="onSubmit()">
                   <div class="form-group">
                     <input type="email"
-                      [ngClass]="{ 'is-invalid': f['username'].errors?.['invalid'] && f['username'].touched && f['username'].dirty}"
+                      [ngClass]="{ 'is-invalid': f['username'].errors && f['username'].touched && f['username'].dirty}"
                       class="form-control form-control-user" formControlName="username" id="username" name="username"
                       aria-describedby=" emailHelp " placeholder=" Enter Email Address... " />
                     <!-- user name validation error messages-->
                     <small class="text-danger" *ngIf="f['username'].errors?.['required'] && f['username'].touched">Email
                       ID
                       mandatory</small>
-                    <small class="text-danger" *ngIf="f['username'].errors?.['email'] && f['username'].touched">Email
+                    <small class="text-danger" *ngIf="f['username'].errors?.['pattern']">Email
                       ID
                       Invalid</small>
                   </div>

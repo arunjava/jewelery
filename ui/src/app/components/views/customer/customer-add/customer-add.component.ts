@@ -47,18 +47,21 @@ export class CustomerAddComponent implements OnInit {
 
   customerForm = this.formBuilder.group({
     customerName: ['', Validators.required],
-    phoneNumber: ['', Validators.required],
+    phoneNumber: ['', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(10), Validators.maxLength(10)]],
     inputAddress: ['', Validators.required],
-    inputAddress2: ['', Validators.required],
+    inputAddress2: [''],
     countryFormName: ['', Validators.required],
     stateFormName: ['', Validators.required],
     districtFormName: ['', Validators.required],
-    subDistirctFormName: ['', Validators.required],
+    subDistirctFormName: [''],
     pincode: ['', Validators.required],
     locality: ['', Validators.required],
     referralCode: [],
     altPhoneNumber: []
   });
+
+  // convenience getter for easy access to form fields
+  get f() { return this.customerForm.controls; }
 
   onCountrySelection(country: Country) {
     console.log('Selected count -->' + country.countryName + ' ' + country.countryCode);

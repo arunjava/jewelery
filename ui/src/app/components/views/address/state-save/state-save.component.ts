@@ -27,6 +27,9 @@ export class StateSaveComponent implements OnInit {
     stateCode: ['', Validators.required]
   });
 
+  // convenience getter for easy access to form fields
+  get f() { return this.stateForm.controls; }
+
   onFormSubmit() {
     let stateReq = {} as StateRequestModel;
     stateReq.stateCode = this.stateForm.value.stateCode;

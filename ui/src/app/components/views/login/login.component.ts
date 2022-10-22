@@ -1,3 +1,4 @@
+import { emailValidator } from '../../../helper/validators/email-validator.directive';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -6,6 +7,7 @@ import { LoginService } from '../../../service/login/login.service';
 import { UserService } from '../../../service/user-service/user-service.service';
 import { ModalComponent } from '../../helper/modal/modal.component';
 import { ModalBox } from '../../../models/ModalBox.model';
+
 
 @Component({
   selector: 'app-login',
@@ -17,7 +19,7 @@ export class LoginComponent implements OnInit {
   public loading = false;
 
   loginform = this.formBuilder.group({
-    username: ['', Validators.required,Validators.email],
+    username: ['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$"), Validators.email, emailValidator()]],
     password: ['', Validators.required]
   });
 

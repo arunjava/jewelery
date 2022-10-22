@@ -53,6 +53,9 @@ export class DistrictSaveComponent implements OnInit {
     districtName: ['', Validators.required]
   });
 
+  // convenience getter for easy access to form fields
+  get f() { return this.districtForm.controls; }
+
   onFormSubmit() {
     let districtReq = {} as DistrictSaveRequest;
     districtReq.districtName = this.districtForm.value.districtName;

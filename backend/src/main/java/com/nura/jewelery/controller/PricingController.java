@@ -30,6 +30,7 @@ public class PricingController {
 	@PostMapping("/pricing")
 	public ResponseEntity<ServiceResponse<PricingDTO>> savePricing(@RequestBody PricingDTO pricingDTO) {
 		Pricing pricing = pricingMapper.dtoTODomain(pricingDTO);
+		pricing.setActive(true);
 		return ResponseEntity.ok(new ServiceResponseWrapper<PricingDTO>().wrapServiceResponse(
 				pricingMapper.domainTODTO(pricingService.save(pricing)), HttpStatus.CREATED.getReasonPhrase(),
 				HttpStatus.CREATED.value()));

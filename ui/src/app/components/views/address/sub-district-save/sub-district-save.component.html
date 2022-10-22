@@ -6,6 +6,7 @@
         <select
           formControlName="country"
           class="form-control"
+          [ngClass]="{ 'is-invalid': f['country'].errors && f['country'].touched && f['country'].dirty}"
           [(ngModel)]="selectedCountry"
           (change)="onCountrySelection(selectedCountry)"
         >
@@ -20,6 +21,7 @@
         <select
           formControlName="state"
           class="form-control"
+          [ngClass]="{ 'is-invalid': f['state'].errors && f['state'].touched && f['state'].dirty}"
           [(ngModel)]="selectedSate"
           (change)="onStateSelection(selectedSate)"
         >
@@ -34,6 +36,7 @@
         <select
           formControlName="district"
           class="form-control"
+          [ngClass]="{ 'is-invalid': f['district'].errors && f['district'].touched && f['district'].dirty}"
         >
           <option [ngValue]="null" selected disabled>Choose...</option>
           <option *ngFor="let district of districts" [ngValue]="district">
@@ -45,13 +48,16 @@
     <div class="form-group row">
       <div class="col-sm-3 mb-3 mb-sm-0">
         <label for="subDistrictName">SubDistrict Name</label>
-        <input type="text" formControlName="subDistrictName" class="form-control form-control-user" id="subDistrictName"
+        <input type="text" formControlName="subDistrictName" 
+          class="form-control form-control-user" 
+          [ngClass]="{ 'is-invalid': f['subDistrictName'].errors && f['subDistrictName'].touched && f['subDistrictName'].dirty}"
+          id="subDistrictName"
           placeholder="SubDistrict Name" />
       </div>
     </div>
     <div class="form-group row">
       <div class="col-sm-3 mb-3 mb-sm-0">
-        <button type="submit" class="btn btn-success btn-user btn-block">
+        <button type="submit" [disabled]="subDistrictForm.invalid" class="btn btn-success btn-user btn-block">
           Add
         </button>
       </div>

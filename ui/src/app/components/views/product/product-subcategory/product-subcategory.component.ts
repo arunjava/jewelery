@@ -40,6 +40,9 @@ export class ProductSubcategoryComponent implements OnInit {
     productCategory : ['', Validators.required]
   });
 
+  // convenience getter for easy access to form fields
+  get f() { return this.productSubCatForm.controls; }
+
   onSubmit() {
     console.log(this.productSubCatForm.value.productCategory);
     this.productSaveSubCategory.subCategoryName = this.productSubCatForm.value.subCategoryName;

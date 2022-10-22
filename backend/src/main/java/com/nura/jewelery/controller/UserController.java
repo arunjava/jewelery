@@ -60,7 +60,7 @@ public class UserController {
 					"Valid User", HttpStatus.OK.value()));
 		}
 
-		return ResponseEntity.ok(new ServiceResponseWrapper<UserDTO>().wrapServiceResponse(null, "Not available",
+		return ResponseEntity.ok(new ServiceResponseWrapper<UserDTO>().wrapServiceResponse(null, "Invalid Credentials",
 				HttpStatus.NO_CONTENT.value()));
 	}
 

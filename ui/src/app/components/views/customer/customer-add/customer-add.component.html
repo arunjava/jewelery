@@ -6,20 +6,25 @@
         <input
           type="text"
           formControlName="customerName"
+          [ngClass]="{ 'is-invalid': f['customerName'].errors && f['customerName'].touched && f['customerName'].dirty}"
           class="form-control form-control-user"
           id="customerName"
           placeholder="Customer Name"
         />
+        <small class="text-danger" *ngIf="f['customerName'].errors?.['required'] && f['customerName'].touched">Customer name is mandatory</small>
       </div>
       <div class="col-sm-6 mb-3 mb-sm-0">
         <label for="phoneNumber">Phone Number </label>
         <input
           type="text"
           formControlName="phoneNumber"
+          [ngClass]="{ 'is-invalid': f['phoneNumber'].errors && f['phoneNumber'].touched && f['phoneNumber'].dirty}"
           class="form-control form-control-user"
           id="phoneNumber"
           placeholder="Customer Phone Number"
         />
+        <small class="text-danger" *ngIf="f['phoneNumber'].errors?.['required'] && f['phoneNumber'].touched">Phone number is mandatory</small>
+        <small class="text-danger" *ngIf="(f['phoneNumber'].errors?.['minlength'] || f['phoneNumber'].errors?.['maxlength'] || f['phoneNumber'].errors?.['pattern']) && (f['phoneNumber'].touched || f['phoneNumber'].dirty)">Phone number is invalid</small>
       </div>
     </div>
     <div class="form-group row">
@@ -42,17 +47,20 @@
           id="referralCode"
           placeholder="Referral Code"
         />
+        
       </div>
     </div>
     <div class="form-group">
       <label for="inputAddress">Address</label>
       <input
         type="text"
+        [ngClass]="{ 'is-invalid': f['inputAddress'].errors && f['inputAddress'].touched && f['inputAddress'].dirty}"
         class="form-control form-control-user"
         formControlName="inputAddress"
         id="inputAddress"
         placeholder="1234 Main St"
       />
+      <small class="text-danger" *ngIf="f['inputAddress'].errors?.['required'] && f['inputAddress'].touched">Address Line1 is mandatory</small>
     </div>
     <div class="form-group">
       <label for="inputAddress2">Address 2</label>
@@ -68,6 +76,7 @@
       <div class="form-group col-md-4">
         <label for="inputCountry">Country</label>
         <select
+          [ngClass]="{ 'is-invalid': f['countryFormName'].errors && f['countryFormName'].touched && f['countryFormName'].dirty}"
           formControlName="countryFormName"
           [(ngModel)]="selectedCountry"
           (change)="onCountrySelection(selectedCountry)"
@@ -78,11 +87,13 @@
             {{ country.countryName }}
           </option>
         </select>
+        <small class="text-danger" *ngIf="f['countryFormName'].errors?.['required'] && f['countryFormName'].touched">Invalid Country Selected</small>
       </div>
       <div class="form-group col-md-4">
         <label for="inputState">State</label>
         <select
           id="inputState"
+          [ngClass]="{ 'is-invalid': f['stateFormName'].errors && f['stateFormName'].touched && f['stateFormName'].dirty}"
           class="form-control"
           formControlName="stateFormName"
           [(ngModel)]="selectedState"
@@ -93,11 +104,13 @@
             {{ state.stateName }}
           </option>
         </select>
+        <small class="text-danger" *ngIf="f['stateFormName'].errors?.['required'] && f['stateFormName'].touched">Invalid State Selected</small>
       </div>
       <div class="form-group col-md-4">
         <label for="inputDistrict">City/District</label>
         <select
           id="inputDistrict"
+          [ngClass]="{ 'is-invalid': f['districtFormName'].errors && f['districtFormName'].touched && f['districtFormName'].dirty}"
           class="form-control"
           formControlName="districtFormName"
           [(ngModel)]="selectedDistrict"
@@ -108,6 +121,7 @@
             {{ district.districtName }}
           </option>
         </select>
+        <small class="text-danger" *ngIf="f['districtFormName'].errors?.['required'] && f['districtFormName'].touched">Invalid District Selected</small>
       </div>
       <div class="form-group col-md-4">
         <label for="subDistrict">Sub District/Area</label>
@@ -130,21 +144,25 @@
         <label for="pincode">Zip</label>
         <input
           type="text"
+          [ngClass]="{ 'is-invalid': f['pincode'].errors && f['pincode'].touched && f['pincode'].dirty}"
           class="form-control"
           id="pincode"
           formControlName="pincode"
         />
+        <small class="text-danger" *ngIf="f['pincode'].errors?.['required'] && f['pincode'].touched">PIN Required</small>
       </div>
       <div class="form-group col-md-3">
         <label for="locality">Locality</label>
         <input
           type="text"
+          [ngClass]="{ 'is-invalid': f['locality'].errors && f['locality'].touched && f['locality'].dirty}"
           class="form-control"
           id="locality"
           formControlName="locality"
         />
+        <small class="text-danger" *ngIf="f['locality'].errors?.['required'] && f['locality'].touched">Locality Required</small>
       </div>
-      <button type="submit" class="btn btn-primary btn-user btn-block">
+      <button type="submit" [disabled] = "customerForm.invalid" class="btn btn-primary btn-user btn-block">
         Add
       </button>
     </div>

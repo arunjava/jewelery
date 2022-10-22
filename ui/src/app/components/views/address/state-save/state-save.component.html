@@ -3,7 +3,9 @@
     <div class="form-group row">
       <div class="col-sm-3 mb-3 mb-sm-0">
         <label for="country">Country</label>
-        <select formControlName="country" class="form-control">
+        <select formControlName="country" 
+          [ngClass]="{ 'is-invalid': f['country'].errors && f['country'].touched && f['country'].dirty}"
+          class="form-control">
           <option [ngValue]="null" selected disabled>Choose...</option>
           <option *ngFor="let country of countries" [ngValue] = "country">
             {{ country.countryName }}
@@ -12,18 +14,22 @@
       </div>
       <div class="col-sm-3 mb-3 mb-sm-0">
         <label for="stateName">State Name</label>
-        <input type="text" formControlName="stateName" class="form-control form-control-user" id="stateName"
+        <input type="text" formControlName="stateName" 
+          [ngClass]="{ 'is-invalid': f['stateName'].errors && f['stateName'].touched && f['stateName'].dirty}"
+          class="form-control form-control-user" id="stateName"
           placeholder="State Name" />
       </div>
       <div class="col-sm-3 mb-3 mb-sm-0">
         <label for="stateCode">Code</label>
-        <input type="text" formControlName="stateCode" class="form-control form-control-user" id="stateCode"
+        <input type="text" formControlName="stateCode" 
+          class="form-control form-control-user" id="stateCode"
+          [ngClass]="{ 'is-invalid': f['stateCode'].errors && f['stateCode'].touched && f['stateCode'].dirty}"
           placeholder="Code" />
       </div>
     </div>
     <div class="form-group row">
       <div class="col-sm-3 mb-3 mb-sm-0">
-        <button type="submit" class="btn btn-success btn-user btn-block">
+        <button type="submit" [disabled]="stateForm.invalid" class="btn btn-success btn-user btn-block">
           Add
         </button>
       </div>
