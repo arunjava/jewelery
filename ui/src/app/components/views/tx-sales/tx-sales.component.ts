@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { CustomerService } from '../../../service/customer-service/customer.service';
 import { Customer } from '../../../models/customer/customer.model';
 import { BsModalService } from 'ngx-bootstrap/modal';
@@ -67,7 +67,9 @@ export class TxSalesComponent implements OnInit {
     sellingPrice: ['', Validators.required],
     wastageCharges: ['', Validators.required],
     makingCharges: ['', Validators.required],
-    salesValue: ['', Validators.required]
+    sgst: ['', Validators.required],
+    cgst: ['', Validators.required],
+    salesValue: ['', Validators.required],
   });
 
   get f() {
@@ -85,6 +87,8 @@ export class TxSalesComponent implements OnInit {
     this.sales.qty = this.salesForm.value.qty;
     this.sales.makingCharges = this.salesForm.value.makingCharges;
     this.sales.wastageCharges = this.salesForm.value.wastageCharges;
+    this.sales.sgst = Number(parseFloat(this.salesForm.value.sgst).toFixed(2));
+    this.sales.cgst = Number(parseFloat(this.salesForm.value.cgst).toFixed(2));
     
     if(this.selectedCustomerScheme) {
       this.sales.customerSchemeID = this.selectedCustomerScheme.id;
@@ -162,7 +166,13 @@ export class TxSalesComponent implements OnInit {
     let wc: number = Number(this.salesForm.value.wastageCharges);
     let mc: number = Number(this.salesForm.value.makingCharges);
     let salesValue: number = (sp * qty) + wc + mc;
-    this.salesForm.controls['salesValue'].setValue(salesValue);
+    let sgst: number = (salesValue * 1.5) / 100;
+    let cgst: number = (salesValue * 1.5) / 100;
+
+    salesValue = salesValue + sgst + cgst;
+    this.salesForm.controls['sgst'].setValue(sgst.toFixed(2));
+    this.salesForm.controls['cgst'].setValue(cgst.toFixed(2));
+    this.salesForm.controls['salesValue'].setValue(salesValue.toFixed(2));
     console.log('Overall sales value -->' + salesValue);
 
   }
@@ -214,13 +224,19 @@ export class TxSalesComponent implements OnInit {
       }
     });
 
-  
+
 
   }
 
   resetValues(){
     this.customer = {} as Customer;
+    let control: AbstractControl;
     this.salesForm.reset();
+    this.salesForm.markAsUntouched();
+    Object.keys(this.salesForm.controls).forEach((name) => {
+      control = this.salesForm.controls[name];
+      control.setErrors(null);
+    });
     this.customerSchemes = [] as CustomerScheme[];
   }
 

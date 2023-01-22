@@ -100,7 +100,10 @@ public class SalesServiceImpl implements SalesService {
 					}
 				}
 			}
-			salesAmt += sale.getWastageCharges() + sale.getMakingCharges();
+			sale.setCgstCharges(salesDTO.getCgst());
+			sale.setSgstCharges(salesDTO.getSgst());
+			sale.setGstCharges(salesDTO.getCgst() + salesDTO.getSgst());
+			salesAmt += sale.getWastageCharges() + sale.getMakingCharges() + sale.getGstCharges();
 			sale.setSoldAmt(salesAmt);
 			return salesRepo.save(sale);
 		} else {

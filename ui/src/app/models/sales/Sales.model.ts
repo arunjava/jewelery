@@ -14,4 +14,6 @@ export interface Sales {
   soldAmt: number;
   customerSchemeID: number;
   txnDate: Date;
+  cgst: number;
+  sgst: number;
 }

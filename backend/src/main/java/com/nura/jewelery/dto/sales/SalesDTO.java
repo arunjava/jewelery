@@ -23,4 +23,6 @@ public class SalesDTO {
 	private double wastageCharges;
 	private double soldAmt;
 	private Date txnDate;
+	private double sgst;
+	private double cgst;
 }

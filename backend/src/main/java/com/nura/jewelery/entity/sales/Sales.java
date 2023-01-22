@@ -69,6 +69,12 @@ public class Sales implements Serializable {
 	private double makingCharges;
 	@Column(name = "wastage_charges")
 	private double wastageCharges;
+	@Column(name = "sgst_charges")
+	private double sgstCharges;
+	@Column(name = "cgst_charges")
+	private double cgstCharges;
+	@Column(name = "gst_charges")
+	private double gstCharges;
 
 	@PrePersist
 	public void setTxnDate() {
